@@ -5,69 +5,99 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/style.css">
-  <title>Путешествие по России</title>
+  <link rel="stylesheet" href="pages/index.css">
+  <title>Mesto</title>
 </head>
 
 <body class="root">
 
   <div class="page">
 
+    <div class="page__popup popup">
+      <div class="popup__container">
+        <form class="popup__edit-form edit-form" action="#" method="POST">
+          <h3 class="edit-form__title">Редактировать профиль</h3>
+          <input type="text" class="edit-form__name input-text" id="edit-form__name" name="edit-form__name"
+            value="Жак-Ив Кусто" placeholder="Имя" required>
+          <input type="text" class="edit-form__profession input-text" id="edit-form__profession"
+            name="edit-form__profession" value="Исследователь океана" placeholder="Профессия" required>
+          <button type="submit" class="edit-form__save-button" value="edit-form__save-button">Сохранить</button>
+          <button type="submit" class="edit-form__close-button" value="edit-form__close-button"></button>
+        </form>
+      </div>
+    </div>
+
+
     <header class="page__header header">
       <img class="header__icon" src="images/logo-white.svg" alt="иконка в виде карты России">
-      <hr>
+      <hr class="header__line">
     </header>
 
     <main class="page__main main">
 
-      <section class="profile" aria-label="Профиль">
-        <img class="profile__image" src="images/jacques-yves-photo.jpg" alt="Фотография профиля">
-        <p class="profile__name">Жак-Ив Кусто</p>
-        <P class="profile__description">Исследователь океана</P>
-        <button type="submit" class="profile__edit-button" value="edit"></button>
+      <section class="main__profile profile" aria-label="Профиль">
+
+        <picture class="profile__picture">
+          <source class="profile__image" type="image/webp" srcset="images/jacques-yves-photo.webp">
+          <img class="profile__image" src="images/jacques-yves-photo.jpg" alt="Фотография профиля">
+        </picture>
+
+        <div class="profile__name-button-box">
+          <p class="profile__name">Жак-Ив Кусто</p>
+          <button type="submit" class="profile__edit-button" value="edit"></button>
+        </div>
+        <p class="profile__profession">Исследователь океана</p>
         <button type="submit" class="profile__add-button" value="add"></button>
       </section>
 
-      <section class="cards-block" aria-label="Карточки профиля">
+      <section class="main__cards-block cards-block" aria-label="Карточки профиля">
         <ul class="cards-block__list">
           <li class="cards-block__card card">
-            <img class="card__image" src="images/karachaevsk.jpg" alt="Замок.">
-            <h2 class="card__title">Карачаевск</h2>
+            <picture class="card__picture">
+              <source class="card__image" type="image/webp" srcset="images/karachaevsk.webp">
+              <img class="card__image" src="images/karachaevsk.jpg" alt="Фотография профиля">
+            </picture>
+            <a class="card__link-text" href="#">Карачаевск</a>
             <button type="submit" class="card__like-button" value="like"></button>
           </li>
-        </ul>
-        <ul class="cards-block__list">
           <li class="cards-block__card card">
-            <img class="card__image" src="images/mountain-elbrus.jpg" alt="Холмы и небо.">
-            <h2 class="card__title">Гора Эльбрус</h2>
+            <picture class="card__picture">
+              <source class="card__image" type="image/webp" srcset="images/mountain-elbrus.webp">
+              <img class="card__image" src="images/mountain-elbrus.jpg" alt="Фотография профиля">
+            </picture>
+            <a class="card__link-text" href="#">Гора Эльбрус</a>
             <button type="submit" class="card__like-button" value="like"></button>
           </li>
-        </ul>
-        <ul class="cards-block__list">
           <li class="cards-block__card card">
-            <img class="card__image" src="images/dombai.jpg" alt="Горы и лес.">
-            <h2 class="card__title">Домбай</h2>
+            <picture class="card__picture">
+              <source class="card__image" type="image/webp" srcset="images/dombai.webp">
+              <img class="card__image" src="images/dombai.jpg" alt="Фотография профиля">
+            </picture>
+            <a class="card__link-text" href="#">Домбай</a>
             <button type="submit" class="card__like-button" value="like"></button>
           </li>
-        </ul>
-        <ul class="cards-block__list">
           <li class="cards-block__card card">
-            <img class="card__image" src="images/mountain-elbrus.jpg" alt="Холмы и небо.">
-            <h2 class="card__title">Гора Эльбрус</h2>
+            <picture class="card__picture">
+              <source class="card__image" type="image/webp" srcset="images/mountain-elbrus.webp">
+              <img class="card__image" src="images/mountain-elbrus.jpg" alt="Фотография профиля">
+            </picture>
+            <a class="card__link-text" href="#">Гора Эльбрус</a>
             <button type="submit" class="card__like-button" value="like"></button>
           </li>
-        </ul>
-        <ul class="cards-block__list">
           <li class="cards-block__card card">
-            <img class="card__image" src="images/dombai.jpg" alt="Горы и лес.">
-            <h2 class="card__title">Домбай</h2>
+            <picture class="card__picture">
+              <source class="card__image" type="image/webp" srcset="images/dombai.webp">
+              <img class="card__image" src="images/dombai.jpg" alt="Фотография профиля">
+            </picture>
+            <a class="card__link-text" href="#">Домбай</a>
             <button type="submit" class="card__like-button" value="like"></button>
           </li>
-        </ul>
-        <ul class="cards-block__list">
           <li class="cards-block__card card">
-            <img class="card__image" src="images/karachaevsk.jpg" alt="Замок.">
-            <h2 class="card__title">Карачаево-Черкесия</h2>
+            <picture class="card__picture">
+              <source class="card__image" type="image/webp" srcset="images/karachaevsk.webp">
+              <img class="card__image" src="images/karachaevsk.jpg" alt="Фотография профиля">
+            </picture>
+            <a class="card__link-text" href="#">Карачаево-Черкесия</a>
             <button type="submit" class="card__like-button" value="like"></button>
           </li>
         </ul>

@@ -1,0 +1,10 @@
+.edit-form__profession {
+  margin: 0 0 48px 0;
+  width: 100%;
+}
+
+@media (max-width: 545px) {
+  .edit-form__profession {
+    margin: 0 0 44px 0;
+  }
+}

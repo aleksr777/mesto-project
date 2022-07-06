@@ -1,0 +1,24 @@
+.cards-block__list {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(3, 32.0454545455%);
+  grid-template-rows: repeat(auto-fit, min-content);
+  grid-auto-rows: min-content;
+  row-gap: 21px;
+  list-style-type: none;
+}
+
+@media (max-width: 800px) {
+  .cards-block__list {
+    grid-template-columns: repeat(2, 48.8888888889%);
+  }
+}
+
+@media (max-width: 545px) {
+  .cards-block__list {
+    display: block;
+  }
+}
