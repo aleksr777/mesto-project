@@ -1,5 +1,5 @@
 .cards-block {
-  padding: 20px 0 47px 0;
+  padding: 10px 0 47px 0;
   box-sizing: border-box;
 }
 
@@ -11,6 +11,6 @@
 
 @media (max-width: 545px) {
   .cards-block {
-    padding: 20px 0 26px 0;
+    padding: 20px 19px 26px 19px;
   }
 }

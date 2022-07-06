@@ -21,8 +21,8 @@
     grid-row: 3/4;
     grid-column: 2/3;
     position: relative;
-    top: 0;
-    left: 0;
+    top: -50px;
+    left: 10px;
   }
 }
 
@@ -38,5 +38,7 @@
     grid-column: 1/2;
     width: 100%;
     background-size: 16px 16px;
+    top: 0;
+    left: 0;
   }
 }

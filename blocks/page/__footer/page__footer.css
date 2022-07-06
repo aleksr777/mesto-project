@@ -4,3 +4,10 @@
   margin: 0 auto;
   width: 100%;
 }
+
+@media (max-width: 545px) {
+  .page__footer {
+    grid-column: 1/2;
+    grid-row: 3/4;
+  }
+}

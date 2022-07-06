@@ -1,4 +1,4 @@
-.card__link-text {
+.card__text {
   grid-row: 2/3;
   grid-column: 1/2;
   padding: 11.5% 0 11% 9%;
@@ -12,10 +12,4 @@
   overflow: hidden;
   text-decoration: none;
   transition: all 0.3s ease 0s;
-}
-
-@media (min-width: 545px) {
-  .card__link-text:hover {
-    opacity: 0.7;
-  }
 }

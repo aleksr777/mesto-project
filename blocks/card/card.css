@@ -14,7 +14,7 @@
 
 @media (min-width: 545px) {
   .card:hover {
-    transform: translate(1%, -1%);
+    transform: translate(0,-1%);
   }
 }
 

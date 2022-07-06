@@ -1,5 +1,12 @@
 .header {
-  padding: 45px 0 12px 0;
+  padding: 45px 0 7px 0;
   box-sizing: border-box;
   width: 100%;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}
+
+@media (max-width: 545px) {
+  .header {
+    padding: 45px 19px 9px 19px;
+  }
 }

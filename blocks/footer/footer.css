@@ -3,15 +3,8 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 800px) {
-  .footer__copyright {
-    font-size: 16px;
-  }
-}
-
 @media (max-width: 545px) {
-  .footer__copyright {
-    font-size: 14px;
-    line-height: 1.214;
+  .footer {
+    padding: 21px 19px 60px 19px;
   }
 }
