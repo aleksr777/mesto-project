@@ -1,7 +1,7 @@
 .profile__name {
   display: inline-block;
   margin: 0;
-  padding: 21px 0 0 9px;
+  padding: 23px 0 0 0;
   font-weight: 500;
   font-size: 42px;
   line-height: 1.14;
@@ -22,7 +22,7 @@
   .profile__name {
     font-size: 27px;
     line-height: 1.2222;
-    margin: 0 0 5px 0;
-    padding: 10px 0 0 9px;
+    margin: 0 8px 5px 0;
+    padding: 10px 0 0 25px;
   }
 }

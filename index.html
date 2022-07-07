@@ -13,7 +13,8 @@
 
   <div class="page">
 
-    <div class="page__popup popup"><!-- popup_opened  -->
+    <div class="page__popup popup">
+      <!-- popup_opened  -->
       <div class="popup__container">
         <h3 class="popup__title">Редактировать профиль</h3>
         <form class="popup__edit-form edit-form" name="edit-form" action="#" method="POST">
@@ -33,72 +34,70 @@
 
     <main class="page__main main">
 
-      <section class="main__profile profile" aria-label="Профиль">
+      <section class="profile" aria-label="Профиль">
 
         <picture class="profile__picture">
           <source class="profile__image" type="image/webp" srcset="images/jacques-yves-photo.webp">
           <img class="profile__image" src="images/jacques-yves-photo.jpg" alt="Фотография профиля">
         </picture>
 
-        <div class="profile__name-button-box">
+        <div class="profile__text-box">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button type="button" class="profile__edit-button" value="edit"></button>
+          <p class="profile__profession">Исследователь океана</p>
         </div>
-        <p class="profile__profession">Исследователь океана</p>
         <button type="button" class="profile__add-button" value="add"></button>
       </section>
 
-      <section class="main__cards-block cards-block" aria-label="Карточки профиля">
-        <ul class="cards-block__list">
-          <li class="cards-block__card card">
-            <picture class="card__picture">
-              <source class="card__image" type="image/webp" srcset="images/karachaevsk.webp">
-              <img class="card__image" src="images/karachaevsk.jpg" alt="Фотография профиля">
-            </picture>
-            <p class="card__text">Карачаевск</p>
-            <button type="button" class="card__like-button" value="like"></button>
-          </li>
-          <li class="cards-block__card card">
-            <picture class="card__picture">
-              <source class="card__image" type="image/webp" srcset="images/mountain-elbrus.webp">
-              <img class="card__image" src="images/mountain-elbrus.jpg" alt="Фотография профиля">
-            </picture>
-            <p class="card__text">Гора Эльбрус</p>
-            <button type="button" class="card__like-button" value="like"></button>
-          </li>
-          <li class="cards-block__card card">
-            <picture class="card__picture">
-              <source class="card__image" type="image/webp" srcset="images/dombai.webp">
-              <img class="card__image" src="images/dombai.jpg" alt="Фотография профиля">
-            </picture>
-            <p class="card__text">Домбай</p>
-            <button type="button" class="card__like-button" value="like"></button>
-          </li>
-          <li class="cards-block__card card">
-            <picture class="card__picture">
-              <source class="card__image" type="image/webp" srcset="images/mountain-elbrus.webp">
-              <img class="card__image" src="images/mountain-elbrus.jpg" alt="Фотография профиля">
-            </picture>
-            <p class="card__text">Гора Эльбрус</p>
-            <button type="button" class="card__like-button" value="like"></button>
-          </li>
-          <li class="cards-block__card card">
-            <picture class="card__picture">
-              <source class="card__image" type="image/webp" srcset="images/dombai.webp">
-              <img class="card__image" src="images/dombai.jpg" alt="Фотография профиля">
-            </picture>
-            <p class="card__text">Домбай</p>
-            <button type="button" class="card__like-button" value="like"></button>
-          </li>
-          <li class="cards-block__card card">
-            <picture class="card__picture">
-              <source class="card__image" type="image/webp" srcset="images/karachaevsk.webp">
-              <img class="card__image" src="images/karachaevsk.jpg" alt="Фотография профиля">
-            </picture>
-            <p class="card__text">Карачаево-Черкесия</p>
-            <button type="button" class="card__like-button" value="like"></button>
-          </li>
-        </ul>
+      <section class="cards-block" aria-label="Карточки профиля">
+        <article class="cards-block__card card">
+          <picture class="card__picture">
+            <source class="card__image" type="image/webp" srcset="images/karachaevsk.webp">
+            <img class="card__image" src="images/karachaevsk.jpg" alt="Фотография профиля">
+          </picture>
+          <h3 class="card__text">Карачаевск</h3>
+          <button type="button" class="card__like-button" value="like"></button>
+        </article>
+        <article class="cards-block__card card">
+          <picture class="card__picture">
+            <source class="card__image" type="image/webp" srcset="images/mountain-elbrus.webp">
+            <img class="card__image" src="images/mountain-elbrus.jpg" alt="Фотография профиля">
+          </picture>
+          <h3 class="card__text">Гора Эльбрус</h3>
+          <button type="button" class="card__like-button" value="like"></button>
+        </article>
+        <article class="cards-block__card card">
+          <picture class="card__picture">
+            <source class="card__image" type="image/webp" srcset="images/dombai.webp">
+            <img class="card__image" src="images/dombai.jpg" alt="Фотография профиля">
+          </picture>
+          <h3 class="card__text">Домбай</h3>
+          <button type="button" class="card__like-button" value="like"></button>
+        </article>
+        <article class="cards-block__card card">
+          <picture class="card__picture">
+            <source class="card__image" type="image/webp" srcset="images/mountain-elbrus.webp">
+            <img class="card__image" src="images/mountain-elbrus.jpg" alt="Фотография профиля">
+          </picture>
+          <h3 class="card__text">Гора Эльбрус</h3>
+          <button type="button" class="card__like-button" value="like"></button>
+        </article>
+        <article class="cards-block__card card">
+          <picture class="card__picture">
+            <source class="card__image" type="image/webp" srcset="images/dombai.webp">
+            <img class="card__image" src="images/dombai.jpg" alt="Фотография профиля">
+          </picture>
+          <h3 class="card__text">Домбай</h3>
+          <button type="button" class="card__like-button" value="like"></button>
+        </article>
+        <article class="cards-block__card card">
+          <picture class="card__picture">
+            <source class="card__image" type="image/webp" srcset="images/karachaevsk.webp">
+            <img class="card__image" src="images/karachaevsk.jpg" alt="Фотография профиля">
+          </picture>
+          <h3 class="card__text">Карачаево-Черкесия</h3>
+          <button type="button" class="card__like-button" value="like"></button>
+        </article>
       </section>
     </main>
 

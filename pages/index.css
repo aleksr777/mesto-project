@@ -32,12 +32,12 @@
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__image/profile__image.css);
-@import url(../blocks/profile/__name-button-box/profile__name-button-box.css);
+@import url(../blocks/profile/__picture/profile__picture.css);
+@import url(../blocks/profile/__text-box/profile__text-box.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__profession/profile__profession.css);
 
 @import url(../blocks/cards-block/cards-block.css);
-@import url(../blocks/cards-block/__list/cards-block__list.css);
 
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__picture/card__picture.css);
