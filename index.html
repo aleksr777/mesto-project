@@ -13,18 +13,26 @@
 
   <div class="page">
 
-    <div class="page__popup popup">
-      <!-- popup_opened  -->
+    <div class="page__popup popup"><!-- popup_opened  -->
+
       <div class="popup__container">
+
         <h3 class="popup__title">Редактировать профиль</h3>
+
+        <button type="button" class="popup__close-button" value="popup__close-button"></button>
+
         <form class="popup__edit-form edit-form" name="edit-form" action="#" method="POST">
+
           <input type="text" class="edit-form__name input-text" id="edit-form__name" name="edit-form__name"
             value="Жак-Ив Кусто" placeholder="Имя" required>
+
           <input type="text" class="edit-form__profession input-text" id="edit-form__profession"
             name="edit-form__profession" value="Исследователь океана" placeholder="Профессия" required>
+
           <button type="submit" class="edit-form__save-button" value="edit-form__save-button">Сохранить</button>
-          <button type="button" class="edit-form__close-button" value="edit-form__close-button"></button>
+
         </form>
+
       </div>
     </div>
 
