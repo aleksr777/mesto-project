@@ -15,3 +15,4 @@ function closePopupWindow() {
 	console.log(popupWindow);
 	popupWindow.classList.remove('popup_opened');
 }
+console.log('Всё правильно');
