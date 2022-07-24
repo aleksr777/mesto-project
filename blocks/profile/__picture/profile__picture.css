@@ -7,6 +7,30 @@
   max-height: 121px;
 }
 
+.profile__picture .profile__img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 121px;
+  height: 121px;
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile__picture .profile__webp {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 121px;
+  height: 121px;
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  object-position: center;
+}
+
 @media (max-width: 545px) {
   .profile__picture {
     grid-row: 1/2;

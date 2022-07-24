@@ -12,14 +12,18 @@
   transition: all 0.3s ease 0s;
 }
 
-@media (min-width: 545px) {
-  .card:hover {
-    transform: translate(0,-1%);
-  }
-}
 
-@media (max-width: 545px) {
-  .card:not(:last-of-type) {
-    margin-bottom: 20px;
+
+@media screen and (min-width: 545px) {
+  .card:hover {
+    transform: translate(0, -1%);
+  }
+
+  .card:hover .card__trash-button {
+    opacity: 1;
+  }
+
+  .card:hover .card__trash-button:hover {
+    opacity: 0.6;
   }
 }

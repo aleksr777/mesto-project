@@ -4,4 +4,25 @@
   grid-column: 1/3;
   width: 100%;
   padding: 0 0 100% 0;
+  cursor: pointer;
+}
+
+.card__picture .card__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card__picture .card__webp {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }

@@ -1,0 +1,10 @@
+.cards-block__card {
+	margin: 0;
+	position: relative;
+}
+
+@media screen and (max-width: 545px) {
+	.cards-block__card:not(:last-of-type) {
+		margin-bottom: 20px;
+	}
+}
