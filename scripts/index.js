@@ -84,6 +84,10 @@ const openPopupImage = (picture, event) => {
 const cardTemplate = document.querySelector('#card-template').content;
 const cardsBlock = document.querySelector('.cards-block');
 
+const cloneNodeTemplate = (template) => {
+	return template.querySelector('.cards-block__card').cloneNode(true);
+}
+
 const fillTemplate = (card, name, srcLink, srcsetLink) => {
 	card.querySelector('.card__text').textContent = name;
 	card.querySelector('.card__img').src = srcLink;
@@ -95,7 +99,7 @@ const fillTemplate = (card, name, srcLink, srcsetLink) => {
 
 const createNewCard = (name, srcsetLink, srcLink, event) => {
 
-	const newCard = cardTemplate.querySelector('.cards-block__card').cloneNode(true);
+	const newCard = cloneNodeTemplate(cardTemplate);
 
 	fillTemplate(newCard, name, srcLink, srcsetLink);
 
@@ -119,9 +123,9 @@ const createNewCard = (name, srcsetLink, srcLink, event) => {
 
 const loadInitialCards = () => {
 	initialCards.forEach(element => {
-		const newCard = cardTemplate.querySelector('.cards-block__card').cloneNode(true);
-		fillTemplate(newCard, element.name, element.src, element.srcset);
-		cardsBlock.append(newCard);
+		const card = cloneNodeTemplate(cardTemplate);
+		fillTemplate(card, element.name, element.src, element.srcset);
+		cardsBlock.append(card);
 	});
 }
 
