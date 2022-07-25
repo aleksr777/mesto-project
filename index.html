@@ -21,7 +21,7 @@
 
         <h3 class="popup__title">Редактировать профиль</h3>
 
-        <form class="form" name="edit-form" id="edit-form" action="#" method="POST">
+        <form class="form form_type_profile" name="edit-form" id="edit-form" action="#" method="POST">
 
           <input type="text" class="form__input-text input-text" id="edit-input-name" name="edit-input-name" value=""
             placeholder="Имя" required>
@@ -29,7 +29,8 @@
           <input type="text" class="form__input-text input-text" id="edit-input-profession" name="edit-input-profession"
             value="" placeholder="Профессия" required>
 
-          <button type="submit" class="form__button form__button_type_profile" value="save-edit-button">Сохранить</button>
+          <button type="submit" class="form__button form__button_type_profile"
+            value="save-edit-button">Сохранить</button>
 
         </form>
       </div>
@@ -43,7 +44,7 @@
 
         <h3 class="popup__title">Новое место</h3>
 
-        <form class="form" name="card-form" id="card-form" action="#" method="POST">
+        <form class="form form_type_card-form" name="card-form" id="card-form" action="#" method="POST">
 
           <input type="text" class="form__input-text input-text" id="add-card-input-name" name="add-card-input-name"
             value="" placeholder="Название" required>
@@ -68,8 +69,9 @@
           <source class="popup__webp" type="image/webp" srcset="#">
           <img class="popup__img" src="#" alt=".">
         </picture>
-        <p class="popup__caption"></p>
 
+        <p class="popup__caption"></p>
+        
       </div>
     </div>
 
@@ -99,11 +101,11 @@
         <template id="card-template">
           <article class="cards-block__card card">
             <button type="button" class="card__trash-button" value="delete"></button>
+            <h3 class="card__text"></h3>
             <picture class="card__picture">
               <source class="card__webp" type="image/webp" srcset="">
               <img class="card__img" src="" alt="Изображение места.">
             </picture>
-            <h3 class="card__text"></h3>
             <button type="button" class="card__like-button" value="like"></button>
           </article>
         </template>
