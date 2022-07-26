@@ -5,6 +5,7 @@
   width: 100%;
   padding: 0 0 100% 0;
   cursor: pointer;
+  background-color: #E9E9E9;
 }
 
 .card__picture .card__img {
