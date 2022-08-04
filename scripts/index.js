@@ -70,10 +70,11 @@ const openPopup = (popup) => {
 
 const closePopup = (popup) => {
 	popup.style.animationName = 'close-popup';
+	popup.style.playState = 'running';
 	setTimeout(() => {
-		popup.style.animationName = 'appearance-popup';
 		popup.classList.remove('popup_opened');
-	}, 400);
+		popup.style.animationName = 'appearance-popup';
+	}, 300);
 };
 
 const toggleLikeButton = (likeButton) => {
