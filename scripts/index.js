@@ -70,7 +70,7 @@ const openPopup = (popup) => {
 
 const closePopup = (popup) => {
 	popup.style.animationName = 'close-popup';
-	popup.style.playState = 'running';
+	popup.style.animationPlayState = 'running';
 	setTimeout(() => {
 		popup.classList.remove('popup_opened');
 		popup.style.animationName = 'appearance-popup';
