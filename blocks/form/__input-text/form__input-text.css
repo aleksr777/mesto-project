@@ -1,8 +1,8 @@
 .form__input-text {
-  margin: 0 0 20px 0;
+  outline: none;
+  margin: 0;
   width: 100%;
   padding: 9px 0;
-  outline: none;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   font-family: inherit;
@@ -24,18 +24,4 @@
 .form__input-text::placeholder {
   font-family: inherit;
   color: rgba(0, 0, 0, .3);
-}
-
-.form__input-text:last-of-type {
-  margin-bottom: 49px;
-}
-
-@media (max-width: 545px) {
-  .form__input-text {
-    margin: 0 0 21px 0;
-  }
-
-  .form__input-text:last-of-type {
-    margin-bottom: 44px;
-  }
 }

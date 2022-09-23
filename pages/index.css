@@ -4,6 +4,7 @@
 
 @import url(../blocks/root/root.css);
 
+@import url(../blocks/form/__label/form__label.css);
 @import url(../blocks/form/__input-text/form__input-text.css);
 @import url(../blocks/form/__input-text/_type_error/form__input-text_type_error.css);
 @import url(../blocks/form/__input-error/form__input-error.css);

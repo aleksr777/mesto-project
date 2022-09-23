@@ -110,6 +110,17 @@ const hideInputError = (formElement, inputElement) => {
 
 // Функция, которая проверяет валидность поля
 const isValid = (formElement, inputElement) => {
+
+	if (inputElement.validity.patternMismatch) {
+		// данные атрибута доступны у элемента инпута через ключевое слово dataset.
+    // в js имя атрибута пишется в camelCase, в HTML в kebab-case.
+		inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+	} else {
+		// если передать пустую строку, то будут доступны
+		// стандартные браузерные сообщения
+		inputElement.setCustomValidity('');
+	}
+
 	if (!inputElement.validity.valid) {
 		// showInputError получает параметром форму, в которой
 		// находится проверяемое поле, и само это поле

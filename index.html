@@ -28,10 +28,10 @@
 
         <div class="profile__text-box">
           <h1 class="profile__name">Александр</h1>
-          <button type="button" class="profile__edit-button" value="edit"></button>
+          <button type="button" class="profile__edit-button" value="edit-profile"></button>
           <p class="profile__profession">Студент 15-ой когорты Web+</p>
         </div>
-        <button type="button" class="profile__add-button" value="add"></button>
+        <button type="button" class="profile__add-button" value="add-profile"></button>
       </section>
 
       <section class="cards-block" aria-label="Карточки профиля">
@@ -64,13 +64,19 @@
 
         <form class="form form_type_profile" name="edit-form" id="edit-form" method="POST" novalidate>
 
-          <input type="text" class="form__input-text" id="profile-name-input" name="profile-name-input"
-            value="" placeholder="Имя" minlength="2" maxlength="40" required>
-          <span class="form__input-error profile-name-input-error"></span>
+          <label class="form__label">
+            <input type="text" class="form__input-text" id="profile-name-input" name="profile-name-input" value=""
+              placeholder="Имя" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
+              data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки знак дефиса и пробел" required>
+            <span class="form__input-error profile-name-input-error"></span>
+          </label>
 
-          <input type="text" class="form__input-text" id="profile-profession-input"
-            name="profile-profession-input" value="" placeholder="Профессия" minlength="2" maxlength="200" required>
-          <span class="form__input-error profile-profession-input-error"></span>
+          <label class="form__label">
+            <input type="text" class="form__input-text" id="profile-profession-input" name="profile-profession-input"
+              value="" placeholder="Профессия" minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
+              data-error-message="Разрешены только латинские буквы, кириллические буквы, знак дефиса и пробел" required>
+            <span class="form__input-error profile-profession-input-error"></span>
+          </label>
 
           <button type="submit" class="form__submit form__submit_type_profile"
             value="save-edit-button">Сохранить</button>
@@ -87,14 +93,18 @@
         <h3 class="popup__title">Новое место</h3>
 
         <form class="form form_type_card-form" name="card-form" id="card-form" method="POST" novalidate>
+          <label class="form__label">
+            <input type="text" class="form__input-text" id="card-name-input" name="card-name-input" value=""
+              placeholder="Название" minlength="2" maxlength="30" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
+              data-error-message="Разрешены только латинские буквы, кириллические буквы, знак дефиса и пробел" required>
+            <span class="form__input-error card-name-input-error"></span>
+          </label>
 
-          <input type="text" class="form__input-text" id="card-name-input" name="card-name-input" value=""
-            placeholder="Название" minlength="2" maxlength="30" required>
-          <span class="form__input-error card-name-input-error"></span>
-
-          <input type="url" class="form__input-text" id="card-link-input" name="card-link-input" value=""
-            placeholder="Ссылка на картинку" required>
-          <span class="form__input-error card-link-input-error"></span>
+          <label class="form__label">
+            <input type="url" class="form__input-text" id="card-link-input" name="card-link-input" value=""
+              placeholder="Ссылка на картинку" required>
+            <span class="form__input-error card-link-input-error"></span>
+          </label>
 
           <button type="submit" class="form__submit form__submit_type_card-form"
             value="create-card-button">Создать</button>
