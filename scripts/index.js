@@ -7,13 +7,14 @@ const popupProfile = document.querySelector('.popup_type_profile');
 const popupCardForm = document.querySelector('.popup_type_card-form');
 const popupImage = document.querySelector('.popup_type_image');
 
-const inputName = document.querySelector('#edit-input-name');
-const inputProfession = document.querySelector('#edit-input-profession');
+const inputName = document.querySelector('#profile-name-input');
+const inputProfession = document.querySelector('#profile-profession-input');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
 
-const inputPlaceName = document.querySelector('#add-card-input-name');
-const inputSrcLink = document.querySelector('#add-card-input-link');
+const inputPlaceName = document.querySelector('#card-name-input');
+const inputSrcLink = document.querySelector('#card-link-input');
+
 
 const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 
@@ -24,6 +25,109 @@ const captionPopupImage = popupImage.querySelector('.popup__caption');
 const cardsBlock = document.querySelector('.cards-block');
 const cardTemplate = document.querySelector('#card-template');
 const cloneNodeTemplate = (template) => template.querySelector('.cards-block__card').cloneNode(true);
+
+
+
+
+
+
+const hasInvalidInput = (inputList) => {
+	// проходим по этому массиву методом some
+	return inputList.some((inputElement) => {
+		// Если поле не валидно, колбэк вернёт true
+		return !inputElement.validity.valid;
+	})
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+	// Если есть хотя бы один невалидный инпут
+	if (hasInvalidInput(inputList)) {
+		// сделай кнопку неактивной
+		buttonElement.classList.add('form__submit_inactive');
+		buttonElement.setAttribute('disabled', true);
+	} else {
+		// иначе сделай кнопку активной
+		buttonElement.classList.remove('form__submit_inactive');
+		buttonElement.removeAttribute('disabled');
+	}
+};
+
+const setEventListeners = (formElement) => {
+	// Найдём все поля формы и сделаем из них массив
+	const inputList = Array.from(formElement.querySelectorAll('.form__input-text'));
+	// Найдём в текущей форме кнопки отправки
+	const buttonElements = formElement.querySelectorAll('.form__submit');
+
+	buttonElements.forEach((buttonElement) => {
+		toggleButtonState(inputList, buttonElement);
+	});
+
+	inputList.forEach((inputElement) => {
+		inputElement.addEventListener('input', () => {
+			isValid(formElement, inputElement);
+			buttonElements.forEach((buttonElement) => {
+				toggleButtonState(inputList, buttonElement);
+			});
+		});
+	});
+};
+
+const enableValidation = () => {
+	// Найдём все формы с указанным классом в DOM,
+	// сделаем из них массив методом Array.from
+	const formList = Array.from(document.querySelectorAll('.form'));
+
+	// Переберём полученную коллекцию
+	formList.forEach((formElement) => {
+		formElement.addEventListener('submit', (evt) => {
+			// У каждой формы отменим стандартное поведение
+			evt.preventDefault();
+		});
+
+		// Для каждой формы вызовем функцию setEventListeners,
+		// передав ей элемент формы
+		setEventListeners(formElement);
+	});
+};
+
+const showInputError = (formElement, inputElement, errorMessage) => {
+	// Находим элемент ошибки внутри самой функции
+	const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+	// Остальной код такой же
+	inputElement.classList.add('form__input-text_type_error');
+	errorElement.textContent = errorMessage;
+	errorElement.classList.add('form__input-error_active');
+};
+
+const hideInputError = (formElement, inputElement) => {
+	// Находим элемент ошибки
+	const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+	// Остальной код такой же
+	inputElement.classList.remove('form__input-text_type_error');
+	errorElement.classList.remove('form__input-error_active');
+	errorElement.textContent = '';
+};
+
+// Функция, которая проверяет валидность поля
+const isValid = (formElement, inputElement) => {
+	if (!inputElement.validity.valid) {
+		// showInputError получает параметром форму, в которой
+		// находится проверяемое поле, и само это поле
+		showInputError(formElement, inputElement, inputElement.validationMessage);
+	} else {
+		// hideInputError получает параметром форму, в которой
+		// находится проверяемое поле, и само это поле
+		hideInputError(formElement, inputElement);
+	}
+};
+
+// Вешаем обработчики на все поля форм и инпуты
+enableValidation();
+
+
+
+
+
 
 const card = {
 	placeName: '',

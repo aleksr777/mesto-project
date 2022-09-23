@@ -1,4 +1,5 @@
-.card {
+.card
+{
   padding: 0;
   background: #fff;
   border-radius: 10px;
@@ -8,22 +9,25 @@
   display: grid;
   grid-template-columns: 1fr 21.9858156%;
   grid-template-rows: repeat(2, minmax(min-content, max-content));
-  column-gap: 0.1%;
-  transition: all 0.3s ease 0s;
+  column-gap: .1%;
+  transition: all .3s ease 0s;
 }
 
+@media screen and (min-width: 545px)
+{
 
-
-@media screen and (min-width: 545px) {
-  .card:hover {
-    transform: translate(0, -1%);
+  .card:hover .card__picture::before
+  {
+    opacity: .1;
   }
 
-  .card:hover .card__trash-button {
+  .card:hover .card__trash-button
+  {
     opacity: 1;
   }
 
-  .card:hover .card__trash-button:hover {
-    opacity: 0.6;
+  .card:hover .card__trash-button:hover
+  {
+    opacity: .6;
   }
 }

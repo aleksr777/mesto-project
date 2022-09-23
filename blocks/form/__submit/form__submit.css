@@ -1,4 +1,4 @@
-.form__button {
+.form__submit {
   width: 100%;
   height: 50px;
   background: #000;
@@ -15,7 +15,7 @@
 }
 
 @media (max-width: 545px) {
-  .form__button {
+  .form__submit {
     font-size: 14px;
     line-height: 17px;
     height: 46px;
@@ -23,7 +23,7 @@
 }
 
 @media (min-width: 545px) {
-  .form__button:hover {
+  .form__submit:hover {
     opacity: 0.8;
   }
 }

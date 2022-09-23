@@ -1,6 +1,29 @@
 .form__input-text {
   margin: 0 0 20px 0;
   width: 100%;
+  padding: 9px 0;
+  outline: none;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-family: inherit;
+  color: #000;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  transition: all 0.3s ease 0s;
+}
+
+.form__input-text:hover {
+  border-color: rgba(0, 0, 0, .6);
+}
+
+.form__input-text:focus {
+  border-color: rgba(0, 0, 0, 1);
+}
+
+.form__input-text::placeholder {
+  font-family: inherit;
+  color: rgba(0, 0, 0, .3);
 }
 
 .form__input-text:last-of-type {
@@ -11,6 +34,7 @@
   .form__input-text {
     margin: 0 0 21px 0;
   }
+
   .form__input-text:last-of-type {
     margin-bottom: 44px;
   }

@@ -1,0 +1,11 @@
+.form__input-text_type_error {
+  border-color: rgba(255, 0, 0, 1);
+}
+
+.form__input-text_type_error:hover {
+  border-color: rgba(255, 0, 0, 1);
+}
+
+.form__input-text_type_error:focus {
+  border-color: rgba(255, 0, 0, 1);
+}
