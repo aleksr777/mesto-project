@@ -36,4 +36,4 @@ const openPopupImage = (event) => {
   openPopup(popupImage);
 }
 
-export { popupCloseButtons, popupProfile, popupCardForm, popupImage, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, imgPopupImage, webpPopupImage, captionPopupImage, openPopupProfile, closeCurrentPopup, openPopupImage }; 
+export { popupCloseButtons, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, openPopupProfile, closeCurrentPopup, openPopupImage }; 
