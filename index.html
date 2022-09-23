@@ -29,7 +29,7 @@
         <div class="profile__text-box">
           <h1 class="profile__name">Александр</h1>
           <button type="button" class="profile__edit-button" value="edit-profile"></button>
-          <p class="profile__profession">Студент 15-ой когорты Web+</p>
+          <p class="profile__profession">Студент Яндекс-практикума</p>
         </div>
         <button type="button" class="profile__add-button" value="add-profile"></button>
       </section>
@@ -67,7 +67,8 @@
           <label class="form__label">
             <input type="text" class="form__input-text" id="profile-name-input" name="profile-name-input" value=""
               placeholder="Имя" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
-              data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки знак дефиса и пробел" required>
+              data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки знак дефиса и пробел"
+              required>
             <span class="form__input-error profile-name-input-error"></span>
           </label>
 
@@ -129,7 +130,7 @@
     </div>
   </div>
 
-  <script src="scripts/index.js"></script>
+  <script type="module" src="components/index.js"></script>
 
 </body>
 
