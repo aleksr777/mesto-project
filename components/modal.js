@@ -1,5 +1,7 @@
 import { openPopup, closePopup } from './utils.js';
 
+const popupWindows = document.querySelectorAll('.popup');
+
 const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupCardForm = document.querySelector('.popup_type_card-form');
@@ -16,15 +18,17 @@ const imgPopupImage = popupImage.querySelector('.popup__img');
 const webpPopupImage = popupImage.querySelector('.popup__webp');
 const captionPopupImage = popupImage.querySelector('.popup__caption');
 
-const openPopupProfile = () => {
+const openPopupProfile = (event) => {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
   openPopup(popupProfile);
 }
 
 const closeCurrentPopup = (event) => {
-  closePopup(event.currentTarget.closest('.popup'));
-  event.stopPropagation();
+  if (event.target.classList.contains('popup__close-button') || event.target.classList.contains('popup_opened')) {
+    closePopup(event.currentTarget.closest('.popup'));
+    event.stopPropagation();
+  }
 }
 
 const openPopupImage = (event) => {
@@ -36,4 +40,4 @@ const openPopupImage = (event) => {
   openPopup(popupImage);
 }
 
-export { popupCloseButtons, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, openPopupProfile, closeCurrentPopup, openPopupImage }; 
+export { popupWindows, popupCloseButtons, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, openPopupProfile, closeCurrentPopup, openPopupImage }; 

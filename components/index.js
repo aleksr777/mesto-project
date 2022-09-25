@@ -1,16 +1,18 @@
 import { enableValidation } from './validate.js';
 import { loadInitialCards, loadCardInfo } from './card.js';
 import { openPopup, closePopup } from './utils.js';
-import { popupCloseButtons, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, openPopupProfile, closeCurrentPopup } from './modal.js';
+import { popupWindows, popupCloseButtons, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, openPopupProfile, closeCurrentPopup } from './modal.js';
 
 const editButton = document.querySelector('.profile__edit-button');
 const addCardButton = document.querySelector('.profile__add-button');
 
-editButton.addEventListener('click', openPopupProfile);
+/* const addCardButton = document.querySelector('.profile__add-button'); */
 
-addCardButton.addEventListener('click', () => openPopup(popupCardForm));
+editButton.addEventListener('click', (event) => openPopupProfile(event));
 
-popupCloseButtons.forEach(element => {
+addCardButton.addEventListener('click', (event) => openPopup(popupCardForm));
+
+popupWindows.forEach(element => {
 	element.addEventListener('click', (event) => {
 		closeCurrentPopup(event)
 	});
