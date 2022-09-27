@@ -1,3 +1,5 @@
+import './index.css';
+
 import { enableValidation } from './validate.js';
 import { loadInitialCards, loadCardInfo } from './card.js';
 import { openPopup, closePopup } from './utils.js';
@@ -5,8 +7,6 @@ import { popupWindows, popupCloseButtons, popupProfile, popupCardForm, createCar
 
 const editButton = document.querySelector('.profile__edit-button');
 const addCardButton = document.querySelector('.profile__add-button');
-
-/* const addCardButton = document.querySelector('.profile__add-button'); */
 
 editButton.addEventListener('click', (event) => openPopupProfile(event));
 
