@@ -1,0 +1,22 @@
+.profile__text-box {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 16px;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 545px) {
+  .profile__text-box {
+    justify-content: center;
+    text-align: center;
+    grid-column: 1/2;
+    grid-row: 2/3;
+    gap: 3px 10px;
+  }
+}

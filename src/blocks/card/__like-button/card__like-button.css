@@ -1,0 +1,22 @@
+.card__like-button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  grid-row: 2/3;
+  grid-column: 2/3;
+  align-self: center;
+  justify-self: center;
+  width: 24px;
+  height: 21px;
+  background: transparent center / 22px 19px no-repeat;
+  background-image: url(../../../images/heart-transparent.svg);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+}
+
+@media (min-width: 545px) {
+  .card__like-button:hover {
+    opacity: 0.52;
+  }
+}

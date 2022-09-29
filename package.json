@@ -1,0 +1,41 @@
+{
+  "name": "mesto-project",
+  "version": "1.0.0",
+  "description": "* Основы адаптивной вёрстки под различные устройства\r * Основы работы с дизайнерским макетом в Figma\r * Основы работы с GIT и Bash\r * Основы работы с полями ввода данных, валидация полей ввода через JS.\r * Основы работы с popup-окнами.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleksr777/mesto-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aleksr777/mesto-project/issues"
+  },
+  "homepage": "https://github.com/aleksr777/mesto-project#readme",
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.3",
+    "autoprefixer": "^10.4.12",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "cssnano": "^5.1.13",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "postcss-loader": "^7.0.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "core-js": "^3.25.3"
+  }
+}

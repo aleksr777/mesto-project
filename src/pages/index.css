@@ -1,0 +1,54 @@
+@import url(../vendor/normalize.css);
+
+@import url(../vendor/fonts.css);
+
+@import url(../blocks/root/root.css);
+
+@import url(../blocks/form/__label/form__label.css);
+@import url(../blocks/form/__input-text/form__input-text.css);
+@import url(../blocks/form/__input-text/_type_error/form__input-text_type_error.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/_active/form__input-error_active.css);
+@import url(../blocks/form/__submit/form__submit.css);
+@import url(../blocks/form/__submit/_inactive/form__submit_inactive.css);
+
+@import url(../blocks/main/main.css);
+
+@import url(../blocks/page/page.css);
+@import url(../blocks/page/__footer/page__footer.css);
+@import url(../blocks/page/__header/page__header.css);
+@import url(../blocks/page/__main/page__main.css);
+@import url(../blocks/page/__popup/page__popup.css);
+
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__icon/header__icon.css);
+
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__picture/profile__picture.css);
+@import url(../blocks/profile/__text-box/profile__text-box.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__profession/profile__profession.css);
+
+@import url(../blocks/cards-block/cards-block.css);
+@import url(../blocks/cards-block/__card/cards-block__card.css);
+
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__picture/card__picture.css);
+@import url(../blocks/card/__like-button/card__like-button.css);
+@import url(../blocks/card/__like-button/_activ/card__like-button_activ.css);
+@import url(../blocks/card/__trash-button/card__trash-button.css);
+@import url(../blocks/card/__text/card__text.css);
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_type_image/popup_type_image.css);
+@import url(../blocks/popup/__close-button/popup__close-button.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__container/_type_image/popup__container_type_image.css);
+@import url(../blocks/popup/__picture/popup__picture.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__title/popup__title.css);
