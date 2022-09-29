@@ -12,36 +12,54 @@ const card = {
   srcsetLink: '',
 };
 
+const kamchatkaWebp = new URL('../images/kamchatka.webp', import.meta.url);
+const kamchatkaJpg = new URL('../images/kamchatka.jpg', import.meta.url);
+
+const elbrusWebp = new URL('../images/mountain-elbrus.webp', import.meta.url);
+const elbrusJpg = new URL('../images/mountain-elbrus.jpg', import.meta.url);
+
+const dombaiWebp = new URL('../images/dombai.webp', import.meta.url);
+const dombaiJpg = new URL('../images/dombai.jpg', import.meta.url);
+
+const baikalWebp = new URL('../images/baikal.webp', import.meta.url);
+const baikalJpeg = new URL('../images/baikal.jpeg', import.meta.url);
+
+const stolbyWebp = new URL('../images/stolby-vyvetrivaniya.webp', import.meta.url);
+const stolbyJpg = new URL('../images/stolby-vyvetrivaniya.jpg', import.meta.url);
+
+const karachaevskWebp = new URL('../images/karachaevsk.webp', import.meta.url);
+const karachaevskJpg = new URL('../images/karachaevsk.jpg', import.meta.url);
+
 const initialCards = [
   {
     name: 'Камчатка',
-    srcset: 'images/kamchatka.webp',
-    src: 'images/kamchatka.jpg'
+    srcset: kamchatkaWebp,
+    src: kamchatkaJpg
   },
   {
     name: 'Гора Эльбрус',
-    srcset: 'images/mountain-elbrus.webp',
-    src: 'images/mountain-elbrus.jpg'
+    srcset: elbrusWebp,
+    src: elbrusJpg
   },
   {
     name: 'Домбай',
-    srcset: 'images/dombai.webp',
-    src: 'images/dombai.jpg'
+    srcset: dombaiWebp,
+    src: dombaiJpg
   },
   {
     name: 'Озеро Байкал',
-    srcset: 'images/baikal.webp',
-    src: 'images/baikal.jpeg'
+    srcset: baikalWebp,
+    src: baikalJpeg
   },
   {
     name: 'Столбы выветривания – Маньпупунер',
-    srcset: 'images/stolby-vyvetrivaniya.webp',
-    src: 'images/stolby-vyvetrivaniya.jpg'
+    srcset: stolbyWebp,
+    src: stolbyJpg
   },
   {
     name: 'Карачаево-Черкессия',
-    srcset: 'images/karachaevsk.webp',
-    src: 'images/karachaevsk.jpg'
+    srcset: karachaevskWebp,
+    src: karachaevskJpg
   }
 ];
 

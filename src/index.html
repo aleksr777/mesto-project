@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css">
+  <!-- <link rel="stylesheet" href="pages/index.css"> -->
   <title>Mesto</title>
 </head>
 
@@ -14,7 +14,7 @@
   <div class="page">
 
     <header class="page__header header">
-      <img class="header__icon" src="images/logo-white.svg" alt="Логотип.">
+      <img class="header__icon" src="<%=require('./images/logo-white.svg')%>" alt="Логотип.">
     </header>
 
     <main class="page__main main">
@@ -22,8 +22,8 @@
       <section class="profile" aria-label="Профиль">
 
         <picture class="profile__picture">
-          <source class="profile__webp" type="image/webp" srcset="images/user-image.webp">
-          <img class="profile__img" src="images/user-image.jpg" alt="Фотография профиля.">
+          <source class="profile__webp" type="image/webp" srcset="<%=require('./images/user-image.webp')%>">
+          <img class="profile__img" src="<%=require('./images/user-image.jpg')%>" alt="Фотография профиля.">
         </picture>
 
         <div class="profile__text-box">
@@ -130,7 +130,7 @@
     </div>
   </div>
 
-  <script type="module" src="components/index.js"></script>
+  <!-- <script type="module" src="components/index.js"></script> -->
 
 </body>
 
