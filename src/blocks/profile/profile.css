@@ -19,7 +19,7 @@
   .profile {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, minmax(min-content, max-content));
-    max-width:100%;
+    max-width: 100%;
     padding: 42px 19px 15px 19px;
     gap: 5px 0;
   }

@@ -1,5 +1,4 @@
-.card
-{
+.card {
   padding: 0;
   background: #fff;
   border-radius: 10px;
@@ -13,21 +12,17 @@
   transition: all .3s ease 0s;
 }
 
-@media screen and (min-width: 545px)
-{
+@media screen and (min-width: 545px) {
 
-  .card:hover .card__picture::before
-  {
+  .card:hover .card__picture::before {
     opacity: .1;
   }
 
-  .card:hover .card__trash-button
-  {
+  .card:hover .card__trash-button {
     opacity: 1;
   }
 
-  .card:hover .card__trash-button:hover
-  {
+  .card:hover .card__trash-button:hover {
     opacity: .6;
   }
 }
