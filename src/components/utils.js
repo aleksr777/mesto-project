@@ -10,8 +10,8 @@ const handlerEsc = (event) => {
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handlerEsc);
-  const textForm = popup.querySelector('.form__input-text');
-  if (textForm && enableValidation) { enableValidation() }
+  const form = popup.querySelector('.form');
+  if (form) { enableValidation() }
 };
 
 const closePopup = (popup) => {
