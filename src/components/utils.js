@@ -1,8 +1,8 @@
 import { enableValidation } from './validate.js';
 
 const handlerEsc = (event) => {
-  const popup = document.querySelector('.popup_opened');
   if (event.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
     closePopup(popup);
   }
 }
