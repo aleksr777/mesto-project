@@ -2,7 +2,6 @@ const handlerEsc = (event) => {
   const popup = document.querySelector('.popup_opened');
   if (event.key === 'Escape') {
     closePopup(popup);
-    console.log('popup');
   }
 }
 
