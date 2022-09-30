@@ -31,6 +31,4 @@ saveProfileForm.addEventListener('submit', (event) => {
 	event.preventDefault();
 });
 
-enableValidation();
-
 loadInitialCards();
