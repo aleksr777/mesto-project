@@ -12,6 +12,8 @@ const card = {
   srcsetLink: '',
 };
 
+const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
+
 const kamchatkaWebp = new URL('../images/kamchatka.webp', import.meta.url);
 const kamchatkaJpg = new URL('../images/kamchatka.jpg', import.meta.url);
 
@@ -67,7 +69,7 @@ const loadCardInfo = () => {
   card.placeName = inputPlaceName.value;
   card.srcLink = inputSrcLink.value;
   card.srcsetLink = '';
-  cardsBlock.prepend(createCard(card));
+  cardsBlock.prepend(createCard(card, splashScreen));
   inputPlaceName.value = '';
   inputSrcLink.value = '';
 }
@@ -90,12 +92,12 @@ const toggleLikeCurrentButton = (event) => {
   event.stopPropagation();
 }
 
-const createCard = (card) => {
+const createCard = (card, splashScreen) => {
   const newCard = cloneNodeTemplate(cardTemplate.content);
   newCard.querySelector('.card__text').textContent = card.placeName;
   newCard.querySelector('.card__img').src = card.srcLink;
   newCard.querySelector('.card__webp').srcset = card.srcsetLink;
-  newCard.querySelector('.card__img').onerror = () => newCard.querySelector('.card__img').src = 'images/no-image.jpg';
+  newCard.querySelector('.card__img').onerror = () => { newCard.querySelector('.card__img').src = splashScreen; }
   newCard.querySelector('.card__picture').addEventListener('click', (event) => openPopupImage(event));
   newCard.querySelector('.card__like-button').addEventListener('click', (event) => toggleLikeCurrentButton(event));
   newCard.querySelector('.card__trash-button').addEventListener('click', (event) => deleteCurrentCard(event));
@@ -107,7 +109,7 @@ const loadInitialCards = () => {
     card.placeName = initCard.name;
     card.srcLink = initCard.src;
     card.srcsetLink = initCard.srcset;
-    cardsBlock.prepend(createCard(card));
+    cardsBlock.prepend(createCard(card, splashScreen));
   });
 }
 

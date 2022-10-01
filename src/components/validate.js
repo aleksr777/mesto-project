@@ -1,3 +1,12 @@
+const deactivateButton = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.setAttribute('disabled', true);
+}
+
+const activateButton = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.remove(inactiveButtonClass);
+  buttonElement.removeAttribute('disabled');
+}
 
 const hasInvalidInput = (inputList) => {
   // проходим по этому массиву методом some
@@ -11,12 +20,11 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
-  } else {
+    deactivateButton(buttonElement, inactiveButtonClass);
+  } 
+  else {
     // иначе сделай кнопку активной
-    buttonElement.classList.remove(inactiveButtonClass);
-    buttonElement.removeAttribute('disabled');
+    activateButton(buttonElement, inactiveButtonClass);
   }
 };
 
@@ -111,4 +119,4 @@ const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
   }
 };
 
-export { enableValidation }; 
+export { enableValidation, deactivateButton }; 

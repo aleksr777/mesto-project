@@ -1,5 +1,3 @@
-import { enableValidation } from './validate.js';
-
 const handlerEsc = (event) => {
   if (event.key === 'Escape') {
     const popup = document.querySelector('.popup_opened');
@@ -10,17 +8,6 @@ const handlerEsc = (event) => {
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handlerEsc);
-  const form = popup.querySelector('.form');
-  if (form) {
-    enableValidation({
-      formSelector: '.form',
-      inputSelector: '.form__input-text',
-      submitButtonSelector: '.form__submit',
-      inactiveButtonClass: 'form__submit_inactive',
-      inputErrorClass: 'form__input-text_type_error',
-      errorClass: 'form__input-error'
-    });
-  }
 };
 
 const closePopup = (popup) => {

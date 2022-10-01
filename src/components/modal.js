@@ -2,7 +2,6 @@ import { openPopup, closePopup } from './utils.js';
 
 const popupWindows = document.querySelectorAll('.popup');
 
-const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupCardForm = document.querySelector('.popup_type_card-form');
 const popupImage = document.querySelector('.popup_type_image');
@@ -40,4 +39,4 @@ const openPopupImage = (event) => {
   openPopup(popupImage);
 }
 
-export { popupWindows, popupCloseButtons, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, openPopupProfile, closeCurrentPopup, openPopupImage }; 
+export { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, openPopupProfile, closeCurrentPopup, openPopupImage }; 
