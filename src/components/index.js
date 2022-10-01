@@ -1,5 +1,9 @@
 import '../pages/index.css';
 
+const submit = popupCardForm.querySelector('.form__submit');
+const name = popupCardForm.querySelector('#card-name-input').value;
+const link = popupCardForm.querySelector('#card-link-input').value;
+
 import { enableValidation, deactivateButton } from './validate.js';
 import { loadInitialCards, loadCardInfo } from './card.js';
 import { openPopup, closePopup } from './utils.js';
@@ -12,9 +16,6 @@ editButton.addEventListener('click', (event) => openPopupProfile(event));
 
 addCardButton.addEventListener('click', () => {
 	openPopup(popupCardForm);
-	const submit = popupCardForm.querySelector('.form__submit');
-	const name = popupCardForm.querySelector('#card-name-input').value;
-	const link = popupCardForm.querySelector('#card-link-input').value;
 	if (!name && !link) {
 		deactivateButton(submit, 'form__submit_inactive');
 	}
