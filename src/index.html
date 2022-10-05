@@ -22,14 +22,14 @@
       <section class="profile" aria-label="Профиль">
 
         <picture class="profile__picture">
-          <source class="profile__webp" type="image/webp" srcset="<%=require('./images/user-image.webp')%>">
-          <img class="profile__img" src="<%=require('./images/user-image.jpg')%>" alt="Фотография профиля.">
+          <source class="profile__webp" type="image/webp" srcset="">
+          <img class="profile__img" src="" alt="Фотография профиля.">
         </picture>
 
         <div class="profile__text-box">
-          <h1 class="profile__name">Александр</h1>
+          <h1 class="profile__name"></h1>
           <button type="button" class="profile__edit-button" value="edit-profile"></button>
-          <p class="profile__profession">Студент Яндекс-практикума</p>
+          <p class="profile__profession"></p>
         </div>
         <button type="button" class="profile__add-button" value="add-profile"></button>
       </section>
@@ -94,7 +94,7 @@
         <h3 class="popup__title">Новое место</h3>
 
         <form class="form form_type_card-form" name="card-form" id="card-form" method="POST" novalidate>
-          
+
           <label class="form__label">
             <input type="text" class="form__input-text" id="card-name-input" name="card-name-input" value=""
               placeholder="Название" minlength="2" maxlength="30" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"

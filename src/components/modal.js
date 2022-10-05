@@ -12,6 +12,7 @@ const inputName = document.querySelector('#profile-name-input');
 const inputProfession = document.querySelector('#profile-profession-input');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
+const profileAvatar = document.querySelector('.profile__img');
 
 const imgPopupImage = popupImage.querySelector('.popup__img');
 const webpPopupImage = popupImage.querySelector('.popup__webp');
@@ -39,4 +40,4 @@ const openPopupImage = (event) => {
   openPopup(popupImage);
 }
 
-export { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, openPopupProfile, closeCurrentPopup, openPopupImage }; 
+export { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, closeCurrentPopup, openPopupImage }; 

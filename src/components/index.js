@@ -1,16 +1,22 @@
 import '../pages/index.css';
+import { enableValidation, deactivateButton } from './validate.js';
+import { loadCardInfo } from './card.js';
+import { openPopup, closePopup } from './utils.js';
+import { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, closeCurrentPopup } from './modal.js';
+import { getInitialCards, sendProfileInfo, getProfileInfo } from './api.js';
 
 const submit = popupCardForm.querySelector('.form__submit');
 const name = popupCardForm.querySelector('#card-name-input').value;
 const link = popupCardForm.querySelector('#card-link-input').value;
 
-import { enableValidation, deactivateButton } from './validate.js';
-import { loadInitialCards, loadCardInfo } from './card.js';
-import { openPopup, closePopup } from './utils.js';
-import { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, openPopupProfile, closeCurrentPopup } from './modal.js';
-
 const editButton = document.querySelector('.profile__edit-button');
 const addCardButton = document.querySelector('.profile__add-button');
+
+const handleProfileInfo = (arr) => {
+	profileName.textContent = arr.name;
+	profileProfession.textContent = arr.about;
+	profileAvatar.src = arr.avatar;
+}
 
 editButton.addEventListener('click', (event) => openPopupProfile(event));
 
@@ -28,19 +34,18 @@ popupWindows.forEach(element => {
 });
 
 createCardForm.addEventListener('submit', (event) => {
+	event.preventDefault();
 	loadCardInfo();
 	closePopup(popupCardForm);
-	event.preventDefault();
 });
 
 saveProfileForm.addEventListener('submit', (event) => {
+	event.preventDefault();
 	profileName.textContent = inputName.value;
 	profileProfession.textContent = inputProfession.value;
+	sendProfileInfo(inputName.value, inputProfession.value);
 	closePopup(popupProfile);
-	event.preventDefault();
 });
-
-loadInitialCards();
 
 enableValidation({
 	formSelector: '.form',
@@ -50,3 +55,8 @@ enableValidation({
 	inputErrorClass: 'form__input-text_type_error',
 	errorClass: 'form__input-error'
 });
+
+getProfileInfo();
+getInitialCards();
+
+export { handleProfileInfo };
