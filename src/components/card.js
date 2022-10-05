@@ -1,4 +1,5 @@
 import { openPopupImage } from './modal.js';
+import { sendNewCard } from './api.js';
 
 const inputPlaceName = document.querySelector('#card-name-input');
 const inputlink = document.querySelector('#card-link-input');
@@ -15,6 +16,7 @@ const card = {
 const loadCardInfo = () => {
   card.name = inputPlaceName.value;
   card.link = inputlink.value;
+  sendNewCard(card.name, card.link);
   cardsBlock.prepend(createCard(card, splashScreen));
   inputPlaceName.value = '';
   inputlink.value = '';
@@ -57,4 +59,4 @@ const loadInitialCards = (initialCards) => {
   });
 }
 
-export { loadInitialCards, loadCardInfo }; 
+export { loadInitialCards, loadCardInfo, inputPlaceName, inputlink }; 

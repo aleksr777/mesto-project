@@ -64,4 +64,15 @@ const getInitialCards = () => {
     });
 }
 
-export { getInitialCards, sendProfileInfo, getProfileInfo };
+const sendNewCard = (cardName, cardLink) => {
+  fetch(`${config.baseUrl}/cards`, {
+    method: 'POST',
+    headers: config.headers,
+    body: JSON.stringify({
+      name: cardName,
+      link: cardLink,      
+    })
+  });
+}
+
+export { getInitialCards, sendNewCard, sendProfileInfo, getProfileInfo };
