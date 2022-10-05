@@ -75,4 +75,4 @@ const sendNewCard = (cardName, cardLink) => {
   });
 }
 
-export { getInitialCards, sendNewCard, sendProfileInfo, getProfileInfo };
+export { getInitialCards, sendNewCard, getProfileInfo, sendProfileInfo };
