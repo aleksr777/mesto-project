@@ -1,5 +1,6 @@
 import { openPopupImage } from './modal.js';
 import { sendNewCard } from './api.js';
+import { profileId } from './index.js';
 
 const inputPlaceName = document.querySelector('#card-name-input');
 const inputlink = document.querySelector('#card-link-input');
@@ -18,7 +19,7 @@ const loadCardInfo = () => {
   card.name = inputPlaceName.value;
   card.link = inputlink.value;
   card.numLikes = 0;
-  cardsBlock.prepend(createCard(card, splashScreen, card.numLikes));
+  cardsBlock.prepend(createCard(card, splashScreen));
   sendNewCard(card.name, card.link);
   inputPlaceName.value = '';
   inputlink.value = '';
@@ -42,16 +43,23 @@ const toggleLikeCurrentButton = (event) => {
   event.stopPropagation();
 }
 
-const createCard = (card, splashScreen, numLikes) => {
+const createCard = (card, splashScreen) => {
   const newCard = cloneNodeTemplate(cardTemplate.content);
   newCard.querySelector('.card__text').textContent = card.name;
-  if (Number(numLikes) === 0) {
+  if (card.numLikes === 0) {
     newCard.querySelector('.card__like-button').style.marginTop = '';
     newCard.querySelector('.card__like-number').textContent = '';
   }
   else {
     newCard.querySelector('.card__like-button').style.marginTop = '-15px';
-    newCard.querySelector('.card__like-number').textContent = numLikes;
+    newCard.querySelector('.card__like-number').textContent = card.numLikes;
+  }
+  if (card.numLikes === 0) {
+    newCard.querySelector('.card__like-button').style.marginTop = '';
+    newCard.querySelector('.card__like-number').textContent = '';
+  }
+  if (profileId === card.owner._id) {
+    newCard.querySelector('.card__trash-button').style.display = 'block';
   }
   newCard.querySelector('.card__img').src = card.link;
   newCard.querySelector('.card__img').onerror = () => { newCard.querySelector('.card__img').src = splashScreen; }
@@ -69,7 +77,8 @@ const loadInitialCards = (initialCards) => {
     card.likes.forEach(el => {
       card.numLikes += 1;
     });
-    cardsBlock.prepend(createCard(card, splashScreen, card.numLikes));
+    /* console.log(card.owner._id); */
+    cardsBlock.prepend(createCard(card, splashScreen));
   });
 }
 

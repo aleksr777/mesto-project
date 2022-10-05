@@ -12,10 +12,13 @@ const link = popupCardForm.querySelector('#card-link-input').value;
 const editButton = document.querySelector('.profile__edit-button');
 const addCardButton = document.querySelector('.profile__add-button');
 
+let profileId;
+
 const handleProfileInfo = (arr) => {
 	profileName.textContent = arr.name;
 	profileProfession.textContent = arr.about;
 	profileAvatar.src = arr.avatar;
+	profileId = arr._id;
 }
 
 editButton.addEventListener('click', (event) => openPopupProfile(event));
@@ -59,4 +62,4 @@ enableValidation({
 getProfileInfo();
 getInitialCards();
 
-export { handleProfileInfo };
+export { handleProfileInfo, profileId };
