@@ -1,4 +1,4 @@
-import { loadInitialCards, removeCards } from './card.js';
+import { loadInitialCards, removeCards, putLikeLocal, deleteLikeLocal } from './card.js';
 import { handleProfileInfo } from './index.js';
 import { openPopup, closePopup } from './utils.js';
 import { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, closeCurrentPopup, submitCardForm, submitProfile } from './modal.js';
@@ -42,7 +42,6 @@ const sendProfileInfo = (inputName, inputProfession) => {
   })
     .then(res => {
       if (res.ok) {
-        console.log(inputName, inputProfession);
         closePopup(popupProfile);
         profileName.textContent = inputName;
         profileProfession.textContent = inputProfession;
@@ -58,6 +57,8 @@ const sendProfileInfo = (inputName, inputProfession) => {
       }
     })
     .catch((err) => {
+      submitProfile.textContent = 'Сохранить';
+      submitProfile.removeAttribute('disabled');
       console.log(err);
     });
 }
@@ -112,6 +113,8 @@ const sendNewCard = (cardName, cardLink) => {
       }
     })
     .catch((err) => {
+      submitCardForm.textContent = 'Cоздать';
+      submitCardForm.removeAttribute('disabled');
       console.log(err);
     });
 }
@@ -137,4 +140,52 @@ const deleteCardOnServer = async (card, cardId) => {
     });
 }
 
-export { getInitialCards, sendNewCard, deleteCardOnServer, getProfileInfo, sendProfileInfo };
+const putLikeOnServer = async (likeButton, card, cardId) => {
+  fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: 'PUT',
+    headers: config.headers,
+    body: JSON.stringify({
+      _id: cardId
+    })
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    })
+    .then(data => {
+      putLikeLocal(likeButton, card, data.likes);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+const deleteLikeOnServer = async (likeButton, card, cardId) => {
+  fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: 'DELETE',
+    headers: config.headers,
+    body: JSON.stringify({
+      _id: cardId
+    })
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    })
+    .then(data => {
+      deleteLikeLocal(likeButton, card, data.likes);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+export { getInitialCards, sendNewCard, deleteCardOnServer, putLikeOnServer, deleteLikeOnServer, getProfileInfo, sendProfileInfo };
