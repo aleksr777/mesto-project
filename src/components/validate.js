@@ -21,7 +21,7 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
     deactivateButton(buttonElement, inactiveButtonClass);
-  } 
+  }
   else {
     // иначе сделай кнопку активной
     activateButton(buttonElement, inactiveButtonClass);

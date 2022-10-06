@@ -1,7 +1,6 @@
 import { loadInitialCards, updateCards, updateProfileInfo, putLikeLocal, deleteLikeLocal } from './card.js';
 import { handleProfileInfo } from './index.js';
-import { openPopup, closePopup } from './utils.js';
-import { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, closeCurrentPopup, submitCardForm, submitProfile } from './modal.js';
+import { submitCardForm, submitProfile } from './modal.js';
 
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-15',

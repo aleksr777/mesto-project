@@ -1,8 +1,9 @@
 import '../pages/index.css';
+
 import { enableValidation, deactivateButton } from './validate.js';
-import { removeCards, inputPlaceName, inputlink } from './card.js';
-import { openPopup, closePopup } from './utils.js';
-import { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, closeCurrentPopup, submitCardForm, submitProfile } from './modal.js';
+import { inputPlaceName, inputlink } from './card.js';
+import { openPopup} from './utils.js';
+import { popupWindows, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, closeCurrentPopup, submitCardForm, submitProfile } from './modal.js';
 import { getInitialCards, sendNewCard, sendProfileInfo, getProfileInfo } from './api.js';
 
 const editButton = document.querySelector('.profile__edit-button');
