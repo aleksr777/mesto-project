@@ -1,5 +1,6 @@
-import { openPopupImage } from './modal.js';
+import { openPopupImage, submitCardForm, submitProfile, popupCardForm, popupProfile, profileName, profileProfession, inputName, inputProfession } from './modal.js';
 import { profileId } from './index.js';
+import { closePopup } from './utils.js';
 import { deleteCardOnServer, getInitialCards, putLikeOnServer, deleteLikeOnServer } from './api.js';
 
 const inputPlaceName = document.querySelector('#card-name-input');
@@ -14,6 +15,26 @@ const removeCards = () => {
   cards.forEach(card => {
     card.remove();
   });
+}
+
+const updateProfileInfo = () => {
+  closePopup(popupProfile);
+  profileName.textContent = inputName.value;
+  profileProfession.textContent = inputProfession.value;
+  setTimeout(() => {
+    submitProfile.textContent = 'Сохранить';
+    submitProfile.removeAttribute('disabled');
+  }, 300);
+}
+
+const updateCards = () => {
+  closePopup(popupCardForm);
+  removeCards();
+  getInitialCards();
+  setTimeout(() => {
+    submitCardForm.textContent = 'Cоздать';
+    submitCardForm.removeAttribute('disabled');
+  }, 300);
 }
 
 const deleteCard = async (deleteButton) => {
@@ -106,4 +127,4 @@ const loadInitialCards = (initialCards) => {
   });
 }
 
-export { loadInitialCards, removeCards, inputPlaceName, inputlink, putLikeLocal, deleteLikeLocal }; 
+export { loadInitialCards, removeCards, updateCards, inputPlaceName, inputlink, updateProfileInfo, putLikeLocal, deleteLikeLocal }; 

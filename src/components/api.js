@@ -1,4 +1,4 @@
-import { loadInitialCards, removeCards, putLikeLocal, deleteLikeLocal } from './card.js';
+import { loadInitialCards, updateCards, updateProfileInfo, putLikeLocal, deleteLikeLocal } from './card.js';
 import { handleProfileInfo } from './index.js';
 import { openPopup, closePopup } from './utils.js';
 import { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, closeCurrentPopup, submitCardForm, submitProfile } from './modal.js';
@@ -42,13 +42,7 @@ const sendProfileInfo = (inputName, inputProfession) => {
   })
     .then(res => {
       if (res.ok) {
-        closePopup(popupProfile);
-        profileName.textContent = inputName;
-        profileProfession.textContent = inputProfession;
-        setTimeout(() => {
-          submitProfile.textContent = 'Сохранить';
-          submitProfile.removeAttribute('disabled');
-        }, 300);
+        updateProfileInfo();
       }
       else {
         submitProfile.textContent = 'Сохранить';
@@ -98,13 +92,7 @@ const sendNewCard = (cardName, cardLink) => {
   })
     .then(res => {
       if (res.ok) {
-        closePopup(popupCardForm);
-        removeCards();
-        getInitialCards();
-        setTimeout(() => {
-          submitCardForm.textContent = 'Cоздать';
-          submitCardForm.removeAttribute('disabled');
-        }, 300);
+        updateCards();
       }
       else {
         submitCardForm.textContent = 'Cоздать';
