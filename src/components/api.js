@@ -1,5 +1,7 @@
-import { loadInitialCards } from './card.js';
+import { loadInitialCards, removeCards } from './card.js';
 import { handleProfileInfo } from './index.js';
+import { openPopup, closePopup } from './utils.js';
+import { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, closeCurrentPopup, submitCardForm, submitProfile } from './modal.js';
 
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-15',
@@ -37,7 +39,27 @@ const sendProfileInfo = (inputName, inputProfession) => {
       name: inputName,
       about: inputProfession
     })
-  });
+  })
+    .then(res => {
+      if (res.ok) {
+        console.log(inputName, inputProfession);
+        closePopup(popupProfile);
+        profileName.textContent = inputName;
+        profileProfession.textContent = inputProfession;
+        setTimeout(() => {
+          submitProfile.textContent = 'Сохранить';
+          submitProfile.removeAttribute('disabled');
+        }, 300);
+      }
+      else {
+        submitProfile.textContent = 'Сохранить';
+        submitProfile.removeAttribute('disabled');
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 const getInitialCards = () => {
@@ -70,9 +92,49 @@ const sendNewCard = (cardName, cardLink) => {
     headers: config.headers,
     body: JSON.stringify({
       name: cardName,
-      link: cardLink,      
+      link: cardLink,
     })
-  });
+  })
+    .then(res => {
+      if (res.ok) {
+        closePopup(popupCardForm);
+        removeCards();
+        getInitialCards();
+        setTimeout(() => {
+          submitCardForm.textContent = 'Cоздать';
+          submitCardForm.removeAttribute('disabled');
+        }, 300);
+      }
+      else {
+        submitCardForm.textContent = 'Cоздать';
+        submitCardForm.removeAttribute('disabled');
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
-export { getInitialCards, sendNewCard, getProfileInfo, sendProfileInfo };
+const deleteCardOnServer = async (card, cardId) => {
+  fetch(`${config.baseUrl}/cards/${cardId}`, {
+    method: 'DELETE',
+    headers: config.headers,
+    body: JSON.stringify({
+      _id: cardId
+    })
+  })
+    .then(res => {
+      if (res.ok) {
+        card.remove();
+      }
+      else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+export { getInitialCards, sendNewCard, deleteCardOnServer, getProfileInfo, sendProfileInfo };

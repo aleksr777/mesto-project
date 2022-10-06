@@ -1,13 +1,9 @@
 import '../pages/index.css';
 import { enableValidation, deactivateButton } from './validate.js';
-import { loadCardInfo } from './card.js';
+import { removeCards, inputPlaceName, inputlink } from './card.js';
 import { openPopup, closePopup } from './utils.js';
-import { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, closeCurrentPopup } from './modal.js';
-import { getInitialCards, sendProfileInfo, getProfileInfo } from './api.js';
-
-const submit = popupCardForm.querySelector('.form__submit');
-const name = popupCardForm.querySelector('#card-name-input').value;
-const link = popupCardForm.querySelector('#card-link-input').value;
+import { popupWindows, popupProfile, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, closeCurrentPopup, submitCardForm, submitProfile } from './modal.js';
+import { getInitialCards, sendNewCard, sendProfileInfo, getProfileInfo } from './api.js';
 
 const editButton = document.querySelector('.profile__edit-button');
 const addCardButton = document.querySelector('.profile__add-button');
@@ -25,8 +21,8 @@ editButton.addEventListener('click', (event) => openPopupProfile(event));
 
 addCardButton.addEventListener('click', () => {
 	openPopup(popupCardForm);
-	if (!name && !link) {
-		deactivateButton(submit, 'form__submit_inactive');
+	if (!inputPlaceName.value && !inputlink.value) {
+		deactivateButton(submitCardForm, 'form__submit_inactive');
 	}
 });
 
@@ -38,16 +34,16 @@ popupWindows.forEach(element => {
 
 createCardForm.addEventListener('submit', (event) => {
 	event.preventDefault();
-	loadCardInfo();
-	closePopup(popupCardForm);
+	submitCardForm.textContent = 'Сохранение...';
+	submitCardForm.setAttribute('disabled', true);
+	sendNewCard(inputPlaceName.value, inputlink.value);
 });
 
 saveProfileForm.addEventListener('submit', (event) => {
 	event.preventDefault();
-	profileName.textContent = inputName.value;
-	profileProfession.textContent = inputProfession.value;
+	submitProfile.textContent = 'Сохранение...';
+	submitProfile.setAttribute('disabled', true);
 	sendProfileInfo(inputName.value, inputProfession.value);
-	closePopup(popupProfile);
 });
 
 enableValidation({
