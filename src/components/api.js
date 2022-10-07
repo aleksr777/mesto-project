@@ -10,8 +10,13 @@ const config = {
   }
 }
 
+const returnButton = (button, text) => {
+  button.textContent = text;
+  button.removeAttribute('disabled');
+}
+
 const getProfileInfo = () => {
-  fetch(`${config.baseUrl}/users/me`, {
+  return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers
   })
     .then(res => {
@@ -31,7 +36,7 @@ const getProfileInfo = () => {
 }
 
 const sendProfileInfo = (inputName, inputProfession) => {
-  fetch(`${config.baseUrl}/users/me`, {
+  return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
     headers: config.headers,
     body: JSON.stringify({
@@ -44,20 +49,18 @@ const sendProfileInfo = (inputName, inputProfession) => {
         updateProfileInfo();
       }
       else {
-        submitProfile.textContent = 'Сохранить';
-        submitProfile.removeAttribute('disabled');
+        returnButton(submitProfile, 'Сохранить');
         return Promise.reject(`Ошибка: ${res.status}`);
       }
     })
     .catch((err) => {
-      submitProfile.textContent = 'Сохранить';
-      submitProfile.removeAttribute('disabled');
+      returnButton(submitProfile, 'Сохранить');
       console.log(err);
     });
 }
 
 const sendAvatar = (link) => {
-  fetch(`${config.baseUrl}/users/me/avatar`, {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: config.headers,
     body: JSON.stringify({
@@ -69,8 +72,7 @@ const sendAvatar = (link) => {
         return res.json();
       }
       else {
-        submitAvatar.textContent = 'Сохранить';
-        submitAvatar.removeAttribute('disabled');
+        returnButton(submitAvatar, 'Сохранить');
         return Promise.reject(`Ошибка: ${res.status}`);
       }
     })
@@ -78,15 +80,14 @@ const sendAvatar = (link) => {
       updateAvatar(data.avatar);
     })
     .catch((err) => {
-      submitAvatar.textContent = 'Сохранить';
-      submitAvatar.removeAttribute('disabled');
+      returnButton(submitAvatar, 'Сохранить');
       console.log(err);
     });
 }
 
 const getInitialCards = () => {
   let initialCards = [];
-  fetch(`${config.baseUrl}/cards`, {
+  return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
   })
     .then(res => {
@@ -109,7 +110,7 @@ const getInitialCards = () => {
 }
 
 const sendNewCard = (cardName, cardLink) => {
-  fetch(`${config.baseUrl}/cards`, {
+  return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
     body: JSON.stringify({
@@ -122,20 +123,18 @@ const sendNewCard = (cardName, cardLink) => {
         updateCards();
       }
       else {
-        submitCardForm.textContent = 'Cоздать';
-        submitCardForm.removeAttribute('disabled');
+        returnButton(submitCardForm, 'Cоздать');
         return Promise.reject(`Ошибка: ${res.status}`);
       }
     })
     .catch((err) => {
-      submitCardForm.textContent = 'Cоздать';
-      submitCardForm.removeAttribute('disabled');
+      returnButton(submitCardForm, 'Cоздать');
       console.log(err);
     });
 }
 
 const deleteCardOnServer = async (card, cardId) => {
-  fetch(`${config.baseUrl}/cards/${cardId}`, {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
     headers: config.headers,
     body: JSON.stringify({
@@ -156,7 +155,7 @@ const deleteCardOnServer = async (card, cardId) => {
 }
 
 const putLikeOnServer = async (likeButton, card, cardId) => {
-  fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'PUT',
     headers: config.headers,
     body: JSON.stringify({
@@ -180,7 +179,7 @@ const putLikeOnServer = async (likeButton, card, cardId) => {
 }
 
 const deleteLikeOnServer = async (likeButton, card, cardId) => {
-  fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',
     headers: config.headers,
     body: JSON.stringify({
