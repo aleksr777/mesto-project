@@ -1,10 +1,10 @@
-import { openPopupImage, submitCardForm, submitProfile, popupCardForm, popupProfile, profileName, profileProfession, inputName, inputProfession } from './modal.js';
-import { profileId } from './index.js';
+import { openPopupImage, submitCardForm, popupCardForm } from './modal.js';
+import { profileId, restoreButtonState } from './index.js';
 import { closePopup } from './utils.js';
 import { deleteCardOnServer, getInitialCards, putLikeOnServer, deleteLikeOnServer } from './api.js';
 
 const inputPlaceName = document.querySelector('#card-name-input');
-const inputlink = document.querySelector('#card-link-input');
+const inputLinkImg = document.querySelector('#card-link-input');
 const cardsBlock = document.querySelector('.cards-block');
 const cardTemplate = document.querySelector('#card-template');
 const cloneNodeTemplate = (template) => template.querySelector('.cards-block__card').cloneNode(true);
@@ -17,24 +17,11 @@ const removeCards = () => {
   });
 }
 
-const updateProfileInfo = () => {
-  closePopup(popupProfile);
-  profileName.textContent = inputName.value;
-  profileProfession.textContent = inputProfession.value;
-  setTimeout(() => {
-    submitProfile.textContent = 'Сохранить';
-    submitProfile.removeAttribute('disabled');
-  }, 300);
-}
-
 const updateCards = () => {
   closePopup(popupCardForm);
   removeCards();
   getInitialCards();
-  setTimeout(() => {
-    submitCardForm.textContent = 'Cоздать';
-    submitCardForm.removeAttribute('disabled');
-  }, 300);
+  restoreButtonState(submitCardForm, 'Cоздать');
 }
 
 const deleteCard = async (deleteButton) => {
@@ -127,4 +114,4 @@ const loadInitialCards = (initialCards) => {
   });
 }
 
-export { loadInitialCards, removeCards, updateCards, inputPlaceName, inputlink, updateProfileInfo, putLikeLocal, deleteLikeLocal }; 
+export { loadInitialCards, removeCards, updateCards, inputPlaceName, inputLinkImg, putLikeLocal, deleteLikeLocal }; 

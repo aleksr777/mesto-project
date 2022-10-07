@@ -13,6 +13,7 @@
   background-image: url(../../../images/heart-transparent.svg);
   transition: all 0.3s ease 0s;
   cursor: pointer;
+  user-select: none;
 }
 
 @media (min-width: 545px) {

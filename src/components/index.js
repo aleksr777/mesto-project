@@ -1,15 +1,28 @@
 import '../pages/index.css';
 
 import { enableValidation, deactivateButton } from './validate.js';
-import { inputPlaceName, inputlink } from './card.js';
-import { openPopup} from './utils.js';
-import { popupWindows, popupCardForm, createCardForm, saveProfileForm, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, closeCurrentPopup, submitCardForm, submitProfile } from './modal.js';
-import { getInitialCards, sendNewCard, sendProfileInfo, getProfileInfo } from './api.js';
+import { inputPlaceName, inputLinkImg } from './card.js';
+import { popupWindows, popupCardForm, popupProfile, popupAvatar, inputName, inputProfession, profileName, profileProfession, profileAvatar, openPopupProfile, openPopupAvatar, closeCurrentPopup, submitCardForm, submitProfile, submitAvatar, createCardForm, saveProfileForm, saveAvatar, inputLinkAvatar } from './modal.js';
+import { openPopup, closePopup } from './utils.js';
+import { getInitialCards, sendNewCard, sendProfileInfo, sendAvatar, getProfileInfo } from './api.js';
 
 const editButton = document.querySelector('.profile__edit-button');
 const addCardButton = document.querySelector('.profile__add-button');
+const profilePicture = document.querySelector('.profile__picture');
 
 let profileId;
+
+const waitServerResponse = (button, text) => {
+	button.textContent = text;
+	button.setAttribute('disabled', true);
+}
+
+const restoreButtonState = (button, text) => {
+	setTimeout(() => {
+		button.textContent = text;
+		button.removeAttribute('disabled');
+	}, 300);
+}
 
 const handleProfileInfo = (arr) => {
 	profileName.textContent = arr.name;
@@ -18,11 +31,26 @@ const handleProfileInfo = (arr) => {
 	profileId = arr._id;
 }
 
+const updateProfileInfo = () => {
+	closePopup(popupProfile);
+	profileName.textContent = inputName.value;
+	profileProfession.textContent = inputProfession.value;
+	restoreButtonState(submitProfile, 'Сохранить');
+}
+
+const updateAvatar = (link) => {
+	closePopup(popupAvatar);
+	profileAvatar.src = link;
+	restoreButtonState(submitAvatar, 'Сохранить');
+}
+
 editButton.addEventListener('click', (event) => openPopupProfile(event));
+
+profilePicture.addEventListener('click', (event) => openPopupAvatar(event));
 
 addCardButton.addEventListener('click', () => {
 	openPopup(popupCardForm);
-	if (!inputPlaceName.value && !inputlink.value) {
+	if (!inputPlaceName.value && !inputLinkImg.value) {
 		deactivateButton(submitCardForm, 'form__submit_inactive');
 	}
 });
@@ -34,17 +62,21 @@ popupWindows.forEach(element => {
 });
 
 createCardForm.addEventListener('submit', (event) => {
-	event.preventDefault();
-	submitCardForm.textContent = 'Сохранение...';
-	submitCardForm.setAttribute('disabled', true);
-	sendNewCard(inputPlaceName.value, inputlink.value);
+	event.preventDefault(); 
+	waitServerResponse(submitCardForm, 'Сохранение...');
+	sendNewCard(inputPlaceName.value, inputLinkImg.value);
 });
 
 saveProfileForm.addEventListener('submit', (event) => {
 	event.preventDefault();
-	submitProfile.textContent = 'Сохранение...';
-	submitProfile.setAttribute('disabled', true);
+	waitServerResponse(submitProfile, 'Сохранение...');
 	sendProfileInfo(inputName.value, inputProfession.value);
+});
+
+saveAvatar.addEventListener('submit', (event) => {
+	event.preventDefault();
+	waitServerResponse(submitAvatar, 'Сохранение...');
+	sendAvatar(inputLinkAvatar.value);
 });
 
 enableValidation({
@@ -59,4 +91,4 @@ enableValidation({
 getProfileInfo();
 getInitialCards();
 
-export { handleProfileInfo, profileId };
+export { handleProfileInfo, profileId, updateProfileInfo, updateAvatar, restoreButtonState };

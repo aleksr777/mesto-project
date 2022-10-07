@@ -1,6 +1,6 @@
-import { loadInitialCards, updateCards, updateProfileInfo, putLikeLocal, deleteLikeLocal } from './card.js';
-import { handleProfileInfo } from './index.js';
-import { submitCardForm, submitProfile } from './modal.js';
+import { loadInitialCards, updateCards, putLikeLocal, deleteLikeLocal } from './card.js';
+import { handleProfileInfo, updateProfileInfo, updateAvatar } from './index.js';
+import { submitCardForm, submitProfile, submitAvatar } from './modal.js';
 
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-15',
@@ -52,6 +52,34 @@ const sendProfileInfo = (inputName, inputProfession) => {
     .catch((err) => {
       submitProfile.textContent = 'Сохранить';
       submitProfile.removeAttribute('disabled');
+      console.log(err);
+    });
+}
+
+const sendAvatar = (link) => {
+  fetch(`${config.baseUrl}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({
+      avatar: link,
+    })
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      else {
+        submitAvatar.textContent = 'Сохранить';
+        submitAvatar.removeAttribute('disabled');
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    })
+    .then((data) => {
+      updateAvatar(data.avatar);
+    })
+    .catch((err) => {
+      submitAvatar.textContent = 'Сохранить';
+      submitAvatar.removeAttribute('disabled');
       console.log(err);
     });
 }
@@ -175,4 +203,4 @@ const deleteLikeOnServer = async (likeButton, card, cardId) => {
     });
 }
 
-export { getInitialCards, sendNewCard, deleteCardOnServer, putLikeOnServer, deleteLikeOnServer, getProfileInfo, sendProfileInfo };
+export { getInitialCards, sendNewCard, deleteCardOnServer, putLikeOnServer, deleteLikeOnServer, getProfileInfo, sendProfileInfo, sendAvatar };

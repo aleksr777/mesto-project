@@ -8,4 +8,5 @@
   color: #000000;
   align-self: center;
   justify-self: center;
+  user-select: none;
 }
