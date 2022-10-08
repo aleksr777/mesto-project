@@ -1,6 +1,5 @@
-import { closePopup } from './modal.js';
-import { popupCardForm, openPopupImage, profileId} from './index.js';
-import { deleteCardOnServer, getInitialCards, putLikeOnServer, deleteLikeOnServer } from './api.js';
+import { openPopupImage} from './index.js';
+import { deleteCardOnServer, putLikeOnServer, deleteLikeOnServer } from './api.js';
 
 const cardsBlock = document.querySelector('.cards-block');
 const cardTemplate = document.querySelector('#card-template');
@@ -10,6 +9,7 @@ const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
 const deleteCard = async (button) => {
   const card = button.closest('.card');
   const idCard = card.getAttribute('card-id');
+  console.log(card._id);
   deleteCardOnServer(card, idCard)
     .then(() => {
       button.setAttribute('disabled', true);
@@ -65,7 +65,9 @@ const toggleLikeButton = (button) => {
   }
 };
 
-const createCard = (card, splashScreen) => {
+const createCard = (card, splashScreen, profileId) => {
+
+  console.log(profileId);
   const newCard = cloneNodeTemplate(cardTemplate.content);
   const text = newCard.querySelector('.card__text');
   const image = newCard.querySelector('.card__img');
@@ -91,10 +93,10 @@ const createCard = (card, splashScreen) => {
   return newCard;
 }
 
-const loadInitialCards = (arrCads) => {
+const loadInitialCards = (arrCads, profileId) => {
   arrCads = arrCads.reverse()
   arrCads.forEach(card => {
-    cardsBlock.prepend(createCard(card, splashScreen));
+    cardsBlock.prepend(createCard(card, splashScreen, profileId));
   });
 }
 

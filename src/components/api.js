@@ -1,5 +1,3 @@
-import { submitCardForm } from './index.js';
-
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-15',
   headers: {

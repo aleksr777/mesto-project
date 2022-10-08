@@ -33,7 +33,8 @@ const popupImage = document.querySelector('.popup_type_image');
 const imgPopupImage = popupImage.querySelector('.popup__img');
 const captionPopupImage = popupImage.querySelector('.popup__caption');
 
-let profileId;
+let profileInfo = [];
+let initialCards = [];
 
 const openPopupProfile = (event) => {
 	inputName.value = profileName.textContent;
@@ -90,7 +91,7 @@ cardForm.addEventListener('submit', (event) => {
 			/* cardsBlock.prepend(createCard(card, splashScreen)); */
 		})
 		.catch((err) => {
-			console.log(err); 
+			console.log(err);
 		})
 		.finally(() => {
 			restoreButtonState(submitCardForm, 'Сохранить');
@@ -140,23 +141,30 @@ enableValidation({
 	errorClass: 'form__input-error'
 });
 
-getProfileInfo()
-	.then((res) => {
-		profileName.textContent = res.name;
-		profileProfession.textContent = res.about;
-		profileAvatar.src = res.avatar;
-		profileId = res._id;
+Promise.all([
+	getProfileInfo()
+		.then((res) => {
+			profileInfo = res;
+		})
+		.catch((err) => {
+			console.log(err);
+		}),
+	getInitialCards()
+		.then((res) => {
+			initialCards = res;
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+])
+	.then(() => {
+		profileName.textContent = profileInfo.name;
+		profileProfession.textContent = profileInfo.about;
+		profileAvatar.src = profileInfo.avatar;
+		loadInitialCards(initialCards, profileInfo._id);
 	})
 	.catch((err) => {
 		console.log(err);
 	});
 
-getInitialCards()
-	.then((res) => {
-		loadInitialCards(res);
-	})
-	.catch((err) => {
-		console.log(err);
-	});
-
-export { profileId, restoreButtonState, submitCardForm, submitProfile, submitAvatar, openPopupImage, popupCardForm };
+export { openPopupImage };
