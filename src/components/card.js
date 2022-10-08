@@ -1,81 +1,27 @@
-import { openPopupImage } from './modal.js';
+import { closePopup } from './modal.js';
+import { popupCardForm, openPopupImage, profileId, restoreButtonState, submitCardForm } from './index.js';
+import { deleteCardOnServer, getInitialCards, putLikeOnServer, deleteLikeOnServer } from './api.js';
 
-const inputPlaceName = document.querySelector('#card-name-input');
-const inputSrcLink = document.querySelector('#card-link-input');
 const cardsBlock = document.querySelector('.cards-block');
 const cardTemplate = document.querySelector('#card-template');
 const cloneNodeTemplate = (template) => template.querySelector('.cards-block__card').cloneNode(true);
-
-const card = {
-  placeName: '',
-  srcLink: '',
-  srcsetLink: '',
-};
-
 const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
 
-const kamchatkaWebp = new URL('../images/kamchatka.webp', import.meta.url);
-const kamchatkaJpg = new URL('../images/kamchatka.jpg', import.meta.url);
-
-const elbrusWebp = new URL('../images/mountain-elbrus.webp', import.meta.url);
-const elbrusJpg = new URL('../images/mountain-elbrus.jpg', import.meta.url);
-
-const dombaiWebp = new URL('../images/dombai.webp', import.meta.url);
-const dombaiJpg = new URL('../images/dombai.jpg', import.meta.url);
-
-const baikalWebp = new URL('../images/baikal.webp', import.meta.url);
-const baikalJpeg = new URL('../images/baikal.jpeg', import.meta.url);
-
-const stolbyWebp = new URL('../images/stolby-vyvetrivaniya.webp', import.meta.url);
-const stolbyJpg = new URL('../images/stolby-vyvetrivaniya.jpg', import.meta.url);
-
-const karachaevskWebp = new URL('../images/karachaevsk.webp', import.meta.url);
-const karachaevskJpg = new URL('../images/karachaevsk.jpg', import.meta.url);
-
-const initialCards = [
-  {
-    name: 'Камчатка',
-    srcset: kamchatkaWebp,
-    src: kamchatkaJpg
-  },
-  {
-    name: 'Гора Эльбрус',
-    srcset: elbrusWebp,
-    src: elbrusJpg
-  },
-  {
-    name: 'Домбай',
-    srcset: dombaiWebp,
-    src: dombaiJpg
-  },
-  {
-    name: 'Озеро Байкал',
-    srcset: baikalWebp,
-    src: baikalJpeg
-  },
-  {
-    name: 'Столбы выветривания – Маньпупунер',
-    srcset: stolbyWebp,
-    src: stolbyJpg
-  },
-  {
-    name: 'Карачаево-Черкессия',
-    srcset: karachaevskWebp,
-    src: karachaevskJpg
-  }
-];
-
-const loadCardInfo = () => {
-  card.placeName = inputPlaceName.value;
-  card.srcLink = inputSrcLink.value;
-  card.srcsetLink = '';
-  cardsBlock.prepend(createCard(card, splashScreen));
-  inputPlaceName.value = '';
-  inputSrcLink.value = '';
-}
-
-const deleteCard = (closeButton) => {
-  closeButton.closest('.card').remove();
+const deleteCard = async (deleteButton) => {
+  const card = deleteButton.closest('.card');
+  const idCard = card.getAttribute('card-id');
+  deleteCardOnServer(card, idCard)
+    .then(res => {
+      if (res.ok) {
+        card.remove();
+      }
+      else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const deleteCurrentCard = (event) => {
@@ -83,8 +29,56 @@ const deleteCurrentCard = (event) => {
   event.stopPropagation();
 }
 
+const countLikes = (arrLikes) => {
+  let numLikes = 0;
+  arrLikes.forEach(() => {
+    numLikes += 1;
+  });
+  return numLikes;
+};
+
+const showNumberLikes = (card, numLikes) => {
+  if (numLikes === 0) {
+    card.querySelector('.card__like-button').style.marginTop = '';
+    card.querySelector('.card__like-number').textContent = '';
+  }
+  else {
+    card.querySelector('.card__like-button').style.marginTop = '-15px';
+    card.querySelector('.card__like-number').textContent = numLikes;
+  }
+}
+
+const putLikeLocal = (likeButton, card, arrLikes) => {
+  likeButton.classList.add('card__like-button_activ');
+  showNumberLikes(card, countLikes(arrLikes));
+};
+
+const deleteLikeLocal = (likeButton, card, arrLikes) => {
+  likeButton.classList.remove('card__like-button_activ');
+  showNumberLikes(card, countLikes(arrLikes));
+};
+
 const toggleLikeButton = (likeButton) => {
-  likeButton.classList.toggle('card__like-button_activ');
+  const card = likeButton.closest('.card');
+  const idCard = card.getAttribute('card-id');
+  if (likeButton.classList.contains('card__like-button_activ')) {
+    deleteLikeOnServer(likeButton, card, idCard)
+      .then(data => {
+        deleteLikeLocal(likeButton, card, data.likes);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  else {
+    putLikeOnServer(likeButton, card, idCard)
+      .then(res => {
+        putLikeLocal(likeButton, card, res.likes);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 };
 
 const toggleLikeCurrentButton = (event) => {
@@ -94,23 +88,36 @@ const toggleLikeCurrentButton = (event) => {
 
 const createCard = (card, splashScreen) => {
   const newCard = cloneNodeTemplate(cardTemplate.content);
-  newCard.querySelector('.card__text').textContent = card.placeName;
-  newCard.querySelector('.card__img').src = card.srcLink;
-  newCard.querySelector('.card__webp').srcset = card.srcsetLink;
-  newCard.querySelector('.card__img').onerror = () => { newCard.querySelector('.card__img').src = splashScreen; }
-  newCard.querySelector('.card__picture').addEventListener('click', (event) => openPopupImage(event));
-  newCard.querySelector('.card__like-button').addEventListener('click', (event) => toggleLikeCurrentButton(event));
-  newCard.querySelector('.card__trash-button').addEventListener('click', (event) => deleteCurrentCard(event));
+  const text = newCard.querySelector('.card__text');
+  const image = newCard.querySelector('.card__img');
+  const picture = newCard.querySelector('.card__picture');
+  const likeButton = newCard.querySelector('.card__like-button');
+  const trashButton = newCard.querySelector('.card__trash-button');
+  text.textContent = card.name;
+  image.src = card.link;
+  image.onerror = () => { image.src = splashScreen; }
+  picture.addEventListener('click', (event) => openPopupImage(event));
+  likeButton.addEventListener('click', (event) => toggleLikeCurrentButton(event));
+  trashButton.addEventListener('click', (event) => deleteCurrentCard(event));
+  showNumberLikes(newCard, countLikes(card.likes));
+  card.likes.forEach((el) => {
+    if (el._id === profileId) {
+      likeButton.classList.add('card__like-button_activ');
+    }
+  });
+
+  if (profileId !== card.owner._id) {
+    newCard.querySelector('.card__trash-button').style.display = 'none';
+  }
+  newCard.setAttribute('card-id', card._id);
   return newCard;
 }
 
-const loadInitialCards = () => {
-  initialCards.forEach(initCard => {
-    card.placeName = initCard.name;
-    card.srcLink = initCard.src;
-    card.srcsetLink = initCard.srcset;
+const loadInitialCards = (initialCards) => {
+  initialCards = initialCards.reverse()
+  initialCards.forEach(card => {
     cardsBlock.prepend(createCard(card, splashScreen));
   });
 }
 
-export { loadInitialCards, loadCardInfo }; 
+export { loadInitialCards, putLikeLocal, deleteLikeLocal }; 

@@ -1,7 +1,7 @@
 .card__like-button {
   margin: 0;
   padding: 0;
-  border: 0;
+  border: none;
   border-radius: 0;
   grid-row: 2/3;
   grid-column: 2/3;
@@ -13,6 +13,7 @@
   background-image: url(../../../images/heart-transparent.svg);
   transition: all 0.3s ease 0s;
   cursor: pointer;
+  user-select: none;
 }
 
 @media (min-width: 545px) {
