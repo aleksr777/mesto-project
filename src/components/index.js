@@ -1,5 +1,4 @@
 import '../pages/index.css';
-import { updateCards, putLikeLocal, deleteLikeLocal } from './card.js';
 import { loadInitialCards } from './card.js';
 import { enableValidation, deactivateButton } from './validate.js';
 import { closeCurrentPopup, openPopup, closePopup } from './modal.js';
@@ -86,9 +85,12 @@ cardForm.addEventListener('submit', (event) => {
 	sendNewCard(inputPlaceName.value, inputLinkImg.value)
 		.then(() => {
 			closePopup(popupCardForm);
+			inputPlaceName.value = '';
+			inputLinkImg.value = '';
+			/* cardsBlock.prepend(createCard(card, splashScreen)); */
 		})
 		.catch((err) => {
-			console.log(err);
+			console.log(err); 
 		})
 		.finally(() => {
 			restoreButtonState(submitCardForm, 'Сохранить');

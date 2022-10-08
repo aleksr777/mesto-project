@@ -1,4 +1,3 @@
-import { updateCards, putLikeLocal, deleteLikeLocal } from './card.js';
 import { submitCardForm } from './index.js';
 
 const config = {
@@ -88,7 +87,7 @@ const putLikeOnServer = async (likeButton, card, cardId) => {
     .then((res) => { return getResponseData(res) });
 };
 
-const deleteLikeOnServer = async (likeButton, card, cardId) => {
+const deleteLikeOnServer = async (button, card, cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',
     headers: config.headers,

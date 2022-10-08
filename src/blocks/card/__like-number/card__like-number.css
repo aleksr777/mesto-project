@@ -1,4 +1,6 @@
 .card__like-number {
+  position: relative;
+  z-index: 0;
   grid-row: 2/3;
   grid-column: 2/3;
   margin: 0;
@@ -9,4 +11,5 @@
   align-self: center;
   justify-self: center;
   user-select: none;
+  transition: all .3s ease 0s;
 }
