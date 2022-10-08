@@ -1,4 +1,4 @@
-import { openPopupImage} from './index.js';
+import { openPopupImage } from './index.js';
 import { deleteCardOnServer, putLikeOnServer, deleteLikeOnServer } from './api.js';
 
 const cardsBlock = document.querySelector('.cards-block');
@@ -6,10 +6,9 @@ const cardTemplate = document.querySelector('#card-template');
 const cloneNodeTemplate = (template) => template.querySelector('.cards-block__card').cloneNode(true);
 const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
 
-const deleteCard = async (button) => {
+const deleteCard = async (button, id) => {
   const card = button.closest('.card');
-  const idCard = card.getAttribute('card-id');
-  deleteCardOnServer(card, idCard)
+  deleteCardOnServer(card, id)
     .then(() => {
       button.setAttribute('disabled', true);
       card.remove();
@@ -39,11 +38,10 @@ const showNumberLikes = (button, card, numLikes) => {
   }
 }
 
-const toggleLikeButton = (button) => {
+const toggleLikeButton = (button, id) => {
   const card = button.closest('.card');
-  const idCard = card.getAttribute('card-id');
   if (button.classList.contains('card__like-button_activ')) {
-    deleteLikeOnServer(button, card, idCard)
+    deleteLikeOnServer(button, card, id)
       .then((res) => {
         button.classList.remove('card__like-button_activ');
         showNumberLikes(button, card, res.likes.length);
@@ -53,7 +51,7 @@ const toggleLikeButton = (button) => {
       });
   }
   else {
-    putLikeOnServer(button, card, idCard)
+    putLikeOnServer(button, card, id)
       .then(res => {
         button.classList.add('card__like-button_activ');
         showNumberLikes(button, card, res.likes.length);
@@ -75,8 +73,8 @@ const createCard = (card, splashScreen, profileId) => {
   image.src = card.link;
   image.onerror = () => { image.src = splashScreen; }
   picture.addEventListener('click', (event) => openPopupImage(event));
-  likeButton.addEventListener('click', (event) => toggleLikeButton(event.currentTarget));
-  trashButton.addEventListener('click', (event) => deleteCard(event.currentTarget));
+  likeButton.addEventListener('click', (event) => toggleLikeButton(event.currentTarget, card._id));
+  trashButton.addEventListener('click', (event) => deleteCard(event.currentTarget, card._id));
   showNumberLikes(likeButton, newCard, card.likes.length);
   card.likes.forEach((el) => {
     if (el._id === profileId) {
@@ -86,7 +84,6 @@ const createCard = (card, splashScreen, profileId) => {
   if (profileId !== card.owner._id) {
     trashButton.remove();
   }
-  newCard.setAttribute('card-id', card._id);
   return newCard;
 }
 
