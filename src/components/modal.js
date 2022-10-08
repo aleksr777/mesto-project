@@ -38,7 +38,7 @@ const openPopupAvatar = (event) => {
 
 const closeCurrentPopup = (event) => {
   if (event.target.classList.contains('popup__close-button') || event.target.classList.contains('popup_opened')) {
-    closePopup(event.currentTarget.closest('.popup'));
+    closePopup(event.currentTarget);
     event.stopPropagation();
   }
 }
