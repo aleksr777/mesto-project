@@ -1,5 +1,5 @@
 import '../pages/index.css';
-import { loadInitialCards } from './card.js';
+import { createCard, loadInitialCards, cardsBlock, splashScreen } from './card.js';
 import { enableValidation, deactivateButton } from './validate.js';
 import { closeCurrentPopup, openPopup, closePopup } from './modal.js';
 import { getInitialCards, sendNewCard, sendProfileInfo, sendAvatar, getProfileInfo } from './api.js';
@@ -84,11 +84,18 @@ cardForm.addEventListener('submit', (event) => {
 	event.preventDefault();
 	waitServerResponse(submitCardForm, 'Сохранение...');
 	sendNewCard(inputPlaceName.value, inputLinkImg.value)
-		.then(() => {
+		.then((res) => {
 			closePopup(popupCardForm);
 			inputPlaceName.value = '';
 			inputLinkImg.value = '';
-			/* cardsBlock.prepend(createCard(card, splashScreen)); */
+			let newCard = {
+				name: res.name,
+				link: res.link,
+				likes: res.likes,
+				_id: res._id,
+				owner: res.owner
+			}
+			cardsBlock.prepend(createCard(newCard, splashScreen, res.owner._id));
 		})
 		.catch((err) => {
 			console.log(err);

@@ -9,7 +9,6 @@ const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
 const deleteCard = async (button) => {
   const card = button.closest('.card');
   const idCard = card.getAttribute('card-id');
-  console.log(card._id);
   deleteCardOnServer(card, idCard)
     .then(() => {
       button.setAttribute('disabled', true);
@@ -66,8 +65,6 @@ const toggleLikeButton = (button) => {
 };
 
 const createCard = (card, splashScreen, profileId) => {
-
-  console.log(profileId);
   const newCard = cloneNodeTemplate(cardTemplate.content);
   const text = newCard.querySelector('.card__text');
   const image = newCard.querySelector('.card__img');
@@ -100,4 +97,4 @@ const loadInitialCards = (arrCads, profileId) => {
   });
 }
 
-export { loadInitialCards }; 
+export { loadInitialCards, createCard, cardsBlock, splashScreen }; 
