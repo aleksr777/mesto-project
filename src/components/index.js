@@ -84,14 +84,8 @@ cardForm.addEventListener('submit', (event) => {
 	event.preventDefault();
 	waitServerResponse(submitCardForm, 'Сохранение...');
 	sendNewCard(inputPlaceName.value, inputLinkImg.value)
-		.then(res => {
-			if (res.ok) {
-				closePopup(popupCardForm);
-				console.log(res);
-			}
-			else {
-				return Promise.reject(`Ошибка: ${res.status}`);
-			}
+		.then(() => {
+			closePopup(popupCardForm);
 		})
 		.catch((err) => {
 			console.log(err);
@@ -105,15 +99,10 @@ profileForm.addEventListener('submit', (event) => {
 	event.preventDefault();
 	waitServerResponse(submitProfile, 'Сохранение...');
 	sendProfileInfo(inputName.value, inputProfession.value)
-		.then(res => {
-			if (res.ok) {
-				closePopup(popupProfile);
-				profileName.textContent = inputName.value;
-				profileProfession.textContent = inputProfession.value;
-			}
-			else {
-				return Promise.reject(`Ошибка: ${res.status}`);
-			}
+		.then(() => {
+			closePopup(popupProfile);
+			profileName.textContent = inputName.value;
+			profileProfession.textContent = inputProfession.value;
 		})
 		.catch((err) => {
 			console.log(err);
@@ -127,15 +116,10 @@ avatarForm.addEventListener('submit', (event) => {
 	event.preventDefault();
 	waitServerResponse(submitAvatar, 'Сохранение...');
 	sendAvatar(inputLinkAvatar.value)
-		.then(res => {
-			if (res.ok) {
-				closePopup(popupAvatar);
-				profileAvatar.src = inputLinkAvatar.value;
-				inputLinkAvatar.value = '';
-			}
-			else {
-				return Promise.reject(`Ошибка: ${res.status}`);
-			}
+		.then(() => {
+			closePopup(popupAvatar);
+			profileAvatar.src = inputLinkAvatar.value;
+			inputLinkAvatar.value = '';
 		})
 		.catch((err) => {
 			console.log(err);

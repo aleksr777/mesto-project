@@ -11,13 +11,8 @@ const deleteCard = async (deleteButton) => {
   const card = deleteButton.closest('.card');
   const idCard = card.getAttribute('card-id');
   deleteCardOnServer(card, idCard)
-    .then(res => {
-      if (res.ok) {
+    .then(() => {
         card.remove();
-      }
-      else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
     })
     .catch((err) => {
       console.log(err);

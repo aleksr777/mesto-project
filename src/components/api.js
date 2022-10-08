@@ -43,7 +43,8 @@ const sendAvatar = (link) => {
     body: JSON.stringify({
       avatar: link,
     })
-  });
+  })
+    .then((res) => { return getResponseData(res) });
 };
 
 const getInitialCards = () => {
@@ -61,7 +62,8 @@ const sendNewCard = (cardName, cardLink) => {
       name: cardName,
       link: cardLink,
     })
-  });
+  })
+    .then((res) => { return getResponseData(res) });
 };
 
 const deleteCardOnServer = async (card, cardId) => {
@@ -71,7 +73,8 @@ const deleteCardOnServer = async (card, cardId) => {
     body: JSON.stringify({
       _id: cardId
     })
-  });
+  })
+    .then((res) => { return getResponseData(res) });
 };
 
 const putLikeOnServer = async (likeButton, card, cardId) => {
