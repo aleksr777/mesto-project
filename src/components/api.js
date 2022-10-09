@@ -30,7 +30,8 @@ const sendProfileInfo = (name, profession) => {
       name: name,
       about: profession
     })
-  });
+  })
+    .then((res) => { return getResponseData(res) });
 };
 
 const sendAvatar = (link) => {

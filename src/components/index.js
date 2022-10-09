@@ -1,5 +1,5 @@
 import '../pages/index.css';
-import { createCard, loadInitialCards, cardsBlock, splashScreen } from './card.js';
+import { createCard, splashScreen } from './card.js';
 import { enableValidation, deactivateButton } from './validate.js';
 import { closeCurrentPopup, openPopup, closePopup } from './modal.js';
 import { getInitialCards, sendNewCard, sendProfileInfo, sendAvatar, getProfileInfo } from './api.js';
@@ -12,13 +12,17 @@ const profilePicture = document.querySelector('.profile__picture');
 const profileAvatar = document.querySelector('.profile__img');
 const submitAvatar = document.querySelector('.form__submit_type_avatar');
 const inputLinkAvatar = document.querySelector('#user-img-link-input');
+const ErrorLinkAvatar = document.querySelector('.user-img-link-input-error');
 
+const cardsBlock = document.querySelector('.cards-block');
 const popupCardForm = document.querySelector('.popup_type_card-form');
 const cardForm = document.querySelector('.form_type_card-form');
 const addCardButton = document.querySelector('.profile__add-button');
 const submitCardForm = document.querySelector('.form__submit_type_card-form');
 const inputPlaceName = document.querySelector('#card-name-input');
 const inputLinkImg = document.querySelector('#card-link-input');
+const ErrorPlaceName = document.querySelector('.card-name-input-error');
+const ErrorLinkImg = document.querySelector('.card-link-input-error');
 
 const popupProfile = document.querySelector('.popup_type_profile');
 const profileForm = document.querySelector('.form_type_profile');
@@ -28,27 +32,30 @@ const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
 const inputName = document.querySelector('#profile-name-input');
 const inputProfession = document.querySelector('#profile-profession-input');
+const ErrorName = document.querySelector('.profile-name-input-error');
+const ErrorProfession = document.querySelector('.profile-profession-input-error');
 
 const popupImage = document.querySelector('.popup_type_image');
 const imgPopupImage = popupImage.querySelector('.popup__img');
 const captionPopupImage = popupImage.querySelector('.popup__caption');
 
-let profileInfo = [];
-let initialCards = [];
+let arrProfileInfo = [];
+let arrInitialCards = [];
 
-const openPopupProfile = (event) => {
-	inputName.value = profileName.textContent;
-	inputProfession.value = profileProfession.textContent;
-	openPopup(popupProfile);
-	event.stopPropagation();
+// Функция нужна, чтобы отключить показ ошибки валидации поля при повторном открытии попапа
+const hideError = (inputText, inputError) => {
+	if (inputError.classList.contains('form__input-error_active')) {
+		inputError.classList.remove('form__input-error_active');
+	}
+	if (inputText.classList.contains('form__input-text_type_error')) {
+		inputText.classList.remove('form__input-text_type_error');
+	}
 }
 
-const openPopupImage = (event) => {
-	imgPopupImage.src = event.currentTarget.querySelector('.card__img').getAttribute('src');
-	imgPopupImage.alt = event.currentTarget.querySelector('.card__img').getAttribute('alt');
-	captionPopupImage.textContent = event.currentTarget.closest('.card').querySelector('.card__text').textContent;
+const openPopupImage = (name, link) => {
+	imgPopupImage.src = link;
+	captionPopupImage.textContent = name;
 	openPopup(popupImage);
-	event.stopPropagation();
 }
 
 const waitServerResponse = (button, text) => {
@@ -63,15 +70,32 @@ const restoreButtonState = (button, text) => {
 	}, 300);
 };
 
-editButton.addEventListener('click', (event) => openPopupProfile(event));
+editButton.addEventListener('click', (event) => {
+	inputName.value = profileName.textContent;
+	inputProfession.value = profileProfession.textContent;
+	hideError(inputName, ErrorName);
+	hideError(inputProfession, ErrorProfession);
+	openPopup(popupProfile);
+	event.stopPropagation();
+});
 
-profilePicture.addEventListener('click', () => openPopup(popupAvatar));
+profilePicture.addEventListener('click', (event) => {
+	openPopup(popupAvatar);
+	if (!inputLinkAvatar.value) {
+		deactivateButton(submitAvatar, 'form__submit_inactive');
+		hideError(inputLinkAvatar, ErrorLinkAvatar);
+	}
+	event.stopPropagation();
+});
 
-addCardButton.addEventListener('click', () => {
+addCardButton.addEventListener('click', (event) => {
 	openPopup(popupCardForm);
 	if (!inputPlaceName.value && !inputLinkImg.value) {
 		deactivateButton(submitCardForm, 'form__submit_inactive');
+		hideError(inputPlaceName, ErrorPlaceName);
+		hideError(inputLinkImg, ErrorLinkImg);
 	}
+	event.stopPropagation();
 });
 
 popupWindows.forEach(element => {
@@ -139,6 +163,36 @@ avatarForm.addEventListener('submit', (event) => {
 		});
 });
 
+Promise.all([
+	getProfileInfo()
+		.then((res) => {
+			arrProfileInfo = res;
+		})
+		.catch((err) => {
+			console.log(err);
+		}),
+	getInitialCards()
+		.then((res) => {
+			arrInitialCards = res;
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+])
+	.then(() => {
+		profileName.textContent = arrProfileInfo.name;
+		profileProfession.textContent = arrProfileInfo.about;
+		profileAvatar.src = arrProfileInfo.avatar;
+		arrInitialCards = arrInitialCards.reverse()
+		arrInitialCards.forEach(card => {
+			cardsBlock.prepend(createCard(card, splashScreen, arrProfileInfo._id));
+		});
+		arrInitialCards.splice(0, arrInitialCards.length);
+	})
+	.catch((err) => {
+		console.log(err);
+	});
+
 enableValidation({
 	formSelector: '.form',
 	inputSelector: '.form__input-text',
@@ -147,31 +201,5 @@ enableValidation({
 	inputErrorClass: 'form__input-text_type_error',
 	errorClass: 'form__input-error'
 });
-
-Promise.all([
-	getProfileInfo()
-		.then((res) => {
-			profileInfo = res;
-		})
-		.catch((err) => {
-			console.log(err);
-		}),
-	getInitialCards()
-		.then((res) => {
-			initialCards = res;
-		})
-		.catch((err) => {
-			console.log(err);
-		})
-])
-	.then(() => {
-		profileName.textContent = profileInfo.name;
-		profileProfession.textContent = profileInfo.about;
-		profileAvatar.src = profileInfo.avatar;
-		loadInitialCards(initialCards, profileInfo._id);
-	})
-	.catch((err) => {
-		console.log(err);
-	});
 
 export { openPopupImage };
