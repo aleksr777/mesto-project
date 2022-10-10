@@ -69,7 +69,7 @@ const restoreButtonState = (button, text) => {
 	setTimeout(() => {
 		button.textContent = text;
 		button.removeAttribute('disabled');
-	}, 300);
+	}, 600);
 };
 
 const openPopupDeletion = (button, id) => {
