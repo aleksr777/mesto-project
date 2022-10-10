@@ -1,9 +1,11 @@
 import { openPopupImage } from './index.js';
+/* import { closeCurrentPopup, openPopup, closePopup } from './modal.js'; */
 import { deleteCardOnServer, putLikeOnServer, deleteLikeOnServer } from './api.js';
 
 const cardTemplate = document.querySelector('#card-template');
 const cloneNodeTemplate = (template) => template.querySelector('.cards-block__card').cloneNode(true);
 const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
+/* const popupDeletingCard = document.querySelector('.popup_type_deleting-card'); */
 
 const deleteCard = async (button, id) => {
   const card = button.closest('.card');
@@ -11,6 +13,7 @@ const deleteCard = async (button, id) => {
   deleteCardOnServer(card, id)
     .then(() => {
       card.remove();
+      /* openPopup(popupDeletingCard); */
       button.removeAttribute('disabled');
     })
     .catch((err) => {
