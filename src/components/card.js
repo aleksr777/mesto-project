@@ -1,26 +1,10 @@
-import { openPopupImage } from './index.js';
+import { openPopupImage, openPopupDeletion } from './index.js';
 /* import { closeCurrentPopup, openPopup, closePopup } from './modal.js'; */
-import { deleteCardOnServer, putLikeOnServer, deleteLikeOnServer } from './api.js';
+import { putLikeOnServer, deleteLikeOnServer } from './api.js';
 
 const cardTemplate = document.querySelector('#card-template');
 const cloneNodeTemplate = (template) => template.querySelector('.cards-block__card').cloneNode(true);
 const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
-/* const popupDeletingCard = document.querySelector('.popup_type_deleting-card'); */
-
-const deleteCard = async (button, id) => {
-  const card = button.closest('.card');
-  button.setAttribute('disabled', true);
-  deleteCardOnServer(card, id)
-    .then(() => {
-      card.remove();
-      /* openPopup(popupDeletingCard); */
-      button.removeAttribute('disabled');
-    })
-    .catch((err) => {
-      console.log(err);
-      button.removeAttribute('disabled');
-    });
-};
 
 const showNumberLikes = (button, card, numLikes) => {
   const likeNumber = card.querySelector('.card__like-number');
@@ -79,19 +63,12 @@ const createCard = (card, splashScreen, profileId) => {
   image.src = card.link;
   image.onerror = () => { image.src = splashScreen }
   picture.addEventListener('click', (event) => { openPopupImage(card.name, card.link); event.stopPropagation(); });
-  likeButton.addEventListener('click', (event) => toggleLikeButton(event.currentTarget, card._id));
-  trashButton.addEventListener('click', (event) => deleteCard(event.currentTarget, card._id));
+  likeButton.addEventListener('click', (event) => { toggleLikeButton(event.currentTarget, card._id); event.stopPropagation(); });
+  trashButton.addEventListener('click', (event) => { openPopupDeletion(event.currentTarget, card._id); event.stopPropagation(); });
   showNumberLikes(likeButton, newCard, card.likes.length);
   card.likes.forEach((el) => { if (el._id === profileId) { likeButton.classList.add('card__like-button_activ') } });
   if (profileId !== card.owner._id) { trashButton.remove() }
   return newCard;
 }
-
-/* const loadInitialCards = (arrCads, profileId) => {
-  arrCads = arrCads.reverse()
-  arrCads.forEach(card => {
-    cardsBlock.prepend(createCard(card, splashScreen, profileId));
-  });
-} */
 
 export { createCard, splashScreen }; 

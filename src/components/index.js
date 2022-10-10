@@ -2,7 +2,7 @@ import '../pages/index.css';
 import { createCard, splashScreen } from './card.js';
 import { enableValidation, deactivateButton } from './validate.js';
 import { closeCurrentPopup, openPopup, closePopup } from './modal.js';
-import { getInitialCards, sendNewCard, sendProfileInfo, sendAvatar, getProfileInfo } from './api.js';
+import { deleteCardOnServer, getInitialCards, sendNewCard, sendProfileInfo, sendAvatar, getProfileInfo } from './api.js';
 
 const popupWindows = document.querySelectorAll('.popup');
 
@@ -16,6 +16,8 @@ const ErrorLinkAvatar = document.querySelector('.user-img-link-input-error');
 
 const cardsBlock = document.querySelector('.cards-block');
 const popupCardForm = document.querySelector('.popup_type_card-form');
+const popupDeletingCard = document.querySelector('.popup_type_deleting-card');
+const deletionConfirmationButton = document.querySelector('.form__submit_type_deleting-card');
 const cardForm = document.querySelector('.form_type_card-form');
 const addCardButton = document.querySelector('.profile__add-button');
 const submitCardForm = document.querySelector('.form__submit_type_card-form');
@@ -42,7 +44,7 @@ const captionPopupImage = popupImage.querySelector('.popup__caption');
 let arrProfileInfo = [];
 let arrInitialCards = [];
 
-// Функция нужна, чтобы отключить показ ошибки валидации поля при повторном открытии попапа
+// Функция нужна, чтобы отключить некорректный показ ошибки валидации поля при повторном открытии попапа
 const hideError = (inputText, inputError) => {
 	if (inputError.classList.contains('form__input-error_active')) {
 		inputError.classList.remove('form__input-error_active');
@@ -50,13 +52,13 @@ const hideError = (inputText, inputError) => {
 	if (inputText.classList.contains('form__input-text_type_error')) {
 		inputText.classList.remove('form__input-text_type_error');
 	}
-}
+};
 
 const openPopupImage = (name, link) => {
 	imgPopupImage.src = link;
 	captionPopupImage.textContent = name;
 	openPopup(popupImage);
-}
+};
 
 const waitServerResponse = (button, text) => {
 	button.textContent = text;
@@ -68,6 +70,25 @@ const restoreButtonState = (button, text) => {
 		button.textContent = text;
 		button.removeAttribute('disabled');
 	}, 300);
+};
+
+const openPopupDeletion = (button, id) => {
+	const card = button.closest('.card');
+	openPopup(popupDeletingCard);
+	deletionConfirmationButton.addEventListener('click', () => {
+		waitServerResponse(deletionConfirmationButton, 'Удаление...');
+		deleteCardOnServer(card, id)
+			.then(() => {
+				closePopup(popupDeletingCard);
+				card.remove();
+			})
+			.catch((err) => {
+				console.log(err);
+			})
+			.finally(() => {
+				restoreButtonState(deletionConfirmationButton, 'Да');
+			});
+	});
 };
 
 editButton.addEventListener('click', (event) => {
@@ -97,6 +118,8 @@ addCardButton.addEventListener('click', (event) => {
 	}
 	event.stopPropagation();
 });
+
+/* addCardButton.addEventListener('click', (event) => {} */
 
 popupWindows.forEach(element => {
 	element.addEventListener('click', (event) => {
@@ -202,4 +225,4 @@ enableValidation({
 	errorClass: 'form__input-error'
 });
 
-export { openPopupImage };
+export { openPopupImage, openPopupDeletion };
