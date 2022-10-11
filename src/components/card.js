@@ -1,5 +1,4 @@
 import { openPopupImage, openPopupDeletion } from './index.js';
-/* import { closeCurrentPopup, openPopup, closePopup } from './modal.js'; */
 import { putLikeOnServer, deleteLikeOnServer } from './api.js';
 
 const cardTemplate = document.querySelector('#card-template');

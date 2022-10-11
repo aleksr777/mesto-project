@@ -7,35 +7,35 @@ import { deleteCardOnServer, getInitialCards, sendNewCard, sendProfileInfo, send
 const popupWindows = document.querySelectorAll('.popup');
 
 const popupAvatar = document.querySelector('.popup_type_user-img');
-const avatarForm = document.querySelector('.form_type_user-img');
+const avatarForm = popupAvatar.querySelector('.form_type_user-img');
 const profilePicture = document.querySelector('.profile__picture');
 const profileAvatar = document.querySelector('.profile__img');
-const submitAvatar = document.querySelector('.form__submit_type_avatar');
-const inputLinkAvatar = document.querySelector('#user-img-link-input');
-const ErrorLinkAvatar = document.querySelector('.user-img-link-input-error');
+const submitAvatar = avatarForm.querySelector('.form__submit_type_avatar');
+const inputLinkAvatar = avatarForm.querySelector('#user-img-link-input');
+const ErrorLinkAvatar = avatarForm.querySelector('.user-img-link-input-error');
 
 const cardsBlock = document.querySelector('.cards-block');
 const popupCardForm = document.querySelector('.popup_type_card-form');
 const popupDeletingCard = document.querySelector('.popup_type_deleting-card');
-const deletionConfirmationButton = document.querySelector('.form__submit_type_deleting-card');
-const cardForm = document.querySelector('.form_type_card-form');
+const deletionConfirmationButton = popupDeletingCard.querySelector('.form__submit_type_deleting-card');
+const cardForm = popupCardForm.querySelector('.form_type_card-form');
 const addCardButton = document.querySelector('.profile__add-button');
-const submitCardForm = document.querySelector('.form__submit_type_card-form');
-const inputPlaceName = document.querySelector('#card-name-input');
-const inputLinkImg = document.querySelector('#card-link-input');
-const ErrorPlaceName = document.querySelector('.card-name-input-error');
-const ErrorLinkImg = document.querySelector('.card-link-input-error');
+const submitCardForm = cardForm.querySelector('.form__submit_type_card-form');
+const inputPlaceName = cardForm.querySelector('#card-name-input');
+const inputLinkImg = cardForm.querySelector('#card-link-input');
+const ErrorPlaceName = cardForm.querySelector('.card-name-input-error');
+const ErrorLinkImg = cardForm.querySelector('.card-link-input-error');
 
 const popupProfile = document.querySelector('.popup_type_profile');
-const profileForm = document.querySelector('.form_type_profile');
+const profileForm = popupProfile.querySelector('.form_type_profile');
 const editButton = document.querySelector('.profile__edit-button');
-const submitProfile = document.querySelector('.form__submit_type_profile');
+const submitProfile = profileForm.querySelector('.form__submit_type_profile');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
-const inputName = document.querySelector('#profile-name-input');
-const inputProfession = document.querySelector('#profile-profession-input');
-const ErrorName = document.querySelector('.profile-name-input-error');
-const ErrorProfession = document.querySelector('.profile-profession-input-error');
+const inputName = profileForm.querySelector('#profile-name-input');
+const inputProfession = profileForm.querySelector('#profile-profession-input');
+const ErrorName = profileForm.querySelector('.profile-name-input-error');
+const ErrorProfession = profileForm.querySelector('.profile-profession-input-error');
 
 const popupImage = document.querySelector('.popup_type_image');
 const imgPopupImage = popupImage.querySelector('.popup__img');
