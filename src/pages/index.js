@@ -5,42 +5,41 @@ import { enableValidation, deactivateButton } from '../components/validate.js';
 import { closeCurrentPopup, openPopup, closePopup } from '../components/modal.js';
 import { deleteCardOnServer, getInitialCards, sendNewCard, sendProfileInfo, sendAvatar, getProfileInfo } from '../components/api.js';
 
-const popupWindows = document.querySelectorAll('.popup');
-
-const popupAvatar = document.querySelector('.popup_type_user-img');
-const avatarForm = popupAvatar.querySelector('.form_type_user-img');
-const profilePicture = document.querySelector('.profile__picture');
-const profileAvatar = document.querySelector('.profile__img');
-const submitAvatar = avatarForm.querySelector('.form__submit_type_avatar');
-const inputLinkAvatar = avatarForm.querySelector('#user-img-link-input');
-const ErrorLinkAvatar = avatarForm.querySelector('.user-img-link-input-error');
-
-const cardsBlock = document.querySelector('.cards-block');
-const popupCardForm = document.querySelector('.popup_type_card-form');
-const popupDeletingCard = document.querySelector('.popup_type_deleting-card');
-const deletionConfirmationButton = popupDeletingCard.querySelector('.form__submit_type_deleting-card');
-const cardForm = popupCardForm.querySelector('.form_type_card-form');
-const addCardButton = document.querySelector('.profile__add-button');
-const submitCardForm = cardForm.querySelector('.form__submit_type_card-form');
-const inputPlaceName = cardForm.querySelector('#card-name-input');
-const inputLinkImg = cardForm.querySelector('#card-link-input');
-const ErrorPlaceName = cardForm.querySelector('.card-name-input-error');
-const ErrorLinkImg = cardForm.querySelector('.card-link-input-error');
-
-const popupProfile = document.querySelector('.popup_type_profile');
-const profileForm = popupProfile.querySelector('.form_type_profile');
-const editButton = document.querySelector('.profile__edit-button');
-const submitProfile = profileForm.querySelector('.form__submit_type_profile');
-const profileName = document.querySelector('.profile__name');
-const profileProfession = document.querySelector('.profile__profession');
-const inputName = profileForm.querySelector('#profile-name-input');
-const inputProfession = profileForm.querySelector('#profile-profession-input');
-const ErrorName = profileForm.querySelector('.profile-name-input-error');
-const ErrorProfession = profileForm.querySelector('.profile-profession-input-error');
-
-const popupImage = document.querySelector('.popup_type_image');
-const imgPopupImage = popupImage.querySelector('.popup__img');
-const captionPopupImage = popupImage.querySelector('.popup__caption');
+import {
+	popupWindows,
+	popupAvatar,
+	avatarForm,
+	profilePicture,
+	profileAvatar,
+	submitAvatar,
+	inputLinkAvatar,
+	ErrorLinkAvatar,
+	cardsBlock,
+	popupCardForm,
+	popupDeletingCard,
+	deletionConfirmationButton,
+	cardForm,
+	addCardButton,
+	submitCardForm,
+	inputPlaceName,
+	inputLinkImg,
+	ErrorPlaceName,
+	ErrorLinkImg,
+	popupProfile,
+	profileForm,
+	editButton,
+	submitProfile,
+	profileName,
+	profileProfession,
+	inputName,
+	inputProfession,
+	ErrorName,
+	ErrorProfession,
+	popupImage,
+	imgPopupImage,
+	captionPopupImage,
+	validationConfig,
+} from '../utils/constants.js';
 
 // Функция нужна, чтобы отключить некорректный показ ошибки валидации поля при повторном открытии попапа
 const hideError = (inputText, inputError) => {
@@ -52,7 +51,7 @@ const hideError = (inputText, inputError) => {
 	}
 };
 
-const openPopupImage = (name, link) => {
+export const openPopupImage = (name, link) => {
 	imgPopupImage.src = link;
 	captionPopupImage.textContent = name;
 	openPopup(popupImage);
@@ -70,7 +69,7 @@ const restoreButtonState = (button, text) => {
 	}, 600);
 };
 
-const openPopupDeletion = (button, id) => {
+export const openPopupDeletion = (button, id) => {
 	const card = button.closest('.card');
 	openPopup(popupDeletingCard);
 	deletionConfirmationButton.addEventListener('click', () => {
@@ -198,13 +197,4 @@ Promise.all([getProfileInfo(), getInitialCards()])
 		console.log(err);
 	});
 
-enableValidation({
-	formSelector: '.form',
-	inputSelector: '.form__input-text',
-	submitButtonSelector: '.form__submit',
-	inactiveButtonClass: 'form__submit_inactive',
-	inputErrorClass: 'form__input-text_type_error',
-	errorClass: 'form__input-error'
-});
-
-export { openPopupImage, openPopupDeletion };
+enableValidation(validationConfig);
