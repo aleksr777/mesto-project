@@ -3,7 +3,7 @@ import { putLikeOnServer, deleteLikeOnServer } from './api.js';
 
 const cardTemplate = document.querySelector('#card-template');
 const cloneNodeTemplate = (template) => template.querySelector('.cards-block__card').cloneNode(true);
-const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
+export const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
 
 const showNumberLikes = (button, card, numLikes) => {
   const likeNumber = card.querySelector('.card__like-number');
@@ -51,7 +51,7 @@ const toggleLikeButton = (button, id) => {
   }
 };
 
-const createCard = (card, splashScreen, profileId) => {
+export const renderCard = (card, splashScreen, profileId) => {
   const newCard = cloneNodeTemplate(cardTemplate.content);
   const text = newCard.querySelector('.card__text');
   const image = newCard.querySelector('.card__img');
@@ -68,6 +68,4 @@ const createCard = (card, splashScreen, profileId) => {
   card.likes.forEach((el) => { if (el._id === profileId) { likeButton.classList.add('card__like-button_activ') } });
   if (profileId !== card.owner._id) { trashButton.remove() }
   return newCard;
-}
-
-export { createCard, splashScreen }; 
+};

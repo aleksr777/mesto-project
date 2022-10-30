@@ -1,6 +1,6 @@
 import './index.css';
 
-import { createCard, splashScreen } from '../components/card.js';
+import { renderCard, splashScreen } from '../components/card.js';
 import { enableValidation, deactivateButton } from '../components/validate.js';
 import { closeCurrentPopup, openPopup, closePopup } from '../components/modal.js';
 import { deleteCardOnServer, getInitialCards, sendNewCard, sendProfileInfo, sendAvatar, getProfileInfo } from '../components/api.js';
@@ -139,7 +139,7 @@ cardForm.addEventListener('submit', (event) => {
 				_id: res._id,
 				owner: res.owner
 			}
-			cardsBlock.prepend(createCard(newCard, splashScreen, res.owner._id));
+			cardsBlock.prepend(renderCard(newCard, splashScreen, res.owner._id));
 		})
 		.catch((err) => {
 			console.log(err);
@@ -190,7 +190,7 @@ Promise.all([getProfileInfo(), getInitialCards()])
 		profileAvatar.src = profile.avatar;
 		cards = cards.reverse()
 		cards.forEach(card => {
-			cardsBlock.prepend(createCard(card, splashScreen, profile._id));
+			cardsBlock.prepend(renderCard(card, splashScreen, profile._id));
 		});
 	})
 	.catch((err) => {
