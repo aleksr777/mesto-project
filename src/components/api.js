@@ -31,7 +31,10 @@ const sendProfileInfo = (name, profession) => {
       about: profession
     })
   })
-    .then((res) => { return getResponseData(res) });
+    .then((res) => { return getResponseData(res) })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const sendAvatar = (link) => {
@@ -49,7 +52,10 @@ const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
   })
-    .then((res) => { return getResponseData(res) });
+    .then((res) => { return getResponseData(res) })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const sendNewCard = (cardName, cardLink) => {

@@ -1,8 +1,9 @@
-import '../pages/index.css';
-import { createCard, splashScreen } from './card.js';
-import { enableValidation, deactivateButton } from './validate.js';
-import { closeCurrentPopup, openPopup, closePopup } from './modal.js';
-import { deleteCardOnServer, getInitialCards, sendNewCard, sendProfileInfo, sendAvatar, getProfileInfo } from './api.js';
+import './index.css';
+
+import { createCard, splashScreen } from '../components/card.js';
+import { enableValidation, deactivateButton } from '../components/validate.js';
+import { closeCurrentPopup, openPopup, closePopup } from '../components/modal.js';
+import { deleteCardOnServer, getInitialCards, sendNewCard, sendProfileInfo, sendAvatar, getProfileInfo } from '../components/api.js';
 
 const popupWindows = document.querySelectorAll('.popup');
 
@@ -40,9 +41,6 @@ const ErrorProfession = profileForm.querySelector('.profile-profession-input-err
 const popupImage = document.querySelector('.popup_type_image');
 const imgPopupImage = popupImage.querySelector('.popup__img');
 const captionPopupImage = popupImage.querySelector('.popup__caption');
-
-let arrProfileInfo = [];
-let arrInitialCards = [];
 
 // Функция нужна, чтобы отключить некорректный показ ошибки валидации поля при повторном открытии попапа
 const hideError = (inputText, inputError) => {
@@ -186,31 +184,15 @@ avatarForm.addEventListener('submit', (event) => {
 		});
 });
 
-Promise.all([
-	getProfileInfo()
-		.then((res) => {
-			arrProfileInfo = res;
-		})
-		.catch((err) => {
-			console.log(err);
-		}),
-	getInitialCards()
-		.then((res) => {
-			arrInitialCards = res;
-		})
-		.catch((err) => {
-			console.log(err);
-		})
-])
-	.then(() => {
-		profileName.textContent = arrProfileInfo.name;
-		profileProfession.textContent = arrProfileInfo.about;
-		profileAvatar.src = arrProfileInfo.avatar;
-		arrInitialCards = arrInitialCards.reverse()
-		arrInitialCards.forEach(card => {
-			cardsBlock.prepend(createCard(card, splashScreen, arrProfileInfo._id));
+Promise.all([getProfileInfo(), getInitialCards()])
+	.then(([profile, cards]) => {
+		profileName.textContent = profile.name;
+		profileProfession.textContent = profile.about;
+		profileAvatar.src = profile.avatar;
+		cards = cards.reverse()
+		cards.forEach(card => {
+			cardsBlock.prepend(createCard(card, splashScreen, profile._id));
 		});
-		arrInitialCards.splice(0, arrInitialCards.length);
 	})
 	.catch((err) => {
 		console.log(err);

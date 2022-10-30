@@ -1,4 +1,4 @@
-import { openPopupImage, openPopupDeletion } from './index.js';
+import { openPopupImage, openPopupDeletion } from '../pages/index.js';
 import { putLikeOnServer, deleteLikeOnServer } from './api.js';
 
 const cardTemplate = document.querySelector('#card-template');
