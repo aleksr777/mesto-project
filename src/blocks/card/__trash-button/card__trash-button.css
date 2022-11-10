@@ -13,7 +13,7 @@
 	height: 21px;
 	background: transparent url(../../../images/trash.svg) center / 18px 19px no-repeat;
 	cursor: pointer;
-	transition: all 0.3s ease 0s;
+	transition: all .3s ease 0s;
 	opacity: 0;
 }
 

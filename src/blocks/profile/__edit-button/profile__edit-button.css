@@ -10,7 +10,7 @@
   height: 26px;
   background: transparent url(../../../images/edit-button.svg) 100% 0 no-repeat;
   background-size: 24px 24px;
-  transition: all 0.3s ease 0s;
+  transition: all .3s ease 0s;
   cursor: pointer;
 }
 

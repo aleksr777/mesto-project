@@ -25,4 +25,9 @@
   .card:hover .card__trash-button:hover {
     opacity: .6;
   }
+
+  .card:hover .card__trash-button:active {
+    transition: all .1s ease 0s;
+    opacity: .8;
+  }
 }
