@@ -1,5 +1,4 @@
-import { openPopupImage, openPopupDeletion } from '../pages/index.js';
-import { putLikeOnServer, deleteLikeOnServer } from './api.js';
+import { openPopupImage, openPopupDeletion, api } from '../pages/index.js';
 
 const cardTemplate = document.querySelector('#card-template');
 const cloneNodeTemplate = (template) => template.querySelector('.cards-block__card').cloneNode(true);
@@ -28,7 +27,7 @@ const toggleLikeButton = (button, id) => {
   const card = button.closest('.card');
   button.setAttribute('disabled', true);
   if (button.classList.contains('card__like-button_activ')) {
-    deleteLikeOnServer(button, card, id)
+    api.deleteLike(button, card, id)
       .then((res) => {
         button.classList.remove('card__like-button_activ');
         showNumberLikes(button, card, res.likes.length);
@@ -39,7 +38,7 @@ const toggleLikeButton = (button, id) => {
       });
   }
   else {
-    putLikeOnServer(button, card, id)
+    api.putLike(button, card, id)
       .then(res => {
         button.classList.add('card__like-button_activ');
         showNumberLikes(button, card, res.likes.length);

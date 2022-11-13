@@ -1,11 +1,10 @@
 import './index.css';
-
 import { renderCard, splashScreen } from '../components/card.js';
 import { enableValidation, deactivateButton } from '../components/validate.js';
 import { closeCurrentPopup, openPopup, closePopup } from '../components/modal.js';
-import { deleteCardOnServer, getInitialCards, sendNewCard, sendProfileInfo, sendAvatar, getProfileInfo } from '../components/api.js';
 
 import {
+	apiConfig,
 	popupWindows,
 	popupAvatar,
 	avatarForm,
@@ -41,6 +40,12 @@ import {
 	validationConfig,
 } from '../utils/constants.js';
 
+// Импорт классов
+import Api from '../components/api.js';
+
+// Инициализация классов
+export const api = new Api(apiConfig);
+
 // Функция нужна, чтобы отключить некорректный показ ошибки валидации поля при повторном открытии попапа
 const hideError = (inputText, inputError) => {
 	if (inputError.classList.contains('form__input-error_active')) {
@@ -74,7 +79,7 @@ export const openPopupDeletion = (button, id) => {
 	openPopup(popupDeletingCard);
 	deletionConfirmationButton.addEventListener('click', () => {
 		waitServerResponse(deletionConfirmationButton, 'Удаление...');
-		deleteCardOnServer(card, id)
+		api.deleteCard(card, id)
 			.then(() => {
 				closePopup(popupDeletingCard);
 				card.remove();
@@ -127,7 +132,7 @@ popupWindows.forEach(element => {
 cardForm.addEventListener('submit', (event) => {
 	event.preventDefault();
 	waitServerResponse(submitCardForm, 'Сохранение...');
-	sendNewCard(inputPlaceName.value, inputLinkImg.value)
+	api.sendNewCard(inputPlaceName.value, inputLinkImg.value)
 		.then((res) => {
 			closePopup(popupCardForm);
 			inputPlaceName.value = '';
@@ -152,7 +157,7 @@ cardForm.addEventListener('submit', (event) => {
 profileForm.addEventListener('submit', (event) => {
 	event.preventDefault();
 	waitServerResponse(submitProfile, 'Сохранение...');
-	sendProfileInfo(inputName.value, inputProfession.value)
+	api.sendProfileInfo(inputName.value, inputProfession.value)
 		.then(() => {
 			closePopup(popupProfile);
 			profileName.textContent = inputName.value;
@@ -169,7 +174,7 @@ profileForm.addEventListener('submit', (event) => {
 avatarForm.addEventListener('submit', (event) => {
 	event.preventDefault();
 	waitServerResponse(submitAvatar, 'Сохранение...');
-	sendAvatar(inputLinkAvatar.value)
+	api.sendAvatar(inputLinkAvatar.value)
 		.then(() => {
 			closePopup(popupAvatar);
 			profileAvatar.src = inputLinkAvatar.value;
@@ -183,7 +188,7 @@ avatarForm.addEventListener('submit', (event) => {
 		});
 });
 
-Promise.all([getProfileInfo(), getInitialCards()])
+Promise.all([api.getProfileInfo(), api.getCards()])
 	.then(([profile, cards]) => {
 		profileName.textContent = profile.name;
 		profileProfession.textContent = profile.about;
