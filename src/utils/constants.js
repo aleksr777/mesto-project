@@ -6,48 +6,104 @@ export const apiConfig = {
   }
 };
 
-export const validationConfig = {
-  formSelector: '.form',
-  inputSelector: '.form__input-text',
-  submitButtonSelector: '.form__submit',
-  inactiveButtonClass: 'form__submit_inactive',
-  inputErrorClass: 'form__input-text_type_error',
-  errorClass: 'form__input-error'
+// Используемые селекторы в коде JS
+export const selectors = {
+  popup: '.popup',
+  popupOpened: 'popup_opened',
+  popupCloseButton: 'popup__close-button',
+
+  cardsBlock: '.cards-block',
+
+  popupAvatar: '.popup_type_user-img',
+  avatarForm: '.form_type_user-img',
+  profilePicture: '.profile__picture',
+  profileAvatar: '.profile__img',
+  submitAvatar: '.form__submit_type_avatar',
+  inputLinkAvatar: '#user-img-link-input',
+  errorLinkAvatar: '.user-img-link-input-error',
+
+  popupCardForm: '.popup_type_card-form',
+  cardForm: '.form_type_card-form',
+  addCardButton: '.profile__add-button',
+  submitCardForm: '.form__submit_type_card-form',
+  inputPlaceName: '#card-name-input',
+  inputLinkImg: '#card-link-input',
+  errorPlaceName: '.card-name-input-error',
+  errorLinkImg: '.card-link-input-error',
+
+  popupDeletingCard: '.popup_type_deleting-card',
+  deleteСheckButton: '.form__submit_type_deleting-card',
+
+  popupProfile: '.popup_type_profile',
+  profileForm: '.form_type_profile',
+  editButton: '.profile__edit-button',
+  submitProfile: '.form__submit_type_profile',
+  profileName: '.profile__name',
+  profileProfession: '.profile__profession',
+  inputName: '#profile-name-input',
+  inputProfession: '#profile-profession-input',
+  errorName: '.profile-name-input-error',
+  errorProfession: '.profile-profession-input-error',
+
+  popupImage: '.popup_type_image',
+  imgPopupImage: '.popup__img',
+  captionPopupImage: '.popup__caption',
+  
+  form: '.form',
+  input: '.form__input-text',
+  submitButton: '.form__submit',
+  inactiveButton: 'form__submit_inactive',
+  inputError: 'form__input-text_type_error',
+  error: 'form__input-error_active',
 };
 
-export const popupWindows = document.querySelectorAll('.popup');
+// настройка и экспорт настроек валидации (объект с используемыми селекторами)
+export const validationConfig = {
+  formSelector: selectors.form,
+  inputSelector: selectors.input,
+  submitButtonSelector: selectors.submitButton,
+  inactiveButtonClass: selectors.inactiveButton,
+  inputErrorClass: selectors.inputError,
+  errorClass: selectors.error,
+};
 
-export const popupAvatar = document.querySelector('.popup_type_user-img');
-export const avatarForm = popupAvatar.querySelector('.form_type_user-img');
-export const profilePicture = document.querySelector('.profile__picture');
-export const profileAvatar = document.querySelector('.profile__img');
-export const submitAvatar = avatarForm.querySelector('.form__submit_type_avatar');
-export const inputLinkAvatar = avatarForm.querySelector('#user-img-link-input');
-export const ErrorLinkAvatar = avatarForm.querySelector('.user-img-link-input-error');
+//  Создание и экспорт переменных
 
-export const cardsBlock = document.querySelector('.cards-block');
-export const popupCardForm = document.querySelector('.popup_type_card-form');
-export const popupDeletingCard = document.querySelector('.popup_type_deleting-card');
-export const deletionConfirmationButton = popupDeletingCard.querySelector('.form__submit_type_deleting-card');
-export const cardForm = popupCardForm.querySelector('.form_type_card-form');
-export const addCardButton = document.querySelector('.profile__add-button');
-export const submitCardForm = cardForm.querySelector('.form__submit_type_card-form');
-export const inputPlaceName = cardForm.querySelector('#card-name-input');
-export const inputLinkImg = cardForm.querySelector('#card-link-input');
-export const ErrorPlaceName = cardForm.querySelector('.card-name-input-error');
-export const ErrorLinkImg = cardForm.querySelector('.card-link-input-error');
+export const popupWindows = document.querySelectorAll(selectors.popup);
 
-export const popupProfile = document.querySelector('.popup_type_profile');
-export const profileForm = popupProfile.querySelector('.form_type_profile');
-export const editButton = document.querySelector('.profile__edit-button');
-export const submitProfile = profileForm.querySelector('.form__submit_type_profile');
-export const profileName = document.querySelector('.profile__name');
-export const profileProfession = document.querySelector('.profile__profession');
-export const inputName = profileForm.querySelector('#profile-name-input');
-export const inputProfession = profileForm.querySelector('#profile-profession-input');
-export const ErrorName = profileForm.querySelector('.profile-name-input-error');
-export const ErrorProfession = profileForm.querySelector('.profile-profession-input-error');
+export const cardsBlock = document.querySelector(selectors.cardsBlock);
 
-export const popupImage = document.querySelector('.popup_type_image');
-export const imgPopupImage = popupImage.querySelector('.popup__img');
-export const captionPopupImage = popupImage.querySelector('.popup__caption');
+export const popupAvatar = document.querySelector(selectors.popupAvatar);
+export const avatarForm = popupAvatar.querySelector(selectors.avatarForm);
+export const profilePicture = document.querySelector(selectors.profilePicture);
+export const profileAvatar = document.querySelector(selectors.profileAvatar);
+export const submitAvatar = avatarForm.querySelector(selectors.submitAvatar);
+export const inputLinkAvatar = avatarForm.querySelector(selectors.inputLinkAvatar);
+export const errorLinkAvatar = avatarForm.querySelector(selectors.errorLinkAvatar);
+
+export const popupCardForm = document.querySelector(selectors.popupCardForm);
+export const cardForm = popupCardForm.querySelector(selectors.cardForm);
+export const addCardButton = document.querySelector(selectors.addCardButton);
+export const submitCardForm = cardForm.querySelector(selectors.submitCardForm);
+export const inputPlaceName = cardForm.querySelector(selectors.inputPlaceName);
+export const inputLinkImg = cardForm.querySelector(selectors.inputLinkImg);
+export const errorPlaceName = cardForm.querySelector(selectors.errorPlaceName);
+export const errorLinkImg = cardForm.querySelector(selectors.errorLinkImg);
+
+export const popupDeletingCard = document.querySelector(selectors.popupDeletingCard);
+export const deleteСheckButton = popupDeletingCard.querySelector(selectors.deleteСheckButton);
+
+export const popupProfile = document.querySelector(selectors.popupProfile);
+export const profileForm = popupProfile.querySelector(selectors.profileForm);
+export const editButton = document.querySelector(selectors.editButton);
+export const submitProfile = profileForm.querySelector(selectors.submitProfile);
+export const profileName = document.querySelector(selectors.profileName);
+export const profileProfession = document.querySelector(selectors.profileProfession);
+export const inputName = profileForm.querySelector(selectors.inputName);
+export const inputProfession = profileForm.querySelector(selectors.inputProfession);
+export const errorName = profileForm.querySelector(selectors.errorName);
+export const errorProfession = profileForm.querySelector(selectors.errorProfession);
+
+export const popupImage = document.querySelector(selectors.popupImage);
+export const imgPopupImage = popupImage.querySelector(selectors.imgPopupImage);
+export const captionPopupImage = popupImage.querySelector(selectors.captionPopupImage);

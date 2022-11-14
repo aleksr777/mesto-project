@@ -12,18 +12,18 @@ import {
 	profileAvatar,
 	submitAvatar,
 	inputLinkAvatar,
-	ErrorLinkAvatar,
+	errorLinkAvatar,
 	cardsBlock,
 	popupCardForm,
 	popupDeletingCard,
-	deletionConfirmationButton,
+	deleteСheckButton,
 	cardForm,
 	addCardButton,
 	submitCardForm,
 	inputPlaceName,
 	inputLinkImg,
-	ErrorPlaceName,
-	ErrorLinkImg,
+	errorPlaceName,
+	errorLinkImg,
 	popupProfile,
 	profileForm,
 	editButton,
@@ -32,11 +32,12 @@ import {
 	profileProfession,
 	inputName,
 	inputProfession,
-	ErrorName,
-	ErrorProfession,
+	errorName,
+	errorProfession,
 	popupImage,
 	imgPopupImage,
 	captionPopupImage,
+	selectors,
 	validationConfig,
 } from '../utils/constants.js';
 
@@ -47,12 +48,12 @@ import Api from '../components/api.js';
 export const api = new Api(apiConfig);
 
 // Функция нужна, чтобы отключить некорректный показ ошибки валидации поля при повторном открытии попапа
-const hideError = (inputText, inputError) => {
-	if (inputError.classList.contains('form__input-error_active')) {
-		inputError.classList.remove('form__input-error_active');
+const hideerror = (inputText, inputerror) => {
+	if (inputerror.classList.contains(selectors.error)) {
+		inputerror.classList.remove(selectors.error);
 	}
-	if (inputText.classList.contains('form__input-text_type_error')) {
-		inputText.classList.remove('form__input-text_type_error');
+	if (inputText.classList.contains(selectors.inputError)) {
+		inputText.classList.remove(selectors.inputError);
 	}
 };
 
@@ -77,8 +78,8 @@ const restoreButtonState = (button, text) => {
 export const openPopupDeletion = (button, id) => {
 	const card = button.closest('.card');
 	openPopup(popupDeletingCard);
-	deletionConfirmationButton.addEventListener('click', () => {
-		waitServerResponse(deletionConfirmationButton, 'Удаление...');
+	deleteСheckButton.addEventListener('click', () => {
+		waitServerResponse(deleteСheckButton, 'Удаление...');
 		api.deleteCard(card, id)
 			.then(() => {
 				closePopup(popupDeletingCard);
@@ -88,7 +89,7 @@ export const openPopupDeletion = (button, id) => {
 				console.log(err);
 			})
 			.finally(() => {
-				restoreButtonState(deletionConfirmationButton, 'Да');
+				restoreButtonState(deleteСheckButton, 'Да');
 			});
 	});
 };
@@ -96,8 +97,8 @@ export const openPopupDeletion = (button, id) => {
 editButton.addEventListener('click', (event) => {
 	inputName.value = profileName.textContent;
 	inputProfession.value = profileProfession.textContent;
-	hideError(inputName, ErrorName);
-	hideError(inputProfession, ErrorProfession);
+	hideerror(inputName, errorName);
+	hideerror(inputProfession, errorProfession);
 	openPopup(popupProfile);
 	event.stopPropagation();
 });
@@ -105,8 +106,8 @@ editButton.addEventListener('click', (event) => {
 profilePicture.addEventListener('click', (event) => {
 	openPopup(popupAvatar);
 	if (!inputLinkAvatar.value) {
-		deactivateButton(submitAvatar, 'form__submit_inactive');
-		hideError(inputLinkAvatar, ErrorLinkAvatar);
+		deactivateButton(submitAvatar, selectors.inactiveButton);
+		hideerror(inputLinkAvatar, errorLinkAvatar);
 	}
 	event.stopPropagation();
 });
@@ -114,9 +115,9 @@ profilePicture.addEventListener('click', (event) => {
 addCardButton.addEventListener('click', (event) => {
 	openPopup(popupCardForm);
 	if (!inputPlaceName.value && !inputLinkImg.value) {
-		deactivateButton(submitCardForm, 'form__submit_inactive');
-		hideError(inputPlaceName, ErrorPlaceName);
-		hideError(inputLinkImg, ErrorLinkImg);
+		deactivateButton(submitCardForm, selectors.inactiveButton);
+		hideerror(inputPlaceName, errorPlaceName);
+		hideerror(inputLinkImg, errorLinkImg);
 	}
 	event.stopPropagation();
 });

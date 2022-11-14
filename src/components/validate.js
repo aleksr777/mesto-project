@@ -82,7 +82,7 @@ const showInputError = (formElement, inputElement, errorMessage, inputErrorClass
   // Показываем ошибку в форме
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(errorClass + '_active');
+  errorElement.classList.add(errorClass);
 };
 
 const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) => {
@@ -90,7 +90,7 @@ const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) 
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   // Скрываем показ ошибки в форме
   inputElement.classList.remove(inputErrorClass);
-  errorElement.classList.remove(errorClass + '_active');
+  errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 };
 
