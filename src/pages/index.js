@@ -43,9 +43,17 @@ import {
 
 // Импорт классов
 import Api from '../components/api.js';
+//import Card from '../components/сard.js';
+//import Section from '../components/section.js';
+//import UserInfo from '../components/userInfo.js';
+//import PopupWithForm from '../components/popupWithForm.js';
+//import FormValidator from '../components/formValidator.js';
+import PopupWithImage from '../components/popupWithImage.js';
+//import PopupDeleteCard from '../components/popupDeleteCard.js';
 
 // Инициализация классов
 export const api = new Api(apiConfig);
+const popupWithImage = new PopupWithImage(selectors);
 
 // Функция нужна, чтобы отключить некорректный показ ошибки валидации поля при повторном открытии попапа
 const hideerror = (inputText, inputerror) => {
@@ -57,11 +65,7 @@ const hideerror = (inputText, inputerror) => {
 	}
 };
 
-export const openPopupImage = (name, link) => {
-	imgPopupImage.src = link;
-	captionPopupImage.textContent = name;
-	openPopup(popupImage);
-};
+export const openPopupImage = (caption, link) => popupWithImage.open(caption, link);
 
 const waitServerResponse = (button, text) => {
 	button.textContent = text;

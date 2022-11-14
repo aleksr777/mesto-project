@@ -45,8 +45,8 @@ export default class PopupWithForm extends Popup {
     this._formElement.addEventListener('submit', this._doCallback);
   }
 
-  deactivateEventListeners() {// переписываем метод родителя
-    super.deactivateEventListeners();// присваиваем свойства родителя
+  removeEventListeners() {// переписываем метод родителя
+    super.removeEventListeners();// присваиваем свойства родителя
     this._formElement.removeEventListener('submit', this._doCallback);
   }
 

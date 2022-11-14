@@ -27,7 +27,7 @@ export default class PopupDeleteCard extends Popup {
 
   close() {// переписываем метод родителя
     super.close();// присваиваем свойства родителя
-    this.deactivateEventListeners();// используем переписанный метод
+    this.removeEventListeners();// используем переписанный метод
   }
 
   setEventListeners() {// переписываем метод родителя
@@ -35,8 +35,8 @@ export default class PopupDeleteCard extends Popup {
     this._button.addEventListener('click', this._doCallback);
   }
 
-  deactivateEventListeners() {// переписываем метод родителя
-    super.deactivateEventListeners();// присваиваем свойства родителя
+  removeEventListeners() {// переписываем метод родителя
+    super.removeEventListeners();// присваиваем свойства родителя
     this._button.removeEventListener('click', this._doCallback);
   }
 
