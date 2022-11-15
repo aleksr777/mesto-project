@@ -1,4 +1,4 @@
-export class Popup {
+export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
     this._closeClick = this._closeClick.bind(this);
@@ -14,7 +14,7 @@ export class Popup {
 
   // закрытие при клике по кнопке и оверлею
   _closeClick(evt) {
-    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close')) {
+    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-btn')) {
       this.close();
     };
     evt.stopPropagation();

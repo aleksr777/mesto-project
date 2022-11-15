@@ -44,8 +44,8 @@ const deleteCardSubmit = evt => {
   evt.preventDefault();
   popupDeleteCard.isLoading(true);
   api.deleteCard(popupDeleteCard.getIdCard())
-    .then(() => popupDeleteCard.delete())
     .then(() => popupDeleteCard.close())
+    .then(() => popupDeleteCard.delete())
     .catch(err => console.log(err))
     .finally(() => popupDeleteCard.isLoading(false));
 };
@@ -81,7 +81,7 @@ const addCardFormSubmit = evt => {
   addCardPopup.isLoading(true);
   const inputValues = addCardPopup.getFormValues();
   api.postNewCard(inputValues.pictureNameInput, inputValues.linkCardImageInput)
-    .then((data) => renderCard.addItem(createCard(data)))
+    .then((item) => renderCard.addItem(createCard(item, item.owner._id)))
     .then(() => addCardPopup.close())
     .catch(err => console.log(err))
     .finally(() => addCardPopup.isLoading(false));
@@ -139,34 +139,11 @@ function createCard(item, userId) {
 }
 
 // executable code----------------------------------------------------------
-/* let userData;
-api.requestNameBio()
-  .then(data => {
-    userData = data;
-    userInfo.setUserInfo(userInfo.getUserInfo(data));
-  })
-
-api.requestCards()
-  .then(cardsData => renderCard.renderItems(cardsData, userData._id))
-  .catch(err => console.log(err))
- */
-
-Promise.all([api.requestNameBio(), api.requestCards()])
-  .then(([userData, cardsData]) => {
-    userInfo.setUserInfo(userInfo.getUserInfo(userData));
-    renderCard.renderItems(cardsData, userData._id);
-  })
-  .catch(err => console.log(err));
-
-profileFormValidator.enableValidation();
-avatarFormValidator.enableValidation();
-addCardformValidator.enableValidation();
-
 
 // eventListeners-----------------------------------------------------------
 popupOpenButtons.profile.addEventListener('click', () => {
   formSelectors.profile.reset();
-  api.requestNameBio()
+  api.requestProfileInfo()
     .then(data => {
       userInfo.setInput(userInfo.getUserInfo(data))
       profileFormValidator.clearMistakes();
@@ -183,3 +160,15 @@ popupOpenButtons.addCard.addEventListener('click', () => {
   addCardformValidator.clearMistakes();
   addCardPopup.open();
 });
+
+
+Promise.all([api.requestProfileInfo(), api.requestCards()])
+  .then(([userData, cardsData]) => {
+    userInfo.setUserInfo(userInfo.getUserInfo(userData));
+    renderCard.renderItems(cardsData, userData._id);
+  })
+  .catch(err => console.log(err));
+
+profileFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
+addCardformValidator.enableValidation();

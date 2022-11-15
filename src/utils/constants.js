@@ -10,7 +10,7 @@ export const apiConfig = {
 export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__text-field',
-  submitButtonSelector: '.popup__button-save',
+  submitButtonSelector: '.popup__submit-btn',
   inputErrorClass: 'popup__text-field__error',
 };
 

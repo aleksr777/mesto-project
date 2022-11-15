@@ -1,4 +1,4 @@
-.popup__button-save {
+.popup__submit-btn {
   font-size: 18px;
   color: #fff;
   background-color: rgba(0, 0, 0, 1);
@@ -13,11 +13,11 @@
   padding: 0;
 }
 
-.popup__button-save:hover {
+.popup__submit-btn:hover {
   background-color: rgba(0, 0, 0, .8);
 }
 
-.popup__button-save:disabled {
+.popup__submit-btn:disabled {
   background-color: #fff;
   outline: 1px solid rgba(0, 0, 0, 0.2);
   color: rgba(0, 0, 0, 0.2);
@@ -25,7 +25,7 @@
 }
 
 @media screen and (max-width: 540px) {
-  .popup__button-save {
+  .popup__submit-btn {
     font-size: 14px;
     margin: 45px 22px 25px;
     max-width: 238px;

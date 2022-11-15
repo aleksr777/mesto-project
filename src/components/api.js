@@ -9,7 +9,7 @@ export default class Api {
     return Promise.reject(`Ошибка: ${result.status}`);
   }
 
-  requestNameBio() {
+  requestProfileInfo() {
     return fetch(`${this._baseUrl}/users/me`, { headers: this._headers })
       .then(result => this._checkAnswer(result));
   }

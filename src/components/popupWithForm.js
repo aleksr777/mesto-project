@@ -1,10 +1,10 @@
-import { Popup } from './popup.js';
+import Popup from './popup.js';
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, callbackSubmit) {
     super(popupSelector);
     this._formElement = this._popup.querySelector('.popup__form');
-    this._formElementSubmitButton = this._formElement.querySelector('.popup__button-save');
+    this._formElementSubmitButton = this._formElement.querySelector('.popup__submit-btn');
     this._inputList = this._formElement.querySelectorAll('.popup__text-field');
     this._inputValues = {}; // здесь будет содержимое инпутов
     this._callbackSubmit = callbackSubmit;
@@ -28,10 +28,6 @@ export default class PopupWithForm extends Popup {
 
   getInputList() {
     return this._inputList;
-  }
-
-  open() { // переписываем метод родителя
-    super.open();// присваиваем свойства родителя
   }
 
   close() {// переписываем метод родителя
