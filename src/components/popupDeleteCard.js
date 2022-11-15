@@ -1,10 +1,9 @@
-import { selectors } from '../utils/constants.js';
 import { Popup } from './popup.js';
 
 export default class PopupDeleteCard extends Popup {
   constructor(popupSelector, callbackSubmit) {
     super(popupSelector);
-    this._button = this._popup.querySelector(selectors.submitButton);
+    this._button = this._popup.querySelector('.popup__button-save');
     this._callbackSubmit = callbackSubmit;
     this._cardId = '';
     this._cardElement = '';
@@ -27,7 +26,7 @@ export default class PopupDeleteCard extends Popup {
 
   close() {// переписываем метод родителя
     super.close();// присваиваем свойства родителя
-    this.removeEventListeners();// используем переписанный метод
+    this.deactivateEventListeners();// используем переписанный метод
   }
 
   setEventListeners() {// переписываем метод родителя
@@ -35,8 +34,8 @@ export default class PopupDeleteCard extends Popup {
     this._button.addEventListener('click', this._doCallback);
   }
 
-  removeEventListeners() {// переписываем метод родителя
-    super.removeEventListeners();// присваиваем свойства родителя
+  deactivateEventListeners() {// переписываем метод родителя
+    super.deactivateEventListeners();// присваиваем свойства родителя
     this._button.removeEventListener('click', this._doCallback);
   }
 

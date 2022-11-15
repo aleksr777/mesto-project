@@ -1,0 +1,11 @@
+.element__photo {
+  user-select: none;
+  display: block;
+  aspect-ratio: 1 / 1;
+  height: 282px;
+  width: 282px;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+}

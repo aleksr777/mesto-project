@@ -1,97 +1,69 @@
 export default class Api {
-  constructor({baseUrl, headers}) {
-    this._baseUrl = baseUrl;
-    this._headers = headers;
+  constructor(apiConfig) {
+    this._baseUrl = apiConfig.baseUrl;
+    this._headers = apiConfig.headers;
   }
 
-  _getResponseData(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    else {
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
+  _checkAnswer(result) {
+    if (result.ok) { return result.json() }
+    return Promise.reject(`Ошибка: ${result.status}`);
   }
 
-  getProfileInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers
-    })
-      .then((res) => { return this._getResponseData(res) })
+  requestNameBio() {
+    return fetch(`${this._baseUrl}/users/me`, { headers: this._headers })
+      .then(result => this._checkAnswer(result));
   }
 
-  sendProfileInfo(name, profession) {
+  requestCards() {
+    return fetch(`${this._baseUrl}/cards`, { headers: this._headers })
+      .then(result => this._checkAnswer(result));
+  }
+
+  editProfile(newName, newDescription) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        about: profession
+        name: newName,
+        about: newDescription
       })
     })
-      .then((res) => { return this._getResponseData(res) });
+      .then(result => this._checkAnswer(result));
   }
 
-  sendAvatar(link) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: link,
-      })
-    })
-      .then((res) => { return this._getResponseData(res) });
-  }
-
-  getCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers
-    })
-      .then((res) => { return this._getResponseData(res) });
-  }
-
-  sendNewCard(cardName, cardLink) {
+  postNewCard(imageName, imageLink) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: cardName,
-        link: cardLink,
+        name: imageName,
+        link: imageLink
       })
     })
-      .then((res) => { return this._getResponseData(res) });
+      .then(result => this._checkAnswer(result));
   }
 
-  deleteCard(card, cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
-      method: 'DELETE',
-      headers: this._headers,
-      body: JSON.stringify({
-        _id: cardId
-      })
-    })
-      .then((res) => { return this._getResponseData(res) });
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, { method: 'DELETE', headers: this._headers })
+      .then(result => this._checkAnswer(result));
   }
 
-  putLike(likeButton, card, cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: 'PUT',
-      headers: this._headers,
-      body: JSON.stringify({
-        _id: cardId
-      })
-    })
-      .then((res) => { return this._getResponseData(res) });
+  likeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, { method: 'PUT', headers: this._headers })
+      .then(result => this._checkAnswer(result));
   }
 
-  deleteLike(button, card, cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: 'DELETE',
-      headers: this._headers,
-      body: JSON.stringify({
-        _id: cardId
-      })
-    })
-      .then((res) => { return this._getResponseData(res) });
+  likeDeleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, { method: 'DELETE', headers: this._headers })
+      .then(result => this._checkAnswer(result));
   }
-};
+
+  newAvatar(imageLink) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({ avatar: imageLink })
+    })
+      .then(result => this._checkAnswer(result));
+  }
+}

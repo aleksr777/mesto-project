@@ -1,12 +1,11 @@
-import { selectors } from '../utils/constants.js';
 import { Popup } from './popup.js';
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, callbackSubmit) {
     super(popupSelector);
-    this._formElement = this._popup.querySelector(selectors.form);
-    this._formElementSubmitButton = this._formElement.querySelector(selectors.submitButton);
-    this._inputList = this._formElement.querySelectorAll(selectors.input);
+    this._formElement = this._popup.querySelector('.popup__form');
+    this._formElementSubmitButton = this._formElement.querySelector('.popup__button-save');
+    this._inputList = this._formElement.querySelectorAll('.popup__text-field');
     this._inputValues = {}; // здесь будет содержимое инпутов
     this._callbackSubmit = callbackSubmit;
     this._doCallback = this._doCallback.bind(this);// этот нужно, чтобы можно было снять обработчик с кнопки
@@ -45,8 +44,8 @@ export default class PopupWithForm extends Popup {
     this._formElement.addEventListener('submit', this._doCallback);
   }
 
-  removeEventListeners() {// переписываем метод родителя
-    super.removeEventListeners();// присваиваем свойства родителя
+  deactivateEventListeners() {// переписываем метод родителя
+    super.deactivateEventListeners();// присваиваем свойства родителя
     this._formElement.removeEventListener('submit', this._doCallback);
   }
 

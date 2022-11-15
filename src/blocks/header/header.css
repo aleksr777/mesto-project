@@ -1,12 +1,21 @@
 .header {
-  padding: 45px 0 7px 0;
+  margin-top: 45px;
+  position: relative;
+  min-height: 74px;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
   box-sizing: border-box;
-  width: 100%;
-  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
-@media (max-width: 545px) {
+@media screen and (max-width: 900px) {
   .header {
-    padding: 45px 19px 9px 19px;
+    margin-top: 28px;
+  }
+}
+
+@media screen and (max-width: 679px) {
+  .header {
+    min-height: 56px;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
