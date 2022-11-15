@@ -14,7 +14,7 @@ export default class Popup {
 
   // закрытие при клике по кнопке и оверлею
   _closeClick(evt) {
-    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-btn')) {
+    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
       this.close();
     };
     evt.stopPropagation();
@@ -33,12 +33,29 @@ export default class Popup {
   }
 
   open() {
+    this._popup.style.pointerEvents = 'none';
+    this._popup.style.transition = 'all .4s ease 0s'; // задаём нужное свойство transition
+    this._popup.style.opacity = '0'; // делаем popup изначально прозрачным перед открытием
     this._popup.classList.add('popup_opened');
-    this.setEventListeners();
+    setTimeout(() => this._popup.style.opacity = '1', 0);
+    // popup плавно становится непрозрачным (setTimeout нужен для срабатывания свойства transition)
+    setTimeout(() => {
+      this.setEventListeners();
+      this._popup.style.pointerEvents = ''; // возвращаем исходные значения
+      this._popup.style.transition = '';
+    }, 400);
   }
 
   close() {
+    this._popup.style.pointerEvents = 'none';
     this.deactivateEventListeners();
-    this._popup.classList.remove('popup_opened');
+    this._popup.style.transition = 'all .4s ease 0s'; // задаём нужное свойство transition
+    this._popup.style.opacity = '0'; // popup плавно становится прозрачным (срабатывает свойство transition)
+    setTimeout(() => { // setTimeout нужен, чтобы успела сработать анимация (transition) перед закрытием popup
+      this._popup.classList.remove('popup_opened');
+      this._popup.style.opacity = ''; // возвращаем исходные значения
+      this._popup.style.pointerEvents = '';
+      this._popup.style.transition = '';
+    }, 400);
   }
 }

@@ -1,19 +1,26 @@
 .profile {
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
+  box-sizing: border-box;
+  padding: 40px 0 23px 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-rows: minmax(min-content, max-content);
+  gap: 29px;
 }
 
-@media screen and (max-width: 679px) {
+@media (max-width: 800px) {
   .profile {
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: repeat(2, minmax(min-content, max-content));
   }
 }
 
-@media screen and (max-width: 425px) {
+@media (max-width: 545px) {
   .profile {
-    margin: 42px auto 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, minmax(min-content, max-content));
+    max-width: 100%;
+    padding: 42px 19px 15px 19px;
+    gap: 5px 0;
   }
 }

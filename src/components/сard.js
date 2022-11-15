@@ -2,12 +2,12 @@ export default class Card {
   constructor(item, cardBlank, userId, { handleCardClick, handleHeartClick, handleCardDelete }) {
     // selectors
     this._cardBlank = cardBlank.cloneNode(true);
-    this.card = this._cardBlank.querySelector('.element');
-    this._photoElement = this.card.querySelector('.element__photo');
-    this._photoName = this.card.querySelector('.element__name');
-    this._trash = this.card.querySelector('.element__trash');
-    this._heart = this.card.querySelector('.element__heart');
-    this._heartsCount = this.card.querySelector('.element__hearts-count');
+    this.card = this._cardBlank.querySelector('.cards-block__card');
+    this._photoElement = this.card.querySelector('.card__img');
+    this._photoName = this.card.querySelector('.card__text');
+    this._trash = this.card.querySelector('.card__trash-button');
+    this._heart = this.card.querySelector('.card__like-button');
+    this._heartsCount = this.card.querySelector('.card__like-number');
     // data
     this._nameImage = item.name;
     this._linkImage = item.link;

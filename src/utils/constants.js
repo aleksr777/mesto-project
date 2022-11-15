@@ -8,49 +8,49 @@ export const apiConfig = {
 };
 
 export const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__text-field',
-  submitButtonSelector: '.popup__submit-btn',
-  inputErrorClass: 'popup__text-field__error',
+  formSelector: '.form',
+  inputSelector: '.form__input-text',
+  submitButtonSelector: '.form__submit',
+  inputErrorClass: 'form__input-text_type_error',
 };
 
 
 // popups
 export const popupSelectors = {
   profile: '.popup_type_profile',
-  addCard: '.popup_type_add-card',
-  editAvatar: '.popup__type_edit-avatar',
-  viewCard: '.popup__type_view-card',
-  deleteCard: '.popup__type_delete-card'
+  addCard: '.popup_type_card-form',
+  editAvatar: '.popup_type_user-img',
+  viewCard: '.popup_type_image',
+  deleteCard: '.popup_type_deleting-card'
 };
 
 // buttons for open popup
 export const popupOpenButtons = {
-  profile: document.querySelector('.profile__edit'),
-  avatar: document.querySelector('.profile__avatar-container'),
-  addCard: document.querySelector('.profile__add')
+  profile: document.querySelector('.profile__edit-button'),
+  avatar: document.querySelector('.profile__picture'),
+  addCard: document.querySelector('.profile__add-button')
 };
 
 // forms
 export const formSelectors = {
-  profile: document.querySelector('.popup__form_type_profile'),
-  avatar: document.querySelector('.popup__form_type_avatar'),
-  addCard: document.querySelector('.popup__form_type_add-card')
+  profile: document.querySelector('.form_type_profile'),
+  avatar: document.querySelector('.form_type_user-img'),
+  addCard: document.querySelector('.form_type_card-form')
 };
 
 // profile form fields
 export const profileFormFields = {
-  userName: document.querySelector('.popup__text-field_type_name'),
-  userDescription: document.querySelector('.popup__text-field_type_status')
+  userName: document.querySelector('.form__input-text_type_profile-name'),
+  userDescription: document.querySelector('.form__input-text_type_profile-profession')
 };
 
 // profile selectors
 export const profileSelectors = {
   userName: document.querySelector('.profile__name'),
-  userDescription: document.querySelector('.profile__description'),
-  userAvatar: document.querySelector('.profile__avatar')
+  userDescription: document.querySelector('.profile__profession'),
+  userAvatar: document.querySelector('.profile__img')
 };
 
 // card selectors
-export const cardPlace = document.querySelector('.elements');
-export const cardBlank = document.querySelector('#card-blank').content;
+export const cardPlace = document.querySelector('.cards-block');
+export const cardBlank = document.querySelector('#card-template').content;

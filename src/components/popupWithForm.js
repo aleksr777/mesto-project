@@ -3,9 +3,9 @@ import Popup from './popup.js';
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, callbackSubmit) {
     super(popupSelector);
-    this._formElement = this._popup.querySelector('.popup__form');
-    this._formElementSubmitButton = this._formElement.querySelector('.popup__submit-btn');
-    this._inputList = this._formElement.querySelectorAll('.popup__text-field');
+    this._formElement = this._popup.querySelector('.form');
+    this._formElementSubmitButton = this._formElement.querySelector('.form__submit');
+    this._inputList = this._formElement.querySelectorAll('.form__input-text');
     this._inputValues = {}; // здесь будет содержимое инпутов
     this._callbackSubmit = callbackSubmit;
     this._doCallback = this._doCallback.bind(this);// этот нужно, чтобы можно было снять обработчик с кнопки

@@ -12,17 +12,17 @@ import {
   popupOpenButtons,
   profileSelectors,
   profileFormFields,
-} from '../utils/constants.js'
+} from '../utils/constants.js';
 
 
 // callbacks for components-------------------------------------------------
 const handleCardClick = (description, link) => popupWithImage.open(description, link);
 const handleHeartClick = card => {
-  if (card._heart.classList.contains('element__heart_active')) {
+  if (card._heart.classList.contains('card__like-button_activ')) {
     api.likeDeleteCard(card._cardId)
       .then((res) => {
         card._heartsCount.textContent = res.likes.length;
-        card._heart.classList.remove('element__heart_active');
+        card._heart.classList.remove('card__like-button_activ');
       })
       .catch(err => console.log(err));
   }
@@ -30,7 +30,7 @@ const handleHeartClick = card => {
     api.likeCard(card._cardId)
       .then((res) => {
         card._heartsCount.textContent = res.likes.length;
-        card._heart.classList.add('element__heart_active');
+        card._heart.classList.add('card__like-button_activ');
       })
       .catch(err => console.log(err));
   }

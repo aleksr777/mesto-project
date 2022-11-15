@@ -1,0 +1,13 @@
+.page__header {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 545px) {
+  .page__header {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+}
