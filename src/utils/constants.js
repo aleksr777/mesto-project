@@ -14,7 +14,6 @@ export const validationConfig = {
   inputErrorClass: 'form__input-text_type_error',
 };
 
-
 // popups
 export const popupSelectors = {
   profile: '.popup_type_profile',

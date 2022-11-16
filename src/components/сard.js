@@ -3,6 +3,7 @@ export default class Card {
     // selectors
     this._cardBlank = cardBlank.cloneNode(true);
     this.card = this._cardBlank.querySelector('.cards-block__card');
+    this._photoBox = this.card.querySelector('.card__picture');
     this._photoElement = this.card.querySelector('.card__img');
     this._photoName = this.card.querySelector('.card__text');
     this._trash = this.card.querySelector('.card__trash-button');
@@ -47,7 +48,7 @@ export default class Card {
   }
 
   _addEventListeners() {
-    this._photoElement.addEventListener('click', () => this._handleCardClick(this._nameImage, this._linkImage));
+    this._photoBox.addEventListener('click', () => this._handleCardClick(this._nameImage, this._linkImage));
     this._heart.addEventListener('click', () => this._handleHeartClick(this));
     this._trash.addEventListener('click', () => this._handleCardDelete(this));
   }

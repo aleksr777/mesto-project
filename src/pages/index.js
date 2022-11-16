@@ -17,6 +17,7 @@ import {
 
 // callbacks for components-------------------------------------------------
 const handleCardClick = (description, link) => popupWithImage.open(description, link);
+
 const handleHeartClick = card => {
   if (card._heart.classList.contains('card__like-button_activ')) {
     api.likeDeleteCard(card._cardId)
