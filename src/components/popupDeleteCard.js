@@ -6,8 +6,6 @@ export default class PopupDeleteCard extends Popup {
     this._formElement = this._popup.querySelector('.form');
     this._formElementSubmitButton = this._formElement.querySelector('.form__submit');
     this._callbackSubmit = callbackSubmit;
-    this._cardId = '';
-    this._cardElement = '';
     this._doCallback = this._doCallback.bind(this);// этот нужно, чтобы можно было снять обработчик с кнопки
   }
 

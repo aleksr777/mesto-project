@@ -14,7 +14,6 @@ import {
   profileFormFields,
 } from '../utils/constants.js';
 
-
 // callbacks for components-------------------------------------------------
 const handleCardClick = (description, link) => popupWithImage.open(description, link);
 
@@ -37,9 +36,7 @@ const handleHeartClick = card => {
   }
 };
 
-const handleCardDelete = card => {
-  popupDeleteCard.open(card._cardId, card.card);
-}
+const handleCardDelete = card => popupDeleteCard.open(card._cardId, card.card);
 
 const deleteCardSubmit = evt => {
   evt.preventDefault();
@@ -75,7 +72,7 @@ const avatarFormSubmit = evt => {
     .then(() => avatarPopup.close())
     .catch(err => console.log(err))
     .finally(() => avatarPopup.isLoading(false));
-}
+};
 
 const addCardFormSubmit = evt => {
   evt.preventDefault();
@@ -86,13 +83,13 @@ const addCardFormSubmit = evt => {
     .then(() => addCardPopup.close())
     .catch(err => console.log(err))
     .finally(() => addCardPopup.isLoading(false));
-}
+};
 
 const renderer = {
   renderer: (item, id) => {
     renderCard._container.append(createCard(item, id));
   }
-}
+};
 
 const callBacks = {
   handleCardClick: handleCardClick,
@@ -103,7 +100,7 @@ const callBacks = {
   avatarFormSubmit: avatarFormSubmit,
   addCardFormSubmit, addCardFormSubmit,
   renderer: renderer
-}
+};
 
 // import components--------------------------------------------------------
 import Api from '../components/api.js';
@@ -119,7 +116,7 @@ import PopupDeleteCard from '../components/popupDeleteCard.js';
 // initial components-------------------------------------------------------
 const api = new Api(apiConfig);
 
-const renderCard = new Section(cardPlace, callBacks.renderer)
+const renderCard = new Section(cardPlace, callBacks.renderer);
 const popupWithImage = new PopupWithImage(popupSelectors.viewCard);
 const profilePopup = new PopupWithForm(popupSelectors.profile, evt => callBacks.profileFormSubmit(evt));
 const addCardPopup = new PopupWithForm(popupSelectors.addCard, evt => callBacks.addCardFormSubmit(evt));
@@ -137,7 +134,7 @@ function createCard(item, userId) {
   const card = new Card(item, cardBlank, userId, callBacks);
   const markupCard = card.returnCard();
   return markupCard;
-}
+};
 
 // executable code----------------------------------------------------------
 

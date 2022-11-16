@@ -1,7 +1,7 @@
 export default class Api {
-  constructor(apiConfig) {
-    this._baseUrl = apiConfig.baseUrl;
-    this._headers = apiConfig.headers;
+  constructor({baseUrl, headers}) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
   }
 
   _checkAnswer(result) {
