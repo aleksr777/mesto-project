@@ -56,7 +56,7 @@
       <div class="popup__container">
         <button type="button" class="popup__close-button" value="popup-close-button"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
-        <form class="form form_type_profile" name="editForm" id="edit-form" method="POST" novalidate>
+        <form class="form form_type_profile" id="edit-form" method="get" name="nameAndStatus" novalidate>
           <label class="form__label">
             <input type="text" class="form__input-text form__input-text_type_profile-name" id="profile-name-input" name="profileNameInput" value=""
               placeholder="Имя" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
@@ -81,7 +81,7 @@
         <button type="button" class="popup__close-button popup__close-button_type_card-form"
           value="popup-close-button"></button>
         <h3 class="popup__title">Новое место</h3>
-        <form class="form form_type_card-form" name="cardForm" id="card-form" method="POST" novalidate>
+        <form class="form form_type_card-form" id="card-form" method="get" name="addCard" novalidate>
           <label class="form__label">
             <input type="text" class="form__input-text" id="card-name-input" name="cardNameInput" value=""
               placeholder="Название" minlength="2" maxlength="30" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
@@ -114,7 +114,7 @@
       <div class="popup__container">
         <button type="button" class="popup__close-button" value="popup-close-button"></button>
         <h3 class="popup__title">Обновить аватар</h3>
-        <form class="form form_type_user-img" name="cardForm" id="card-form" method="POST" novalidate>
+        <form class="form form_type_user-img" id="card-form" method="get" name="avatar" novalidate>
           <label class="form__label">
             <input type="url" class="form__input-text" id="user-img-link-input" name="userImgLinkInput" value=""
               placeholder="Ссылка на картинку" required>
@@ -130,7 +130,7 @@
       <div class="popup__container">
         <button type="button" class="popup__close-button" value="popup-close-button"></button>
         <h3 class="popup__title popup__title_type_deleting-card">Вы уверены?</h3>
-        <form class="form form_type_deleting-card" name="deletingCardForm" id="deleting-card-form" method="POST"
+        <form class="form form_type_deleting-card" id="deleting-card-form" name="deletingCardForm" method="get"
           novalidate>
           <button type="submit" class="form__submit form__submit_type_deleting-card"
             value="deleting-card-button">Да</button>

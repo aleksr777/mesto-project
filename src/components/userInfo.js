@@ -4,26 +4,25 @@ export default class UserInfo {
     this._userDescriptionSelector = profileSelectors.userDescription;
     this._userAvatarSelector = profileSelectors.userAvatar;
     this._inputName = profileFormFields.userName;
-    this._inputStatus = profileFormFields.userDescription;
+    this._inputDescription = profileFormFields.userDescription;
   }
 
-  // По условиям из тренажёра "Проект Mesto на ООП", данные для метода getUserInfo нужно получить от методов класса Api. Этот же метод нужно использовать для вставки данных в форму при открытии.
-  getUserInfo({ name, about, avatar }) {
+  getUserInfo() {
     return {
-      name: name,
-      description: about,
-      avatar: avatar
+      name: this._userNameSelector.textContent,
+      about: this._userDescriptionSelector.textContent,
+      avatar: this._userAvatarSelector.src
     }
   }
 
-  setUserInfo({ name, description, avatar }) {
+  setUserInfo({ name, about, avatar }) {
     this._userNameSelector.textContent = name;
-    this._userDescriptionSelector.textContent = description;
+    this._userDescriptionSelector.textContent = about;
     this._userAvatarSelector.src = avatar;
   }
 
-  setInput({ name, description }) {
+  setInput({ name, about }) {
     this._inputName.value = name;
-    this._inputStatus.value = description;
+    this._inputDescription.value = about;
   }
 }

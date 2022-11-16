@@ -1,5 +1,6 @@
 export default class Popup {
   constructor(popupSelector) {
+    this._main = document.querySelector('.main');
     this._popup = document.querySelector(popupSelector);
     this._closeClick = this._closeClick.bind(this);
     this._handleEscClose = this._handleEscClose.bind(this);
@@ -33,6 +34,7 @@ export default class Popup {
   }
 
   open() {
+    this._main.style.pointerEvents = 'none';
     this._popup.style.pointerEvents = 'none';
     this._popup.style.transition = 'all .4s ease 0s'; // задаём нужное свойство transition
     this._popup.style.opacity = '0'; // делаем popup изначально прозрачным перед открытием
@@ -54,8 +56,9 @@ export default class Popup {
     setTimeout(() => { // setTimeout нужен, чтобы успела сработать анимация (transition) перед закрытием popup
       this._popup.classList.remove('popup_opened');
       this._popup.style.opacity = ''; // возвращаем исходные значения
+      this._main.style.pointerEvents = '';
       this._popup.style.pointerEvents = '';
       this._popup.style.transition = '';
-    }, 400);
+    }, 400); 
   }
 }

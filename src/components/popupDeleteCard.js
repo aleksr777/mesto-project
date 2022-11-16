@@ -19,7 +19,7 @@ export default class PopupDeleteCard extends Popup {
 
   open(cardId, cardElement) { // переписываем метод родителя
     super.open();// присваиваем свойства родителя
-    return this._cardId = cardId, this._cardElement = cardElement;
+    this._cardId = cardId, this._cardElement = cardElement;
   }
 
   setEventListeners() {// переписываем метод родителя
