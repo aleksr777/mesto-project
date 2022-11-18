@@ -1,64 +1,63 @@
-export default class Popup {
-  constructor(popupSelector) {
-    this._main = document.querySelector('.main');
-    this._popup = document.querySelector(popupSelector);
-    this._closeClick = this._closeClick.bind(this);
-    this._handleEscClose = this._handleEscClose.bind(this);
+export class Popup {
+  constructor(selectors, popup) {
+    this._popup = popup;
+    this._popupOpenedSelector = selectors.popupOpened;
+    this._closeButtonSelector = selectors.popupCloseButton;
+    this._handleClick = this._handleClick.bind(this);
+    this._handleEsc = this._handleEsc.bind(this);
   }
 
   // закрытие при нажатии на клавишу 'Escape'
-  _handleEscClose(evt) {
+  _handleEsc(evt) {
     if (evt.key === 'Escape') {
       this.close();
     }
   }
 
   // закрытие при клике по кнопке и оверлею
-  _closeClick(evt) {
-    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
+  _handleClick(evt) {
+    if (evt.target.classList.contains(this._popupOpenedSelector) || evt.target.classList.contains(this._closeButtonSelector)) {
       this.close();
     };
     evt.stopPropagation();
   }
 
-  // установка слушателей
+  // установка обработчиков
   setEventListeners() {
-    this._popup.addEventListener('click', this._closeClick);
-    document.addEventListener('keydown', this._handleEscClose);
+    this._popup.addEventListener('click', this._handleClick);
+    document.addEventListener('keydown', this._handleEsc);
   }
 
-  // отключение слушателей
-  deactivateEventListeners() {
-    this._popup.removeEventListener('click', this._closeClick);
-    document.removeEventListener('keydown', this._handleEscClose);
+  // отключение обработчиков
+  removeEventListeners() {
+    this._popup.removeEventListener('click', this._handleClick);
+    document.removeEventListener('keydown', this._handleEsc);
   }
 
   open() {
-    this._main.style.pointerEvents = 'none';
     this._popup.style.pointerEvents = 'none';
     this._popup.style.transition = 'all .4s ease 0s'; // задаём нужное свойство transition
     this._popup.style.opacity = '0'; // делаем popup изначально прозрачным перед открытием
-    this._popup.classList.add('popup_opened');
+    this._popup.classList.add(this._popupOpenedSelector);
     setTimeout(() => this._popup.style.opacity = '1', 0);
     // popup плавно становится непрозрачным (setTimeout нужен для срабатывания свойства transition)
     setTimeout(() => {
       this.setEventListeners();
       this._popup.style.pointerEvents = ''; // возвращаем исходные значения
       this._popup.style.transition = '';
-    }, 400);
+    }, 400); 
   }
 
   close() {
     this._popup.style.pointerEvents = 'none';
-    this.deactivateEventListeners();
+    this.removeEventListeners(); 
     this._popup.style.transition = 'all .4s ease 0s'; // задаём нужное свойство transition
     this._popup.style.opacity = '0'; // popup плавно становится прозрачным (срабатывает свойство transition)
     setTimeout(() => { // setTimeout нужен, чтобы успела сработать анимация (transition) перед закрытием popup
-      this._popup.classList.remove('popup_opened');
+      this._popup.classList.remove(this._popupOpenedSelector);
       this._popup.style.opacity = ''; // возвращаем исходные значения
-      this._main.style.pointerEvents = '';
       this._popup.style.pointerEvents = '';
       this._popup.style.transition = '';
-    }, 400); 
+    }, 400);
   }
 }

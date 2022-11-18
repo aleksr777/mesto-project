@@ -1,28 +1,36 @@
 export default class UserInfo {
-  constructor(profileSelectors, profileFormFields) {
-    this._userNameSelector = profileSelectors.userName;
-    this._userDescriptionSelector = profileSelectors.userDescription;
-    this._userAvatarSelector = profileSelectors.userAvatar;
-    this._inputName = profileFormFields.userName;
-    this._inputDescription = profileFormFields.userDescription;
+  constructor(selectors) {
+    this._userNameNode = document.querySelector(selectors.profileName);
+    this._userAboutNode = document.querySelector(selectors.profileProfession);
+    this._userAvatarNode = document.querySelector(selectors.profileAvatar);
+    this._inputName = document.querySelector(selectors.inputName);
+    this._inputAbout = document.querySelector(selectors.inputProfession); 
   }
 
-  getUserInfo() {
+  getUserInfo(data) {
     return {
-      name: this._userNameSelector.textContent,
-      about: this._userDescriptionSelector.textContent,
-      avatar: this._userAvatarSelector.src
+      name: data.name,
+      about: data.about,
+      avatar: data.avatar
     }
   }
 
-  setUserInfo({ name, about, avatar }) {
-    this._userNameSelector.textContent = name;
-    this._userDescriptionSelector.textContent = about;
-    this._userAvatarSelector.src = avatar;
+  setUserNameProfession({ name, about }) {
+    this._userNameNode.textContent = name;
+    this._userAboutNode.textContent = about;
+  }
+
+  setUserAvatar({ avatar }) {
+    this._userAvatarNode.src = avatar;
+  }
+
+  setUserInfo(data) {
+    this.setUserNameProfession(data);
+    this.setUserAvatar(data);
   }
 
   setInput({ name, about }) {
     this._inputName.value = name;
-    this._inputDescription.value = about;
+    this._inputAbout.value = about;
   }
 }

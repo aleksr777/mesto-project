@@ -1,10 +1,9 @@
-import Popup from './popup.js';
+import { Popup } from './popup.js';
 
 export default class PopupDeleteCard extends Popup {
-  constructor(popupSelector, callbackSubmit) {
-    super(popupSelector);
-    this._formElement = this._popup.querySelector('.form');
-    this._formElementSubmitButton = this._formElement.querySelector('.form__submit');
+  constructor(selectors, popup, callbackSubmit) {
+    super(selectors, popup);
+    this._button = popup.querySelector(selectors.submitButton);
     this._callbackSubmit = callbackSubmit;
     this._doCallback = this._doCallback.bind(this);// этот нужно, чтобы можно было снять обработчик с кнопки
   }
@@ -19,29 +18,30 @@ export default class PopupDeleteCard extends Popup {
 
   open(cardId, cardElement) { // переписываем метод родителя
     super.open();// присваиваем свойства родителя
-    this._cardId = cardId, this._cardElement = cardElement;
+    this.setEventListeners();// используем переписанный метод
+    return this._cardId = cardId, this._cardElement = cardElement;
   }
 
   setEventListeners() {// переписываем метод родителя
     super.setEventListeners();// присваиваем свойства родителя
-    this._formElement.addEventListener('submit', this._doCallback);
+    this._button.addEventListener('click', this._doCallback);
   }
 
-  deactivateEventListeners() {// переписываем метод родителя
-    super.deactivateEventListeners();// присваиваем свойства родителя
-    this._formElement.removeEventListener('submit', this._doCallback);
+  removeEventListeners() {// переписываем метод родителя
+    super.removeEventListeners();// присваиваем свойства родителя
+    this._button.removeEventListener('click', this._doCallback);
   }
 
   // изменение состояния кнопки при взаимодействии с сервером
   isLoading(loading) {
     if (loading) {
-      this._formElementSubmitButton.textContent = 'Удаление...';
-      this._formElementSubmitButton.setAttribute('disabled', true);
+      this._button.textContent = 'Удаление...';
+      this._button.setAttribute('disabled', true);
     }
     else {
       setTimeout(() => { // отсрочка нужна, чтобы окно успело закрыться (из-за анимации)        
-        this._formElementSubmitButton.textContent = 'Да';
-        this._formElementSubmitButton.removeAttribute('disabled', true);
+        this._button.textContent = 'Да';
+        this._button.removeAttribute('disabled', true);
       }, 400);
     }
   }
