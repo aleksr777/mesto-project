@@ -12,6 +12,7 @@
 
 @media (max-width: 800px) {
   .cards-block {
+    max-width: 640px;
     padding: 20px 0 36px 0;
     grid-template-columns: repeat(2, 48.8888888889%);
   }
@@ -20,6 +21,7 @@
 @media (max-width: 545px) {
   .cards-block {
     display: block;
+    max-width: 360px;
     padding: 20px 19px 26px 19px;
   }
 }

@@ -13,6 +13,7 @@
 @import url(../blocks/form/__submit/_inactive/form__submit_inactive.css);
 
 @import url(../blocks/main/main.css);
+@import url(../blocks/main/__cards-block/main__cards-block.css);
 
 @import url(../blocks/page/page.css);
 @import url(../blocks/page/__footer/page__footer.css);
