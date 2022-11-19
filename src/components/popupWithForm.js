@@ -1,9 +1,9 @@
 import { Popup } from './popup.js';
 
 export default class PopupWithForm extends Popup {
-  constructor(selectors, popup, callbackSubmit) {
-    super(selectors, popup);
-    this._formElement = popup.querySelector(selectors.form);
+  constructor(selectors, popupElement, pageNode, callbackSubmit) {
+    super(selectors, popupElement, pageNode);
+    this._formElement = popupElement.querySelector(selectors.form);
     this._formElementSubmitButton = this._formElement.querySelector(selectors.submitButton);
     this._inputList = this._formElement.querySelectorAll(selectors.input);
     this._inputValues = {}; // здесь будет содержимое инпутов
@@ -56,5 +56,20 @@ export default class PopupWithForm extends Popup {
         this._formElementSubmitButton.textContent = 'Сохранить';
       }, 400);
     }
+  }
+
+  setBeforeServerResponse() {
+    this._formElement.style.pointerEvents = 'none';
+    this._inputList.forEach(input => {
+      input.value = 'Загрузка...';
+      input.style.opacity = '.5';
+    });
+  }
+
+  setAfterServerResponse() {
+    this._formElement.style.pointerEvents = '';
+    this._inputList.forEach(input => {
+      input.style.opacity = '';
+    });
   }
 }

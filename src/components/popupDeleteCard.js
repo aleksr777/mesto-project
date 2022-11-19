@@ -1,9 +1,9 @@
 import { Popup } from './popup.js';
 
 export default class PopupDeleteCard extends Popup {
-  constructor(selectors, popup, callbackSubmit) {
-    super(selectors, popup);
-    this._button = popup.querySelector(selectors.submitButton);
+  constructor(selectors, popupElement, pageNode, callbackSubmit) {
+    super(selectors, popupElement, pageNode);
+    this._button = popupElement.querySelector(selectors.submitButton);
     this._callbackSubmit = callbackSubmit;
     this._doCallback = this._doCallback.bind(this);// этот нужно, чтобы можно было снять обработчик с кнопки
   }

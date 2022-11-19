@@ -1,41 +1,34 @@
 import './index.css';
+
+import { apiConfig } from '../utils/apiConfig.js';
+
 import { renderCard, splashScreen } from '../components/card.js';
-import { enableValidation, deactivateButton } from '../components/validate.js';
 
 import {
-	apiConfig,
+	validationConfig,
+	page,
 	profilePicture,
-	submitAvatar,
-	inputLinkAvatar,
-	errorLinkAvatar,
 	cardsBlock,
 	addCardButton,
-	submitCardForm,
-	inputPlaceName,
-	inputLinkImg,
-	errorPlaceName,
-	errorLinkImg,
 	editButton,
-	inputName,
-	inputProfession,
-	errorName,
-	errorProfession,
 	popupImage,
 	imgPopupImage,
 	captionPopupImage,
 	popupDeletingCard,
 	popupProfile,
 	selectors,
-	validationConfig,
 	popupCardForm,
-	popupAvatar
+	popupAvatar,
+	profileForm,
+	cardForm,
+	avatarForm
 } from '../utils/constants.js';
 
 // Импорт классов
 import Api from '../components/api.js';
 //import Card from '../components/сard.js';
 //import Section from '../components/section.js';
-//import FormValidator from '../components/formValidator.js';
+import FormValidator from '../components/formValidator.js';
 import UserInfo from '../components/userInfo.js';
 import PopupWithForm from '../components/popupWithForm.js';
 import PopupWithImage from '../components/popupWithImage.js';
@@ -44,11 +37,15 @@ import PopupDeleteCard from '../components/popupDeleteCard.js';
 // Инициализация классов
 export const api = new Api(apiConfig);
 
+const profileFormValidator = new FormValidator(validationConfig, profileForm);
+const cardFormValidator = new FormValidator(validationConfig, cardForm);
+const avatarFormValidator = new FormValidator(validationConfig, avatarForm);
+
 const userInfo = new UserInfo(selectors);
 
-export const popupWithImage = new PopupWithImage(selectors, popupImage, imgPopupImage, captionPopupImage);
+export const popupWithImage = new PopupWithImage(selectors, popupImage, page, imgPopupImage, captionPopupImage);
 
-export const popupDeleteCard = new PopupDeleteCard(selectors, popupDeletingCard, (evt) => {
+export const popupDeleteCard = new PopupDeleteCard(selectors, popupDeletingCard, page, (evt) => {
 	evt.preventDefault();
 	popupDeleteCard.isLoading(true);
 	api.deleteCard(popupDeleteCard.getIdCard())
@@ -57,7 +54,7 @@ export const popupDeleteCard = new PopupDeleteCard(selectors, popupDeletingCard,
 		.finally(() => popupDeleteCard.isLoading(false));
 });
 
-const profilePopup = new PopupWithForm(selectors, popupProfile, (evt) => {
+const profilePopup = new PopupWithForm(selectors, popupProfile, page, (evt) => {
 	evt.preventDefault();
 	profilePopup.isLoading(true);
 	const inputValues = profilePopup.getFormValues();
@@ -70,7 +67,7 @@ const profilePopup = new PopupWithForm(selectors, popupProfile, (evt) => {
 		.finally(() => profilePopup.isLoading(false));
 });
 
-const addCardPopup = new PopupWithForm(selectors, popupCardForm, (evt) => {
+const addCardPopup = new PopupWithForm(selectors, popupCardForm, page, (evt) => {
 	evt.preventDefault();
 	addCardPopup.isLoading(true);
 	const inputValues = addCardPopup.getFormValues();
@@ -81,7 +78,7 @@ const addCardPopup = new PopupWithForm(selectors, popupCardForm, (evt) => {
 		.finally(() => addCardPopup.isLoading(false));
 });
 
-const avatarPopup = new PopupWithForm(selectors, popupAvatar, (evt) => {
+const avatarPopup = new PopupWithForm(selectors, popupAvatar, page, (evt) => {
 	evt.preventDefault();
 	avatarPopup.isLoading(true);
 	const inputValue = avatarPopup.getFormValues();
@@ -94,23 +91,14 @@ const avatarPopup = new PopupWithForm(selectors, popupAvatar, (evt) => {
 		.finally(() => avatarPopup.isLoading(false));
 });
 
-
-// Функция нужна, чтобы отключить некорректный показ ошибки валидации поля при повторном открытии попапа
-const hideerror = (inputText, inputerror) => {
-	if (inputerror.classList.contains(selectors.error)) {
-		inputerror.classList.remove(selectors.error);
-	}
-	if (inputText.classList.contains(selectors.inputError)) {
-		inputText.classList.remove(selectors.inputError);
-	}
-};
-
 editButton.addEventListener('click', (evt) => {
 	profilePopup.open();
-	hideerror(inputName, errorName);
-	hideerror(inputProfession, errorProfession);
+	profilePopup.setBeforeServerResponse();
+	profileFormValidator.clearMistakes();
+	profileFormValidator.disableButtonState();
 	api.getProfileInfo()
 		.then((data) => {
+			profilePopup.setAfterServerResponse();
 			userInfo.setInput(userInfo.getUserInfo(data));
 		})
 		.catch((err) => {
@@ -121,20 +109,15 @@ editButton.addEventListener('click', (evt) => {
 
 profilePicture.addEventListener('click', (evt) => {
 	avatarPopup.open();
-	if (!inputLinkAvatar.value) {
-		deactivateButton(submitAvatar, selectors.inactiveButton);
-		hideerror(inputLinkAvatar, errorLinkAvatar);
-	}
+	avatarFormValidator.clearMistakes();
+	avatarFormValidator.disableButtonState();
 	evt.stopPropagation();
 });
 
 addCardButton.addEventListener('click', (evt) => {
 	addCardPopup.open();
-	if (!inputPlaceName.value && !inputLinkImg.value) {
-		deactivateButton(submitCardForm, selectors.inactiveButton);
-		hideerror(inputPlaceName, errorPlaceName);
-		hideerror(inputLinkImg, errorLinkImg);
-	}
+	cardFormValidator.clearMistakes();
+	cardFormValidator.disableButtonState();
 	evt.stopPropagation();
 });
 
@@ -150,4 +133,6 @@ Promise.all([api.getProfileInfo(), api.getCards()])
 		console.log(err);
 	});
 
-enableValidation(validationConfig);
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();

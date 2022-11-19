@@ -1,13 +1,7 @@
-export const apiConfig = {
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-15',
-  headers: {
-    authorization: 'f31bf66b-98c5-4066-9b1a-67f29063c0e2',
-    'Content-Type': 'application/json'
-  }
-};
-
 // Используемые селекторы в коде JS
 export const selectors = {
+  page: '.page',
+
   popup: '.popup',
   popupOpened: 'popup_opened',
   popupCloseButton: 'popup__close-button',
@@ -79,6 +73,7 @@ export const validationConfig = {
 };
 
 //  Создание и экспорт переменных
+export const page = document.querySelector(selectors.page);
 
 export const cardsBlock = document.querySelector(selectors.cardsBlock);
 

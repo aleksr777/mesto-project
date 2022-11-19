@@ -1,6 +1,7 @@
 export class Popup {
-  constructor(selectors, popup) {
-    this._popup = popup;
+  constructor(selectors, popupElement, pageNode) {
+    this._pageNode = pageNode;
+    this._popup = popupElement;
     this._popupOpenedSelector = selectors.popupOpened;
     this._closeButtonSelector = selectors.popupCloseButton;
     this._handleClick = this._handleClick.bind(this);
@@ -35,6 +36,7 @@ export class Popup {
   }
 
   open() {
+    this._pageNode.style.pointerEvents = 'none';
     this._popup.style.pointerEvents = 'none';
     this._popup.style.transition = 'all .4s ease 0s'; // задаём нужное свойство transition
     this._popup.style.opacity = '0'; // делаем popup изначально прозрачным перед открытием
@@ -45,17 +47,18 @@ export class Popup {
       this.setEventListeners();
       this._popup.style.pointerEvents = ''; // возвращаем исходные значения
       this._popup.style.transition = '';
-    }, 400); 
+    }, 400);
   }
 
   close() {
     this._popup.style.pointerEvents = 'none';
-    this.removeEventListeners(); 
+    this.removeEventListeners();
     this._popup.style.transition = 'all .4s ease 0s'; // задаём нужное свойство transition
     this._popup.style.opacity = '0'; // popup плавно становится прозрачным (срабатывает свойство transition)
     setTimeout(() => { // setTimeout нужен, чтобы успела сработать анимация (transition) перед закрытием popup
       this._popup.classList.remove(this._popupOpenedSelector);
       this._popup.style.opacity = ''; // возвращаем исходные значения
+      this._pageNode.style.pointerEvents = '';
       this._popup.style.pointerEvents = '';
       this._popup.style.transition = '';
     }, 400);

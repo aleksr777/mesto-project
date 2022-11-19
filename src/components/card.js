@@ -33,10 +33,8 @@ const toggleLikeButton = (button, cardId) => {
         button.classList.remove(selectors.likeButtonActive);
         showNumberLikes(button, card, res.likes.length);
       })
-      .catch((err) => {
-        console.log(err);
-        button.removeAttribute('disabled');
-      });
+      .catch((err) => console.log(err))
+      .finally(() => button.removeAttribute('disabled'));
   }
   else {
     api.putLike(cardId)
@@ -44,10 +42,8 @@ const toggleLikeButton = (button, cardId) => {
         button.classList.add(selectors.likeButtonActive);
         showNumberLikes(button, card, res.likes.length);
       })
-      .catch((err) => {
-        console.log(err);
-        button.removeAttribute('disabled');
-      });
+      .catch((err) => console.log(err))
+      .finally(() => button.removeAttribute('disabled'));
   }
 };
 
