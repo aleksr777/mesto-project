@@ -76,6 +76,7 @@ export const validationConfig = {
 export const page = document.querySelector(selectors.page);
 
 export const cardsBlock = document.querySelector(selectors.cardsBlock);
+export const cardTemplate = document.querySelector(selectors.cardTemplate);
 
 export const popupAvatar = document.querySelector(selectors.popupAvatar);
 export const avatarForm = popupAvatar.querySelector(selectors.avatarForm);

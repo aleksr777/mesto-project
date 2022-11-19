@@ -2,7 +2,7 @@ import './index.css';
 
 import { apiConfig } from '../utils/apiConfig.js';
 
-import { renderCard, splashScreen } from '../components/card.js';
+import { renderCard } from '../components/card777.js';
 
 import {
 	validationConfig,
@@ -36,6 +36,8 @@ import PopupDeleteCard from '../components/popupDeleteCard.js';
 
 // Инициализация классов
 export const api = new Api(apiConfig);
+
+export const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
 
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
 const cardFormValidator = new FormValidator(validationConfig, cardForm);
