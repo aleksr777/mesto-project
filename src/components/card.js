@@ -1,4 +1,4 @@
 export default class Card {
-  constructor(){
+  constructor(cadsData, templateElement, handleCardClick) {
   }  
 }
