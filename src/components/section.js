@@ -1,7 +1,6 @@
 export default class Section {
   // Первым параметром конструктор принимает объект с двумя свойствами: items и renderer, второй параметр — селектор контейнера
-  constructor(renderer, cardsBlock, userId) {
-    this._userId = userId;
+  constructor(renderer, cardsBlock) {
     this._renderer = renderer;
     this._cardsBlockNode = cardsBlock;
   }
