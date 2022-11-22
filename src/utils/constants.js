@@ -1,4 +1,4 @@
-// Используемые селекторы в коде JS
+// Используемые селекторы из HTML
 export const selectors = {
   page: '.page',
 
@@ -82,32 +82,16 @@ export const popupAvatar = document.querySelector(selectors.popupAvatar);
 export const avatarForm = popupAvatar.querySelector(selectors.avatarForm);
 export const profilePicture = document.querySelector(selectors.profilePicture);
 export const profileAvatar = document.querySelector(selectors.profileAvatar);
-export const submitAvatar = avatarForm.querySelector(selectors.submitAvatar);
-export const inputLinkAvatar = avatarForm.querySelector(selectors.inputLinkAvatar);
-export const errorLinkAvatar = avatarForm.querySelector(selectors.errorLinkAvatar);
 
 export const popupCardForm = document.querySelector(selectors.popupCardForm);
 export const cardForm = popupCardForm.querySelector(selectors.cardForm);
 export const addCardButton = document.querySelector(selectors.addCardButton);
-export const submitCardForm = cardForm.querySelector(selectors.submitCardForm);
-export const inputPlaceName = cardForm.querySelector(selectors.inputPlaceName);
-export const inputLinkImg = cardForm.querySelector(selectors.inputLinkImg);
-export const errorPlaceName = cardForm.querySelector(selectors.errorPlaceName);
-export const errorLinkImg = cardForm.querySelector(selectors.errorLinkImg);
 
 export const popupDeletingCard = document.querySelector(selectors.popupDeletingCard);
-export const deleteСheckButton = popupDeletingCard.querySelector(selectors.deleteСheckButton);
 
 export const popupProfile = document.querySelector(selectors.popupProfile);
 export const profileForm = popupProfile.querySelector(selectors.profileForm);
 export const editButton = document.querySelector(selectors.editButton);
-export const submitProfile = profileForm.querySelector(selectors.submitProfile);
-export const profileName = document.querySelector(selectors.profileName);
-export const profileProfession = document.querySelector(selectors.profileProfession);
-export const inputName = profileForm.querySelector(selectors.inputName);
-export const inputProfession = profileForm.querySelector(selectors.inputProfession);
-export const errorName = profileForm.querySelector(selectors.errorName);
-export const errorProfession = profileForm.querySelector(selectors.errorProfession);
 
 export const popupImage = document.querySelector(selectors.popupImage);
 export const imgPopupImage = popupImage.querySelector(selectors.imgPopupImage);

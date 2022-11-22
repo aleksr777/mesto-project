@@ -1,5 +1,6 @@
 import './index.css';
 
+// Настройки конфигурации API
 import { apiConfig } from '../utils/apiConfig.js';
 
 import {
@@ -24,8 +25,9 @@ import {
 } from '../utils/constants.js';
 
 // Импорт классов
+
 import Api from '../components/api.js';
-//import Card from '../components/сard.js';
+import Card from '../components/card.js';
 import Section from '../components/section.js';
 import FormValidator from '../components/formValidator.js';
 import UserInfo from '../components/userInfo.js';
@@ -33,10 +35,13 @@ import PopupWithForm from '../components/popupWithForm.js';
 import PopupWithImage from '../components/popupWithImage.js';
 import PopupDeleteCard from '../components/popupDeleteCard.js';
 
-// Инициализация классов
-export const api = new Api(apiConfig);
 
-export const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
+// Инициализация классов
+
+const api = new Api(apiConfig);
+
+// Заставка на случай, если картинка по ссылке не загрузится
+const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
 
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
 const cardFormValidator = new FormValidator(validationConfig, cardForm);
@@ -44,9 +49,9 @@ const avatarFormValidator = new FormValidator(validationConfig, avatarForm);
 
 const userInfo = new UserInfo(selectors);
 
-export const popupWithImage = new PopupWithImage(selectors, popupImage, page, imgPopupImage, captionPopupImage);
+const popupWithImage = new PopupWithImage(selectors, popupImage, page, imgPopupImage, captionPopupImage);
 
-export const popupDeleteCard = new PopupDeleteCard(selectors, popupDeletingCard, page, (evt) => {
+const popupDeleteCard = new PopupDeleteCard(selectors, popupDeletingCard, page, (evt) => {
 	evt.preventDefault();
 	popupDeleteCard.isLoading(true);
 	api.deleteCard(popupDeleteCard.getIdCard())
@@ -92,6 +97,7 @@ const avatarPopup = new PopupWithForm(selectors, popupAvatar, page, (evt) => {
 		.finally(() => avatarPopup.isLoading(false));
 });
 
+// показывает количество лайков (скрывает, если нет лайков)
 const showNumberLikes = (button, card, numLikes) => {
 	const likeNumber = card.querySelector(selectors.likeNumber);
 	likeNumber.textContent = numLikes;
@@ -134,46 +140,37 @@ const toggleLikeButton = (buttonElement, cardId) => {
 	}
 };
 
+// Обработчик клика по картинке с последующим открытием popup
 const handleCardClick = (evt, name, link) => {
 	popupWithImage.open(name, link);
 	evt.stopPropagation();
 }
 
+// Обработчик клика кнопке 'Like'
 const handleLikeButtonClick = (evt, buttonElement, cardId) => {
 	toggleLikeButton(buttonElement, cardId);
 	evt.stopPropagation();
 }
 
+// Обработчик клика кнопке удаления карточки
 const handleTrashButtonClick = (evt, cardId, cardElement) => {
 	popupDeleteCard.open(cardId, cardElement);
 	evt.stopPropagation();
 }
 
-const cloneNodeTemplate = (template) => template.querySelector(selectors.card).cloneNode(true);
+const card = new Card(selectors, cardTemplate, handleCardClick, handleLikeButtonClick, handleTrashButtonClick, showNumberLikes);
 
-const renderer = (card, profileId) => {
-	const newCard = cloneNodeTemplate(cardTemplate.content);
-	const text = newCard.querySelector(selectors.cardText);
-	const image = newCard.querySelector(selectors.cardImg);
-	const picture = newCard.querySelector(selectors.cardPicture);
-	const likeButton = newCard.querySelector(selectors.likeButton);
-	const trashButton = newCard.querySelector(selectors.trashButton);
-	text.textContent = card.name;
-	image.src = card.link;
-	image.onerror = () => { image.src = splashScreen }
-	picture.addEventListener('click', evt => handleCardClick(evt, card.name, card.link));
-	likeButton.addEventListener('click', evt => handleLikeButtonClick(evt, evt.currentTarget, card._id));
-	trashButton.addEventListener('click', evt => handleTrashButtonClick(evt, card._id, evt.currentTarget.closest(selectors.card)));
-	showNumberLikes(likeButton, newCard, card.likes.length);
-	card.likes.forEach((element) => { if (element._id === profileId) { likeButton.classList.add(selectors.likeButtonActive) } });
-	if (profileId !== card.owner._id) { trashButton.remove() }
-	return newCard;
-};
+const renderer = (data, profileId, splashScreen) => { 
+	// без вложенности не удаётся передать 'card.renderer' в качестве аргумента
+	 return card.renderer(data, profileId, splashScreen);
+}
 
-const section = new Section(renderer, cardsBlock);
+const section = new Section(renderer, cardsBlock, splashScreen);
 
-// Исполняемый код
 
+// Исполняемый код //
+
+// Слушатель на нопку редактирования профиля
 editButton.addEventListener('click', (evt) => {
 	profilePopup.open();
 	profilePopup.setBeforeServerResponse();
@@ -190,6 +187,7 @@ editButton.addEventListener('click', (evt) => {
 	evt.stopPropagation();
 });
 
+// Слушатель на нопку редактирования аватара профиля
 profilePicture.addEventListener('click', (evt) => {
 	avatarPopup.open();
 	avatarFormValidator.clearMistakes();
@@ -197,6 +195,7 @@ profilePicture.addEventListener('click', (evt) => {
 	evt.stopPropagation();
 });
 
+// Слушатель на нопку добавления новой карточки
 addCardButton.addEventListener('click', (evt) => {
 	addCardPopup.open();
 	cardFormValidator.clearMistakes();
@@ -204,6 +203,7 @@ addCardButton.addEventListener('click', (evt) => {
 	evt.stopPropagation();
 });
 
+// Загрузка и прорисовка компонентов на странице при загрузке страницы и после загрузки данных с сервера 
 Promise.all([api.getProfileInfo(), api.getCards()])
 	.then(([profileData, cardsData]) => {
 		userInfo.setUserInfo(profileData);
@@ -214,6 +214,7 @@ Promise.all([api.getProfileInfo(), api.getCards()])
 		console.log(err);
 	});
 
+// Включение валидации для форм
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
