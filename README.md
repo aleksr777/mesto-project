@@ -6,6 +6,7 @@
 * HTML, CSS.  
 * JavaScript, Webpack, Babel.
 * GIT.
+* BEM-Nested.
 
 ### В этом проекте отработаны навыки:
 * Адаптивная вёрстка, работа с дизайнерским макетом в Figma.
@@ -26,6 +27,7 @@ In this educational project, simple tasks are implemented: adding and removing c
 * HTML, CSS.
 * JavaScript, Webpack, Babel.
 * GIT.
+* BEM-Nested.
 
 ### Skills worked out in this project:
 * Responsive layout, working with a design layout in Figma.
