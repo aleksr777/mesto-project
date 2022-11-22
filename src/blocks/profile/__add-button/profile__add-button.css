@@ -29,6 +29,7 @@
     grid-column: 2/3;
     top: 0;
     left: 0;
+    margin: 0;
   }
 }
 
@@ -38,6 +39,6 @@
     grid-column: 1/2;
     width: 100%;
     background-size: 16px 16px;
-    max-width: 326px;
+    max-width: 326px;margin: 0 auto;
   }
 }
