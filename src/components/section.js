@@ -7,13 +7,13 @@ export default class Section {
   }
 
  // Отрисовываем новую карточку
-  renderNewItem(cardData, userId) {
+  renderItem(cardData, userId) {
     this.addItem(this._renderer(cardData, userId));
   }
 
   // Отрисовываем карточки при загрузке страницы
-  renderItems(cardsData, userId) {
-    cardsData.forEach(item => this.addItem(this._renderer(item, userId)));
+  renderInitialItems(cardsData, userId) {
+    cardsData.forEach(item => this.renderItem(item, userId));
   }
   // Принимаем DOM-элемент и добавляем его в контейнер
   addItem(element) {

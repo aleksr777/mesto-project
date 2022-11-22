@@ -73,7 +73,7 @@ const addCardPopup = new PopupWithForm(selectors, popupCardForm, page, (evt) => 
 	addCardPopup.isLoading(true);
 	const inputValues = addCardPopup.getFormValues();
 	api.sendNewCard(inputValues.cardNameInput, inputValues.cardLinkInput)
-		.then(cardData => section.renderNewItem(cardData, cardData.owner._id))
+		.then(cardData => section.renderItem(cardData, cardData.owner._id))
 		.then(() => addCardPopup.close())
 		.catch(err => console.log(err))
 		.finally(() => addCardPopup.isLoading(false));
@@ -207,8 +207,8 @@ addCardButton.addEventListener('click', (evt) => {
 Promise.all([api.getProfileInfo(), api.getCards()])
 	.then(([profileData, cardsData]) => {
 		userInfo.setUserInfo(profileData);
-		cardsData = cardsData.reverse();
-		section.renderItems(cardsData, profileData._id);
+		cardsData = cardsData.reverse(); // меняем порядок, чтобы новые карточки добавлялись первыми
+		section.renderInitialItems(cardsData, profileData._id);
 	})
 	.catch((err) => {
 		console.log(err);
