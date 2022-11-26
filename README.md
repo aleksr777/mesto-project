@@ -41,7 +41,8 @@ In this educational project, simple tasks are implemented: adding and removing c
 --------------
 
 * Link: <https://aleksr777.github.io/mesto-project>
-* Figma layout #1: <https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1> or <https://disk.yandex.ru/d/bUgM9AlP0G3fTA>
-* Figma layout #2: <https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1&t=mTuwhPo8mmnpdyAl-0> or <https://disk.yandex.ru/d/D0FI4e88Cotuzw>
-* Figma layout #3: <https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1&t=W3qAGvHFKq29HHeD-0> or <https://disk.yandex.ru/d/GSZDuPHNRnUgpQ>
-* Figma layout #4: <https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript.-Sprint-9?node-id=0%3A1&t=0p0rra3ClscHhXja-0> or <https://disk.yandex.ru/d/2OUv8NxAVKXzVw>
+* Figma layout #1: <https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1>
+* Figma layout #2: <https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1&t=mTuwhPo8mmnpdyAl-0>
+* Figma layout #3: <https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1&t=W3qAGvHFKq29HHeD-0>
+* Figma layout #4: <https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript.-Sprint-9?node-id=0%3A1&t=0p0rra3ClscHhXja-0>
+* Figma layouts in rar archive: <https://disk.yandex.ru/d/H9xvidXcqT6j1A>
