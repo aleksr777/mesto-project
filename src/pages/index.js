@@ -41,7 +41,7 @@ import PopupDeleteCard from '../components/popupDeleteCard.js';
 const api = new Api(apiConfig);
 
 // Заставка на случай, если картинка по ссылке не загрузится
-const splashScreen = new URL('../images/no-image.jpg', import.meta.url);
+const splashScreen = new URL('../images/no-image.svg', import.meta.url);
 
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
 const cardFormValidator = new FormValidator(validationConfig, cardForm);
@@ -49,7 +49,7 @@ const avatarFormValidator = new FormValidator(validationConfig, avatarForm);
 
 const userInfo = new UserInfo(selectors);
 
-const popupWithImage = new PopupWithImage(selectors, popupImage, page, imgPopupImage, captionPopupImage);
+const popupWithImage = new PopupWithImage(selectors, popupImage, page, imgPopupImage, captionPopupImage, splashScreen);
 
 const popupDeleteCard = new PopupDeleteCard(selectors, popupDeletingCard, page, (evt) => {
 	evt.preventDefault();
