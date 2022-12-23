@@ -1,5 +1,7 @@
 # Учебный проект "Mesto"
-
+--------------
+* Project link: <https://aleksr777.github.io/mesto-project>
+--------------
 В этом учебном проекте реализованы простые задачи: добавление и удаление карточек, ставить "like", плавное открытие и закрытие popup-окон, редактирование данных пользователя, проверка валидности полей ввода в формах через JavaScript, взаимодействие с сервером.
 
 ### Используемые технологии:
@@ -38,9 +40,6 @@ In this educational project, simple tasks are implemented: adding and removing c
 * Fundamentals of object-oriented programming, the implementation of the modularity of JavaScript code.
 * Basics of interaction with the server.
 
---------------
-
-* Project link: <https://aleksr777.github.io/mesto-project>
 --------------
 * Figma layout #1: <https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1>
 * Figma layout #2: <https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1&t=mTuwhPo8mmnpdyAl-0>
