@@ -3,9 +3,9 @@
 	border: 0;
 	padding: 0;
 	outline: none;
-	background-color: rgba(255, 255, 255, 0.3);
-	width: fit-content;
-	height: fit-content;
+	background-color: transparent;
+	min-width: 150px;
+	min-height: fit-content;
 	max-width: 75vw;
 	max-height: 75vh;
 }
@@ -20,6 +20,7 @@
 	font-size: 12px;
 	line-height: 1.25;
 	color: #FFFFFF;
+	background-color: transparent;
 }
 
 @media screen and (max-height: 350px) {
