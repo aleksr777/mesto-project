@@ -4,7 +4,7 @@
 	padding: 0;
 	outline: none;
 	background-color: transparent;
-	min-width: 150px;
+	min-width: fit-content;
 	min-height: fit-content;
 	max-width: 75vw;
 	max-height: 75vh;
