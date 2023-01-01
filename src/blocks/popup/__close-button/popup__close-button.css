@@ -23,13 +23,13 @@
   }
 }
 
-@media screen and (min-width:0) and (max-height:545px) {
+@media screen and (max-height:545px) {
   .popup__close-button {
     background-size: 20px 20px;
     width: 22px;
     height: 22px;
-    top: -15px;
-    right: -25px;
+    top: -25px;
+    right: -2px;
   }
 }
 

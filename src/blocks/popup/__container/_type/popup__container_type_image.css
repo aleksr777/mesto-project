@@ -20,3 +20,9 @@
 	color: #FFFFFF;
 	background-color: transparent;
 }
+
+@media screen and (max-height:545px) {
+	.popup__container_type_image .popup__caption {
+		padding: 0;
+	}
+}
