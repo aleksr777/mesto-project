@@ -11,14 +11,14 @@
   max-width: 100%;
 }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .profile__name {
     font-size: 35px;
     line-height: 1.2;
   }
 }
 
-@media (max-width: 545px) {
+@media screen and (max-width: 545px) {
   .profile__name {
     font-size: 27px;
     line-height: 1.2222;

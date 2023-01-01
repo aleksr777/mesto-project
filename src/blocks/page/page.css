@@ -10,7 +10,7 @@
   grid-template-rows: minmax(min-content, max-content) 1fr minmax(min-content, max-content);
 }
 
-@media (max-width: 545px) {
+@media screen and (max-width: 545px) {
   .page {
     grid-template-columns: 1fr;
   }

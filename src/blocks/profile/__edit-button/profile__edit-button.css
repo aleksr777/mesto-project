@@ -14,13 +14,13 @@
   cursor: pointer;
 }
 
-@media (min-width: 545px) {
+@media screen and (min-width: 545px) {
   .profile__edit-button:hover {
     opacity: 0.6;
   }
 }
 
-@media (max-width: 545px) {
+@media screen and (max-width: 545px) {
   .profile__edit-button {
     width: 19px;
     height: 19px;

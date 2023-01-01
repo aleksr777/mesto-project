@@ -41,7 +41,7 @@
   object-position: center;
 }
 
-@media (max-width: 545px) {
+@media screen and (max-width: 545px) {
   .profile__picture {
     grid-row: 1/2;
     grid-column: 1/2;

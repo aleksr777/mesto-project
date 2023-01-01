@@ -10,7 +10,7 @@
   row-gap: 21px;
 }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .cards-block {
     max-width: 640px;
     padding: 20px 0 36px 0;
@@ -18,7 +18,7 @@
   }
 }
 
-@media (max-width: 545px) {
+@media screen and (max-width: 545px) {
   .cards-block {
     display: block;
     max-width: 360px;

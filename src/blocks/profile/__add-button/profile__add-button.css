@@ -17,13 +17,13 @@
   cursor: pointer;
 }
 
-@media (min-width: 545px) {
+@media screen and (min-width: 545px) {
   .profile__add-button:hover {
     opacity: 0.6;
   }
 }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .profile__add-button {
     grid-row: 2/3;
     grid-column: 2/3;
@@ -33,7 +33,7 @@
   }
 }
 
-@media (max-width: 545px) {
+@media screen and (max-width: 545px) {
   .profile__add-button {
     grid-row: 3/4;
     grid-column: 1/2;

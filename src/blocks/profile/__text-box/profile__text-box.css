@@ -11,7 +11,7 @@
   text-overflow: ellipsis;
 }
 
-@media (max-width: 545px) {
+@media screen and (max-width: 545px) {
   .profile__text-box {
     justify-content: center;
     text-align: center;

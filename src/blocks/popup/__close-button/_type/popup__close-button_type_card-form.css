@@ -1,4 +1,4 @@
-@media (min-width: 545px) {
+@media screen and (min-width: 545px) {
   .popup__close-button_type_card-form {
     top: -35px;
     right: -35px;

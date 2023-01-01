@@ -6,8 +6,6 @@
 	background-color: transparent;
 	min-width: fit-content;
 	min-height: fit-content;
-	max-width: 75vw;
-	max-height: 75vh;
 }
 
 .popup__container_type_image .popup__caption {
@@ -21,16 +19,4 @@
 	line-height: 1.25;
 	color: #FFFFFF;
 	background-color: transparent;
-}
-
-@media screen and (max-height: 350px) {
-	.popup__container_type_image {
-		max-height: 70vh;
-	}
-}
-
-@media screen and (max-height: 300px) {
-	.popup__container_type_image {
-		max-height: 65vh;
-	}
 }

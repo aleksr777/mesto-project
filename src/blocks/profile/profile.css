@@ -8,14 +8,14 @@
   gap: 29px;
 }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .profile {
     grid-template-columns: min-content 1fr;
     grid-template-rows: repeat(2, minmax(min-content, max-content));
   }
 }
 
-@media (max-width: 545px) {
+@media screen and (max-width: 545px) {
   .profile {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, minmax(min-content, max-content));

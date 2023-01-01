@@ -15,7 +15,7 @@
   transition: all .3s ease 0s;
 }
 
-@media (max-width: 545px) {
+@media screen and (max-width: 545px) {
   .form__submit {
     font-size: 14px;
     line-height: 17px;
@@ -23,7 +23,7 @@
   }
 }
 
-@media (min-width: 545px) {
+@media screen and (min-width: 545px) {
   .form__submit:hover {
     opacity: 0.8;
   }
