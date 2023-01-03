@@ -1,11 +1,13 @@
 .popup__container {
   position: fixed;
   left: 50%;
-  top: 52%;
+  top: 53%;
   transform: translate(-50%, -50%);
   z-index: 11;
   box-sizing: border-box;
   min-width: 430px;
+  max-width: 88%;
+  max-height: 100vh;
   height: fit-content;
   padding: 34px 36px 34px 36px;
   background: rgb(255, 255, 255);
@@ -16,6 +18,12 @@
 @media screen and (max-width: 545px) {
   .popup__container {
     padding: 25px 22px 26px 22px;
-    max-width: 282px;
+    min-width: 350px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .popup__container {
+    min-width: 88%;
   }
 }
