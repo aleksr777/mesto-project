@@ -1,4 +1,5 @@
 .popup__container_type_image {
+	user-select: none;
 	border-radius: 0;
 	border: 0;
 	padding: 0;
@@ -13,6 +14,7 @@
 }
 
 .popup__container_type_image .popup__caption {
+	user-select: text;
 	border-radius: 0;
 	border: 0;
 	padding: 7px 0 0 0;

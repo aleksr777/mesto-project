@@ -52,11 +52,9 @@ export class Popup {
     this._body.style.height = '100vh';
     /* сдвигаем страницу на нужную высоту*/
     this._body.style.top = -this._pagePosition + 'px';
-    this._body.dataset.position = this._pagePosition;
   }
 
   _enableScroll = () => {
-    this._pagePosition = parseInt(this._body.dataset.position, 10);
     /* Возвращаем ранее заданные стили в css */
     this._body.style.top = '';
     this._body.style.left = '';
@@ -106,6 +104,6 @@ export class Popup {
       this._popup.classList.remove(this._popupOpenedSelector);
       /* возвращаем скрол страницы */
       this._enableScroll();
-    }, 400);
+    }, 500);
   }
 }

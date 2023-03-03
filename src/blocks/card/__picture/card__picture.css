@@ -11,6 +11,7 @@
 }
 
 .card__picture::before {
+  user-select: none;
   content: '';
   position: absolute;
   top: 0;
@@ -23,6 +24,7 @@
 }
 
 .card__picture .card__img {
+  user-select: none;
   width: 100%;
   height: 100%;
   object-fit: cover;
