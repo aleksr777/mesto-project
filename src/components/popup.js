@@ -1,11 +1,15 @@
 export class Popup {
   constructor(selectors, popupElement, pageNode) {
+    this._body = document.querySelector('body');
     this._pageNode = pageNode;
     this._popup = popupElement;
     this._popupOpenedSelector = selectors.popupOpened;
     this._closeButtonSelector = selectors.popupCloseButton;
     this._handleClick = this._handleClick.bind(this);
     this._handleEsc = this._handleEsc.bind(this);
+    this._disableScroll = this._disableScroll.bind(this);
+    this._enableScroll = this._enableScroll.bind(this);
+    this._pagePosition = null;
   }
 
   // закрытие при нажатии на клавишу 'Escape'
@@ -35,7 +39,38 @@ export class Popup {
     document.removeEventListener('keydown', this._handleEsc);
   }
 
+  _disableScroll = () => {
+    /* сохраняем позицию страницы при скроле */
+    this._pagePosition = window.scrollY;
+    /* вычисляем ширину полосы прокрутки */
+    this._body.style.right = (window.innerWidth - this._body.offsetWidth) / 2 + 'px';
+    /* задаём стили */
+    this._body.style.transition = 'none';
+    this._body.style.overflowY = 'hidden';
+    this._body.style.position = 'fixed';
+    this._body.style.width = '100%';
+    this._body.style.height = '100vh';
+    /* сдвигаем страницу на нужную высоту*/
+    this._body.style.top = -this._pagePosition + 'px';
+    this._body.dataset.position = this._pagePosition;
+  }
+
+  _enableScroll = () => {
+    this._pagePosition = parseInt(this._body.dataset.position, 10);
+    /* Возвращаем ранее заданные стили в css */
+    this._body.style.top = '';
+    this._body.style.left = '';
+    this._body.style.transition = '';
+    this._body.style.overflowY = '';
+    this._body.style.position = '';
+    this._body.style.width = '';
+    this._body.style.height = '';
+    /* Устанавливаем скролл в позицию, которая была до открытия popup */
+    window.scroll({ top: this._pagePosition, left: 0 });
+  }
+
   open() {
+    this._disableScroll();
     this._pageNode.style.pointerEvents = 'none';
     this._popup.style.pointerEvents = 'none';
     this._popup.style.transition = 'all .4s ease 0s'; // задаём нужное свойство transition
@@ -51,16 +86,26 @@ export class Popup {
   }
 
   close() {
+    /* блокируем на время срабатывания анимации */
+    this._pageNode.style.pointerEvents = 'none';
     this._popup.style.pointerEvents = 'none';
+    /* удаляем слушатели */
     this.removeEventListeners();
-    this._popup.style.transition = 'all .4s ease 0s'; // задаём нужное свойство transition
-    this._popup.style.opacity = '0'; // popup плавно становится прозрачным (срабатывает свойство transition)
-    setTimeout(() => { // setTimeout нужен, чтобы успела сработать анимация (transition) перед закрытием popup
-      this._popup.classList.remove(this._popupOpenedSelector);
-      this._popup.style.opacity = ''; // возвращаем исходные значения
+    // задаём нужное свойство transition
+    this._popup.style.transition = 'all .4s ease 0s';
+    // popup плавно становится прозрачным (срабатывает свойство transition)
+    this._popup.style.opacity = '0';
+    // setTimeout нужен, чтобы успела сработать анимация (transition) перед закрытием popup
+    setTimeout(() => {
+      // возвращаем исходные значения
+      this._popup.style.transition = '';
+      this._popup.style.opacity = '';
       this._pageNode.style.pointerEvents = '';
       this._popup.style.pointerEvents = '';
-      this._popup.style.transition = '';
+      /* удаляем селектор открытия popup */
+      this._popup.classList.remove(this._popupOpenedSelector);
+      /* возвращаем скрол страницы */
+      this._enableScroll();
     }, 400);
   }
 }
