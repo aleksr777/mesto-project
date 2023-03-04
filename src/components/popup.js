@@ -29,13 +29,13 @@ export class Popup {
 
   // установка обработчиков
   setEventListeners() {
-    this._popup.addEventListener('click', this._handleClick);
+    this._popup.addEventListener('mousedown', this._handleClick);
     document.addEventListener('keydown', this._handleEsc);
   }
 
   // отключение обработчиков
   removeEventListeners() {
-    this._popup.removeEventListener('click', this._handleClick);
+    this._popup.removeEventListener('mousedown', this._handleClick);
     document.removeEventListener('keydown', this._handleEsc);
   }
 
