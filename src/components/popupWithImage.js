@@ -13,8 +13,17 @@ export default class PopupWithImage extends Popup {
     this.popupPicture.src = link;
     this.popupDescription.textContent = caption;
     this.popupPicture.alt = caption + '.';
-    this.popupPicture.onerror = () => { 
+    this.popupPicture.onerror = () => {
       this.popupPicture.src = this.splashScreen
     };
+  }
+
+  close() {
+    super.close();
+    setTimeout(() => {
+      this.popupPicture.src = '';
+      this.popupDescription.textContent = '';
+      this.popupPicture.alt = '';
+    }, 500);
   }
 };
