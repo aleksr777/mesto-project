@@ -44,7 +44,7 @@ export class Popup {
     this._pagePosition = window.scrollY;
     /* вычисляем ширину полосы прокрутки */
     this._body.style.right = (window.innerWidth - this._body.offsetWidth) / 2 + 'px';
-    /* задаём стили */
+    /* задаём стили для фиксации экрана*/
     this._body.style.transition = 'none';
     this._body.style.overflowY = 'hidden';
     this._body.style.position = 'fixed';
@@ -55,7 +55,7 @@ export class Popup {
   }
 
   _enableScroll = () => {
-    /* Возвращаем ранее заданные стили в css */
+    /* Возвращаем исходные стили в css */
     this._body.style.top = '';
     this._body.style.left = '';
     this._body.style.transition = '';
@@ -71,39 +71,44 @@ export class Popup {
     this._disableScroll();
     this._pageNode.style.pointerEvents = 'none';
     this._popup.style.pointerEvents = 'none';
-    this._popup.style.transition = 'all .4s ease 0s'; // задаём нужное свойство transition
-    this._popup.style.opacity = '0'; // делаем popup изначально прозрачным перед открытием
     this._popup.classList.add(this._popupOpenedSelector);
-    setTimeout(() => this._popup.style.opacity = '1', 0);
-    // popup плавно становится непрозрачным (setTimeout нужен для срабатывания свойства transition)
-    setTimeout(() => {
+    this._popup.animate(
+      [
+        { opacity: 0 },
+        { opacity: 1 },
+      ],
+      {
+        duration: 400,
+        easing: "ease-in-out"
+      }
+    ).onfinish = () => {
       this.setEventListeners();
-      this._popup.style.pointerEvents = ''; // возвращаем исходные значения
-      this._popup.style.transition = '';
-    }, 400);
+      // возвращаем исходные значения
+      this._popup.style.pointerEvents = '';
+      this._pageNode.style.pointerEvents = '';
+    };
   }
 
   close() {
     /* блокируем на время срабатывания анимации */
     this._pageNode.style.pointerEvents = 'none';
     this._popup.style.pointerEvents = 'none';
-    /* удаляем слушатели */
     this.removeEventListeners();
-    // задаём нужное свойство transition
-    this._popup.style.transition = 'all .4s ease 0s';
-    // popup плавно становится прозрачным (срабатывает свойство transition)
-    this._popup.style.opacity = '0';
-    // setTimeout нужен, чтобы успела сработать анимация (transition) перед закрытием popup
-    setTimeout(() => {
+    this._popup.animate(
+      [
+        { opacity: 1 },
+        { opacity: 0 }
+      ],
+      {
+        duration: 400,
+        easing: "ease-in-out"
+      }
+    ).onfinish = () => {
       // возвращаем исходные значения
-      this._popup.style.transition = '';
-      this._popup.style.opacity = '';
       this._pageNode.style.pointerEvents = '';
       this._popup.style.pointerEvents = '';
-      /* удаляем селектор открытия popup */
       this._popup.classList.remove(this._popupOpenedSelector);
-      /* возвращаем скрол страницы */
       this._enableScroll();
-    }, 500);
+    };
   }
 }
