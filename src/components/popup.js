@@ -1,5 +1,5 @@
 export class Popup {
-  constructor(selectors, popupElement, pageNode) {
+  constructor(selectors, popupElement, pageNode, animationDuration) {
     this._body = document.querySelector('body');
     this._pageNode = pageNode;
     this._popup = popupElement;
@@ -10,6 +10,7 @@ export class Popup {
     this._disableScroll = this._disableScroll.bind(this);
     this._enableScroll = this._enableScroll.bind(this);
     this._pagePosition = null;
+    this._animationDuration = animationDuration;
   }
 
   // закрытие при нажатии на клавишу 'Escape'
@@ -78,7 +79,7 @@ export class Popup {
         { opacity: 1 },
       ],
       {
-        duration: 400,
+        duration: this._animationDuration,
         easing: "ease-in-out"
       }
     ).onfinish = () => {
@@ -100,7 +101,7 @@ export class Popup {
         { opacity: 0 }
       ],
       {
-        duration: 400,
+        duration: this._animationDuration,
         easing: "ease-in-out"
       }
     ).onfinish = () => {

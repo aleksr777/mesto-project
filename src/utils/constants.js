@@ -8,7 +8,7 @@ export const selectors = {
 
   cardsBlock: '.cards-block',
   card: '.cards-block__card',
-  cardTemplate : '#card-template',
+  cardTemplate: '#card-template',
   likeNumber: '.card__like-number',
   likeNumberHidden: 'card__like-number_hidden',
   likeButton: '.card__like-button',
@@ -17,7 +17,7 @@ export const selectors = {
   trashButton: '.card__trash-button',
   cardText: '.card__text',
   cardImg: '.card__img',
-  cardPicture: '.card__picture',  
+  cardPicture: '.card__picture',
 
   popupAvatar: '.popup_type_user-img',
   avatarForm: '.form_type_user-img',
@@ -53,7 +53,7 @@ export const selectors = {
   popupImage: '.popup_type_image',
   imgPopupImage: '.popup__img',
   captionPopupImage: '.popup__caption',
-  
+
   form: '.form',
   input: '.form__input-text',
   submitButton: '.form__submit',
@@ -96,3 +96,5 @@ export const editButton = document.querySelector(selectors.editButton);
 export const popupImage = document.querySelector(selectors.popupImage);
 export const imgPopupImage = popupImage.querySelector(selectors.imgPopupImage);
 export const captionPopupImage = popupImage.querySelector(selectors.captionPopupImage);
+
+export const POPUP_ANIMATION_DURATION = 400;

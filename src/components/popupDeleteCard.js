@@ -1,11 +1,12 @@
 import { Popup } from './popup.js';
 
 export default class PopupDeleteCard extends Popup {
-  constructor(selectors, popupElement, pageNode, callbackSubmit) {
-    super(selectors, popupElement, pageNode);
+  constructor(selectors, popupElement, pageNode, animationDuration, callbackSubmit) {
+    super(selectors, popupElement, pageNode, animationDuration);
     this._button = popupElement.querySelector(selectors.submitButton);
     this._callbackSubmit = callbackSubmit;
-    this._doCallback = this._doCallback.bind(this);// этот нужно, чтобы можно было снять обработчик с кнопки
+    this._doCallback = this._doCallback.bind(this);
+    this.animationDuration = animationDuration;
   }
 
   _doCallback(evt) { // этот метод нужен, чтобы можно было снять обработчик с кнопки
@@ -39,10 +40,10 @@ export default class PopupDeleteCard extends Popup {
       this._button.setAttribute('disabled', true);
     }
     else {
-      setTimeout(() => { // отсрочка нужна, чтобы окно успело закрыться (из-за анимации)        
+      setTimeout(() => {      
         this._button.textContent = 'Да';
         this._button.removeAttribute('disabled', true);
-      }, 400);
+      }, this.animationDuration);
     }
   }
 

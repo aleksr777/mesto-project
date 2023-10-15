@@ -21,7 +21,8 @@ import {
 	popupAvatar,
 	profileForm,
 	cardForm,
-	avatarForm
+	avatarForm,
+	POPUP_ANIMATION_DURATION,
 } from '../utils/constants.js';
 
 // Импорт классов
@@ -49,53 +50,81 @@ const avatarFormValidator = new FormValidator(validationConfig, avatarForm);
 
 const userInfo = new UserInfo(selectors);
 
-const popupWithImage = new PopupWithImage(selectors, popupImage, page, imgPopupImage, captionPopupImage, splashScreen);
+const popupWithImage = new PopupWithImage(
+	selectors,
+	popupImage,
+	page,
+	imgPopupImage,
+	captionPopupImage,
+	splashScreen,
+	POPUP_ANIMATION_DURATION,
+);
 
-const popupDeleteCard = new PopupDeleteCard(selectors, popupDeletingCard, page, (evt) => {
-	evt.preventDefault();
-	popupDeleteCard.isLoading(true);
-	api.deleteCard(popupDeleteCard.getIdCard())
-		.then(() => { popupDeleteCard.delete(); popupDeleteCard.close(); })
-		.catch(err => console.log(err))
-		.finally(() => popupDeleteCard.isLoading(false));
-});
+const popupDeleteCard = new PopupDeleteCard(
+	selectors,
+	popupDeletingCard,
+	page,
+	POPUP_ANIMATION_DURATION,
+	(evt) => {
+		evt.preventDefault();
+		popupDeleteCard.isLoading(true);
+		api.deleteCard(popupDeleteCard.getIdCard())
+			.then(() => { popupDeleteCard.delete(); popupDeleteCard.close(); })
+			.catch(err => console.log(err))
+			.finally(() => popupDeleteCard.isLoading(false));
+	});
 
-const profilePopup = new PopupWithForm(selectors, popupProfile, page, (evt) => {
-	evt.preventDefault();
-	profilePopup.isLoading(true);
-	const inputValues = profilePopup.getFormValues();
-	api.sendProfileInfo(inputValues.profileNameInput, inputValues.profileProfessionInput)
-		.then(data => {
-			userInfo.setUserNameProfession(userInfo.getUserInfo(data));
-		})
-		.then(() => profilePopup.close())
-		.catch(err => console.log(err))
-		.finally(() => profilePopup.isLoading(false));
-});
+const profilePopup = new PopupWithForm(
+	selectors,
+	popupProfile,
+	page,
+	POPUP_ANIMATION_DURATION,
+	(evt) => {
+		evt.preventDefault();
+		profilePopup.isLoading(true);
+		const inputValues = profilePopup.getFormValues();
+		api.sendProfileInfo(inputValues.profileNameInput, inputValues.profileProfessionInput)
+			.then(data => {
+				userInfo.setUserNameProfession(userInfo.getUserInfo(data));
+			})
+			.then(() => profilePopup.close())
+			.catch(err => console.log(err))
+			.finally(() => profilePopup.isLoading(false));
+	});
 
-const addCardPopup = new PopupWithForm(selectors, popupCardForm, page, (evt) => {
-	evt.preventDefault();
-	addCardPopup.isLoading(true);
-	const inputValues = addCardPopup.getFormValues();
-	api.sendNewCard(inputValues.cardNameInput, inputValues.cardLinkInput)
-		.then(cardData => section.renderItem(cardData, cardData.owner._id))
-		.then(() => addCardPopup.close())
-		.catch(err => console.log(err))
-		.finally(() => addCardPopup.isLoading(false));
-});
+const addCardPopup = new PopupWithForm(
+	selectors,
+	popupCardForm,
+	page,
+	POPUP_ANIMATION_DURATION,
+	(evt) => {
+		evt.preventDefault();
+		addCardPopup.isLoading(true);
+		const inputValues = addCardPopup.getFormValues();
+		api.sendNewCard(inputValues.cardNameInput, inputValues.cardLinkInput)
+			.then(cardData => section.renderItem(cardData, cardData.owner._id))
+			.then(() => addCardPopup.close())
+			.catch(err => console.log(err))
+			.finally(() => addCardPopup.isLoading(false));
+	});
 
-const avatarPopup = new PopupWithForm(selectors, popupAvatar, page, (evt) => {
-	evt.preventDefault();
-	avatarPopup.isLoading(true);
-	const inputValue = avatarPopup.getFormValues();
-	api.sendAvatar(inputValue.userImgLinkInput)
-		.then(data => {
-			userInfo.setUserAvatar(userInfo.getUserInfo(data));
-		})
-		.then(() => avatarPopup.close())
-		.catch(err => console.log(err))
-		.finally(() => avatarPopup.isLoading(false));
-});
+const avatarPopup = new PopupWithForm(
+	selectors,
+	popupAvatar,
+	page,
+	POPUP_ANIMATION_DURATION,
+	(evt) => {
+		evt.preventDefault();
+		avatarPopup.isLoading(true);
+		const inputValue = avatarPopup.getFormValues();
+		api.sendAvatar(inputValue.userImgLinkInput)
+			.then(data => {
+				userInfo.setUserAvatar(userInfo.getUserInfo(data));
+			})
+			.then(() => avatarPopup.close())
+			.catch(err => console.log(err))
+			.finally(() => avatarPopup.isLoading(false));
+	});
 
 // показывает количество лайков (скрывает, если нет лайков)
 const showNumberLikes = (button, card, numLikes) => {
@@ -160,9 +189,9 @@ const handleTrashButtonClick = (evt, cardId, cardElement) => {
 
 const card = new Card(selectors, cardTemplate, handleCardClick, handleLikeButtonClick, handleTrashButtonClick, showNumberLikes);
 
-const renderer = (data, profileId, splashScreen) => { 
+const renderer = (data, profileId, splashScreen) => {
 	// без вложенности не удаётся передать 'card.renderer' в качестве аргумента
-	 return card.renderer(data, profileId, splashScreen);
+	return card.renderer(data, profileId, splashScreen);
 }
 
 const section = new Section(renderer, cardsBlock, splashScreen);

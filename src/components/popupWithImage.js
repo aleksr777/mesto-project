@@ -1,11 +1,12 @@
 import { Popup } from './popup.js';
 
 export default class PopupWithImage extends Popup {
-  constructor(selectors, popupElement, pageNode, imgPopupImage, captionPopupImage, splashScreen) {
-    super(selectors, popupElement, pageNode);
+  constructor(selectors, popupElement, pageNode, imgPopupImage, captionPopupImage, splashScreen, animationDuration) {
+    super(selectors, popupElement, pageNode, animationDuration);
     this.popupPicture = imgPopupImage;
     this.popupDescription = captionPopupImage;
     this.splashScreen = splashScreen;
+    this.animationDuration = animationDuration;
   }
 
   open(caption, link) {
@@ -24,6 +25,6 @@ export default class PopupWithImage extends Popup {
       this.popupPicture.src = '';
       this.popupDescription.textContent = '';
       this.popupPicture.alt = '';
-    }, 500);
+    }, this.animationDuration);
   }
 };
