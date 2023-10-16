@@ -1,8 +1,10 @@
 // Используемые селекторы из HTML
 export const selectors = {
+  body: 'body',
   page: '.page',
 
   popup: '.popup',
+  popupContainer: '.popup__container',
   popupOpened: 'popup_opened',
   popupCloseButton: 'popup__close-button',
 
@@ -62,7 +64,7 @@ export const selectors = {
   error: 'form__input-error_active',
 };
 
-// настройка и экспорт настроек валидации (объект с используемыми селекторами)
+// настройка валидации (объект с используемыми селекторами)
 export const validationConfig = {
   formSelector: selectors.form,
   inputSelector: selectors.input,
@@ -72,29 +74,29 @@ export const validationConfig = {
   errorClass: selectors.error,
 };
 
-//  Создание и экспорт переменных
-export const page = document.querySelector(selectors.page);
+export const bodyNode = document.querySelector(selectors.body);
+export const pageNode = bodyNode.querySelector(selectors.page);
 
-export const cardsBlock = document.querySelector(selectors.cardsBlock);
-export const cardTemplate = document.querySelector(selectors.cardTemplate);
+export const cardsBlock = bodyNode.querySelector(selectors.cardsBlock);
+export const cardTemplate = cardsBlock.querySelector(selectors.cardTemplate);
 
-export const popupAvatar = document.querySelector(selectors.popupAvatar);
+export const popupAvatar = bodyNode.querySelector(selectors.popupAvatar);
 export const avatarForm = popupAvatar.querySelector(selectors.avatarForm);
-export const profilePicture = document.querySelector(selectors.profilePicture);
-export const profileAvatar = document.querySelector(selectors.profileAvatar);
+export const profilePicture = bodyNode.querySelector(selectors.profilePicture);
+export const profileAvatar = bodyNode.querySelector(selectors.profileAvatar);
 
-export const popupCardForm = document.querySelector(selectors.popupCardForm);
+export const popupCardForm = bodyNode.querySelector(selectors.popupCardForm);
 export const cardForm = popupCardForm.querySelector(selectors.cardForm);
-export const addCardButton = document.querySelector(selectors.addCardButton);
+export const addCardButton = bodyNode.querySelector(selectors.addCardButton);
 
-export const popupDeletingCard = document.querySelector(selectors.popupDeletingCard);
+export const popupDeletingCard = bodyNode.querySelector(selectors.popupDeletingCard);
 
-export const popupProfile = document.querySelector(selectors.popupProfile);
+export const popupProfile = bodyNode.querySelector(selectors.popupProfile);
 export const profileForm = popupProfile.querySelector(selectors.profileForm);
-export const editButton = document.querySelector(selectors.editButton);
+export const editButton = bodyNode.querySelector(selectors.editButton);
 
-export const popupImage = document.querySelector(selectors.popupImage);
+export const popupImage = bodyNode.querySelector(selectors.popupImage);
 export const imgPopupImage = popupImage.querySelector(selectors.imgPopupImage);
 export const captionPopupImage = popupImage.querySelector(selectors.captionPopupImage);
 
-export const POPUP_ANIMATION_DURATION = 400;
+export const POPUP_ANIMATION_DURATION = 500;

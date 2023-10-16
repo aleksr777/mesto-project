@@ -4,8 +4,9 @@ import './index.css';
 import { apiConfig } from '../utils/apiConfig.js';
 
 import {
+	bodyNode, 
+	pageNode,
 	validationConfig,
-	page,
 	cardsBlock,
 	cardTemplate,
 	profilePicture,
@@ -26,7 +27,6 @@ import {
 } from '../utils/constants.js';
 
 // Импорт классов
-
 import Api from '../components/api.js';
 import Card from '../components/card.js';
 import Section from '../components/section.js';
@@ -51,9 +51,10 @@ const avatarFormValidator = new FormValidator(validationConfig, avatarForm);
 const userInfo = new UserInfo(selectors);
 
 const popupWithImage = new PopupWithImage(
+	bodyNode, 
+	pageNode,
 	selectors,
 	popupImage,
-	page,
 	imgPopupImage,
 	captionPopupImage,
 	splashScreen,
@@ -61,9 +62,10 @@ const popupWithImage = new PopupWithImage(
 );
 
 const popupDeleteCard = new PopupDeleteCard(
+	bodyNode, 
+	pageNode,
 	selectors,
 	popupDeletingCard,
-	page,
 	POPUP_ANIMATION_DURATION,
 	(evt) => {
 		evt.preventDefault();
@@ -75,9 +77,10 @@ const popupDeleteCard = new PopupDeleteCard(
 	});
 
 const profilePopup = new PopupWithForm(
+	bodyNode, 
+	pageNode,
 	selectors,
 	popupProfile,
-	page,
 	POPUP_ANIMATION_DURATION,
 	(evt) => {
 		evt.preventDefault();
@@ -93,9 +96,10 @@ const profilePopup = new PopupWithForm(
 	});
 
 const addCardPopup = new PopupWithForm(
+	bodyNode, 
+	pageNode,
 	selectors,
 	popupCardForm,
-	page,
 	POPUP_ANIMATION_DURATION,
 	(evt) => {
 		evt.preventDefault();
@@ -109,9 +113,10 @@ const addCardPopup = new PopupWithForm(
 	});
 
 const avatarPopup = new PopupWithForm(
+	bodyNode, 
+	pageNode,
 	selectors,
 	popupAvatar,
-	page,
 	POPUP_ANIMATION_DURATION,
 	(evt) => {
 		evt.preventDefault();
@@ -171,7 +176,7 @@ const toggleLikeButton = (buttonElement, cardId) => {
 
 // Обработчик клика по картинке с последующим открытием popup
 const handleCardClick = (evt, name, link) => {
-	popupWithImage.open(name, link);
+	popupWithImage.open(evt, name, link);
 	evt.stopPropagation();
 }
 
@@ -183,7 +188,7 @@ const handleLikeButtonClick = (evt, buttonElement, cardId) => {
 
 // Обработчик клика кнопке удаления карточки
 const handleTrashButtonClick = (evt, cardId, cardElement) => {
-	popupDeleteCard.open(cardId, cardElement);
+	popupDeleteCard.open(evt, cardId, cardElement);
 	evt.stopPropagation();
 }
 
@@ -201,7 +206,7 @@ const section = new Section(renderer, cardsBlock, splashScreen);
 
 // Слушатель на нопку редактирования профиля
 editButton.addEventListener('click', (evt) => {
-	profilePopup.open();
+	profilePopup.open(evt);
 	profilePopup.setBeforeServerResponse();
 	profileFormValidator.clearMistakes();
 	profileFormValidator.disableButtonState();
@@ -218,7 +223,7 @@ editButton.addEventListener('click', (evt) => {
 
 // Слушатель на нопку редактирования аватара профиля
 profilePicture.addEventListener('click', (evt) => {
-	avatarPopup.open();
+	avatarPopup.open(evt);
 	avatarFormValidator.clearMistakes();
 	avatarFormValidator.disableButtonState();
 	evt.stopPropagation();
@@ -226,7 +231,7 @@ profilePicture.addEventListener('click', (evt) => {
 
 // Слушатель на нопку добавления новой карточки
 addCardButton.addEventListener('click', (evt) => {
-	addCardPopup.open();
+	addCardPopup.open(evt);
 	cardFormValidator.clearMistakes();
 	cardFormValidator.disableButtonState();
 	evt.stopPropagation();

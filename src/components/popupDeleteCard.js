@@ -1,8 +1,8 @@
 import { Popup } from './popup.js';
 
 export default class PopupDeleteCard extends Popup {
-  constructor(selectors, popupElement, pageNode, animationDuration, callbackSubmit) {
-    super(selectors, popupElement, pageNode, animationDuration);
+  constructor(bodyNode, pageNode, selectors, popupElement, animationDuration, callbackSubmit) {
+    super(bodyNode, pageNode, selectors, popupElement, animationDuration);
     this._button = popupElement.querySelector(selectors.submitButton);
     this._callbackSubmit = callbackSubmit;
     this._doCallback = this._doCallback.bind(this);
@@ -17,8 +17,8 @@ export default class PopupDeleteCard extends Popup {
     return this._cardId;
   }
 
-  open(cardId, cardElement) { // переписываем метод родителя
-    super.open();// присваиваем свойства родителя
+  open(evt, cardId, cardElement) { // переписываем метод родителя
+    super.open(evt);// присваиваем свойства родителя
     this.setEventListeners();// используем переписанный метод
     return this._cardId = cardId, this._cardElement = cardElement;
   }
