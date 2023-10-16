@@ -1,15 +1,17 @@
 export class Popup {
-  constructor(selectors, popupElement, pageNode) {
-    this._body = document.querySelector('body');
+  constructor(bodyNode, pageNode, selectors, popupElement, animationDuration) {
+    this._bodyNode = bodyNode;
     this._pageNode = pageNode;
-    this._popup = popupElement;
+    this._popupElement = popupElement;
+    this._container = this._popupElement.querySelector(selectors.popupContainer);
     this._popupOpenedSelector = selectors.popupOpened;
     this._closeButtonSelector = selectors.popupCloseButton;
     this._handleClick = this._handleClick.bind(this);
     this._handleEsc = this._handleEsc.bind(this);
     this._disableScroll = this._disableScroll.bind(this);
     this._enableScroll = this._enableScroll.bind(this);
-    this._pagePosition = null;
+    this._pagePosition = 0;
+    this._animationDuration = animationDuration;
   }
 
   // закрытие при нажатии на клавишу 'Escape'
@@ -29,81 +31,117 @@ export class Popup {
 
   // установка обработчиков
   setEventListeners() {
-    this._popup.addEventListener('mousedown', this._handleClick);
+    this._popupElement.addEventListener('mousedown', this._handleClick);
     document.addEventListener('keydown', this._handleEsc);
   }
 
   // отключение обработчиков
   removeEventListeners() {
-    this._popup.removeEventListener('mousedown', this._handleClick);
+    this._popupElement.removeEventListener('mousedown', this._handleClick);
     document.removeEventListener('keydown', this._handleEsc);
   }
 
-  _disableScroll = () => {
-    /* сохраняем позицию страницы при скроле */
-    this._pagePosition = window.scrollY;
-    /* вычисляем ширину полосы прокрутки */
-    this._body.style.right = (window.innerWidth - this._body.offsetWidth) / 2 + 'px';
-    /* задаём стили */
-    this._body.style.transition = 'none';
-    this._body.style.overflowY = 'hidden';
-    this._body.style.position = 'fixed';
-    this._body.style.width = '100%';
-    this._body.style.height = '100vh';
-    /* сдвигаем страницу на нужную высоту*/
-    this._body.style.top = -this._pagePosition + 'px';
+  _disableScroll = (node) => {
+    this._pagePosition = window.scrollY; // сохраняем позицию скрола
+    node.style.right = `${(window.innerWidth - this._bodyNode.offsetWidth) / 2}px`; // вычисляем ширину полосы прокрутки
+    node.style.top = `${-this._pagePosition}px`; // сдвигаем страницу на нужную высоту
+    // задаём стили для фиксации экрана
+    node.style.transition = 'none';
+    node.style.overflowY = 'hidden';
+    node.style.position = 'fixed';
+    node.style.width = '100%';
+    node.style.height = '100vh';
   }
 
-  _enableScroll = () => {
-    /* Возвращаем ранее заданные стили в css */
-    this._body.style.top = '';
-    this._body.style.left = '';
-    this._body.style.transition = '';
-    this._body.style.overflowY = '';
-    this._body.style.position = '';
-    this._body.style.width = '';
-    this._body.style.height = '';
-    /* Устанавливаем скролл в позицию, которая была до открытия popup */
-    window.scroll({ top: this._pagePosition, left: 0 });
+  _enableScroll = (node) => {
+    // возвращаем исходные стили
+    node.style.top = '';
+    node.style.left = '';
+    node.style.transition = '';
+    node.style.overflowY = '';
+    node.style.position = '';
+    node.style.width = '';
+    node.style.height = '';
+    window.scroll({ top: this._pagePosition, left: 0 }); // устанавливаем скролл в позицию, которая была до открытия popup
   }
 
-  open() {
-    this._disableScroll();
-    this._pageNode.style.pointerEvents = 'none';
-    this._popup.style.pointerEvents = 'none';
-    this._popup.style.transition = 'all .4s ease 0s'; // задаём нужное свойство transition
-    this._popup.style.opacity = '0'; // делаем popup изначально прозрачным перед открытием
-    this._popup.classList.add(this._popupOpenedSelector);
-    setTimeout(() => this._popup.style.opacity = '1', 0);
-    // popup плавно становится непрозрачным (setTimeout нужен для срабатывания свойства transition)
-    setTimeout(() => {
-      this.setEventListeners();
-      this._popup.style.pointerEvents = ''; // возвращаем исходные значения
-      this._popup.style.transition = '';
-    }, 400);
+  open(evt) {
+    if (this._bodyNode && this._pageNode && this._popupElement) {
+
+      this._disableScroll(this._bodyNode);
+      this._pageNode.style.pointerEvents = 'none';
+      this._popupElement.style.pointerEvents = 'none';
+      this._popupElement.classList.add(this._popupOpenedSelector);
+
+      const clickX = `${evt.clientX}px`;
+      const clickY = `${evt.clientY}px`;
+
+      this._container.animate(
+        [
+          {
+            left: clickX,
+            top: clickY,
+            opacity: 0,
+          },
+          { opacity: 1 },
+        ],
+        {
+          duration: this._animationDuration / 1.6,
+          easing: 'ease-out'
+        }
+      )
+
+      this._container.animate(
+        [
+          { opacity: 0 },
+          { opacity: 1 },
+        ],
+        {
+          duration: this._animationDuration,
+          easing: 'ease-in-out'
+        }
+      )
+
+      this._popupElement.animate(
+        [
+          { opacity: 0 },
+          { opacity: 1 },
+        ],
+        {
+          duration: this._animationDuration,
+          easing: 'ease-in-out'
+        }
+      ).onfinish = () => {
+        this.setEventListeners();
+        // возвращаем исходные значения
+        this._popupElement.style.pointerEvents = '';
+        this._pageNode.style.pointerEvents = '';
+      };
+    };
   }
 
   close() {
     /* блокируем на время срабатывания анимации */
-    this._pageNode.style.pointerEvents = 'none';
-    this._popup.style.pointerEvents = 'none';
-    /* удаляем слушатели */
-    this.removeEventListeners();
-    // задаём нужное свойство transition
-    this._popup.style.transition = 'all .4s ease 0s';
-    // popup плавно становится прозрачным (срабатывает свойство transition)
-    this._popup.style.opacity = '0';
-    // setTimeout нужен, чтобы успела сработать анимация (transition) перед закрытием popup
-    setTimeout(() => {
-      // возвращаем исходные значения
-      this._popup.style.transition = '';
-      this._popup.style.opacity = '';
-      this._pageNode.style.pointerEvents = '';
-      this._popup.style.pointerEvents = '';
-      /* удаляем селектор открытия popup */
-      this._popup.classList.remove(this._popupOpenedSelector);
-      /* возвращаем скрол страницы */
-      this._enableScroll();
-    }, 500);
+    if (this._bodyNode && this._pageNode && this._popupElement) {
+      this._pageNode.style.pointerEvents = 'none'
+      this._popupElement.style.pointerEvents = 'none';
+      this.removeEventListeners();
+      this._popupElement.animate(
+        [
+          { opacity: 1 },
+          { opacity: 0 }
+        ],
+        {
+          duration: this._animationDuration,
+          easing: 'ease-in-out'
+        }
+      ).onfinish = () => {
+        // возвращаем исходные значения
+        this._pageNode.style.pointerEvents = '';
+        this._popupElement.style.pointerEvents = '';
+        this._popupElement.classList.remove(this._popupOpenedSelector);
+        this._enableScroll(this._bodyNode);
+      }
+    };
   }
 }

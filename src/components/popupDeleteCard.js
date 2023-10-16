@@ -1,11 +1,12 @@
 import { Popup } from './popup.js';
 
 export default class PopupDeleteCard extends Popup {
-  constructor(selectors, popupElement, pageNode, callbackSubmit) {
-    super(selectors, popupElement, pageNode);
+  constructor(bodyNode, pageNode, selectors, popupElement, animationDuration, callbackSubmit) {
+    super(bodyNode, pageNode, selectors, popupElement, animationDuration);
     this._button = popupElement.querySelector(selectors.submitButton);
     this._callbackSubmit = callbackSubmit;
-    this._doCallback = this._doCallback.bind(this);// этот нужно, чтобы можно было снять обработчик с кнопки
+    this._doCallback = this._doCallback.bind(this);
+    this.animationDuration = animationDuration;
   }
 
   _doCallback(evt) { // этот метод нужен, чтобы можно было снять обработчик с кнопки
@@ -16,8 +17,8 @@ export default class PopupDeleteCard extends Popup {
     return this._cardId;
   }
 
-  open(cardId, cardElement) { // переписываем метод родителя
-    super.open();// присваиваем свойства родителя
+  open(evt, cardId, cardElement) { // переписываем метод родителя
+    super.open(evt);// присваиваем свойства родителя
     this.setEventListeners();// используем переписанный метод
     return this._cardId = cardId, this._cardElement = cardElement;
   }
@@ -39,10 +40,10 @@ export default class PopupDeleteCard extends Popup {
       this._button.setAttribute('disabled', true);
     }
     else {
-      setTimeout(() => { // отсрочка нужна, чтобы окно успело закрыться (из-за анимации)        
+      setTimeout(() => {      
         this._button.textContent = 'Да';
         this._button.removeAttribute('disabled', true);
-      }, 400);
+      }, this.animationDuration);
     }
   }
 
